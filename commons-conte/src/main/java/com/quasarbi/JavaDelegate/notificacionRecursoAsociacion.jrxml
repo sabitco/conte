@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NOTIFICACION rECURSO ASOCIACION" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="113" bottomMargin="99" uuid="99321ac8-d285-4ddc-91f4-5b926ef19bec">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="nombreAsociacion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="121" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c208aff9-38b1-47af-a17e-5b8f7efbda8c" x="0" y="0" width="442" height="75"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DILIGENCIA UNA NOTIFICACIÓN PERSONAL POR MEDIO DE LA CUAL SE NOTIFICALA RESOLUCIÓN No. M-RO "+
+$P{numeroResolucion}+" "+"DE"+" "+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})
++" "+"POR MEDIO DE LA CUAL SE RESUELVE UN RECURSO."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4e1dab5e-758d-4ac2-8391-a82f073ad28b" x="232" y="87" width="210" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. No. "+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="207" splitType="Stretch">
+			<textField>
+				<reportElement uuid="586087ae-75f4-4251-b956-a44224969231" x="0" y="15" width="442" height="190"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A los _______ días del mes de ___________ de ____________ siendo las ________ (a.m./p.m.) se procede a notificar personalmente a "
++ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+" "+
+"identificado con cédula de ciudadanía "+ $P{numeroCedula}+" "+
+"o a _________________________________con cedula__________________, persona autorizada mediante escrito adjunto, la Resolución M-R0 "+
+$P{numeroResolucion}+" "+"de"+" "+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+
+" "+ "advirtiéndole que contra la presente NO procede Recurso alguno por haberse agotado la vía gubernativa."
++"\n"+"\n"+
+"Procede también mediante el mismo documento a entregar de manera definitiva la Matricula Profesional de Técnico Electricista tipo diploma y tipo tarjeta MTE. "+
+$P{numeroCedula}+"-"+$P{numeroMatricula}+","+" "+ "expedida por el Consejo Nacional de Técnicos Electricistas - CONTE."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="204" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e47b12e1-1dad-464d-b0af-17d65f4c3eea" x="0" y="0" width="442" height="103"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QUIEN NOTIFICA"+"\n"+"\n"+"\n"+
+"_________________________"+"\n"+
+"Firma"
++"\n"+
+"C.C"
++"\n"+
+"Asociación:"+"\n"+
+$P{nombreAsociacion}
+
+]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e6c164e-7c18-4455-b171-aba109fa92bc" x="0" y="114" width="442" height="90"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EL NOTIFICADO"+"\n"+"\n"+"\n"+
+"_________________________"+"\n"+
+"Firma"
++"\n"+
+"C.C"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

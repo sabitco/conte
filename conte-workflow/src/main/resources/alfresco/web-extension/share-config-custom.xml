@@ -1,0 +1,2457 @@
+<alfresco-config>
+   
+   <!-- Repository Library config section -->
+   <config evaluator="string-compare" condition="RepositoryLibrary" replace="true">
+      <!--
+         Whether the link to the Repository Library appears in the header component or not.
+      -->
+      <visible>true</visible>
+   </config>
+
+   <config evaluator="string-compare" condition="Remote">
+      <remote>
+         <endpoint>
+            <id>alfresco-noauth</id>
+            <name>Alfresco - unauthenticated access</name>
+            <description>Access to Alfresco Repository WebScripts that do not require authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+            <identity>none</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco</id>
+            <name>Alfresco - user access</name>
+            <description>Access to Alfresco Repository WebScripts that require user authentication</description>
+            <connector-id>alfresco</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+
+         <endpoint>
+            <id>alfresco-feed</id>
+            <name>Alfresco Feed</name>
+            <description>Alfresco Feed - supports basic HTTP authentication via the EndPointProxyServlet</description>
+            <connector-id>http</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/s</endpoint-url>
+            <basic-auth>true</basic-auth>
+            <identity>user</identity>
+         </endpoint>
+         
+         <endpoint>
+            <id>activiti-admin</id>
+            <name>Activiti Admin UI - user access</name>
+            <description>Access to Activiti Admin UI, that requires user authentication</description>
+            <connector-id>activiti-admin-connector</connector-id>
+            <endpoint-url>http://localhost:8080/alfresco/activiti-admin</endpoint-url>
+            <identity>user</identity>
+         </endpoint>
+      </remote>
+   </config>
+
+   
+        <!-- DUPLICADOS -->
+   <config evaluator="string-compare" condition="activiti$gestionDuplicados">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfgd:numeroformulario"/>                        
+                <show id="qswfgd:tiposolicitud"/>
+                <show id="qswfgd:tipodocumento"/>
+                <show id="qswfgd:numerodocumento"/>
+                <show id="qswfgd:nombres"/>
+                <show id="qswfgd:apellidos"/>                   
+                <show id="qswfgd:fechaNacimiento"/>             
+                <show id="qswfgd:direccionResidencia"/>             
+                <show id="qswfgd:dependiente"/>         
+                <show id="qswfgd:notificacion"/>    
+                <show id="qswfgd:email"/>               
+                <show id="qswfgd:departamento"/>                
+                <show id="qswfgd:ciudad"/>              
+                <show id="qswfgd:celular"/>             
+                <show id="qswfgd:telefono"/>                
+                <show id="qswfgd:empresa"/>             
+                <show id="qswfgd:direccionEmpresa"/>                
+                <show id="qswfgd:departamentoEmpresa"/>         
+                <show id="qswfgd:ciudadEmpresa"/>               
+                <show id="qswfgd:telefonoEmpresa"/>             
+                <show id="qswfgd:nombresReferencia1"/>              
+                <show id="qswfgd:direccionReferencia1"/>
+                <show id="qswfgd:telefonoReferencia1"/>             
+                <show id="qswfgd:nombresReferencia2"/>              
+                <show id="qswfgd:direccionReferencia2"/>                
+                <show id="qswfgd:telefonoReferencia2"/>             
+                <show id="qswfgd:tramitePor"/>              
+                <show id="qswfgd:realizadoEn"/>
+                <show id="qswfgd:asociacion"/>
+                <show id="qswfgd:identificacionInspector"/>
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+<config evaluator="task-type" condition="qswfgd:validarPago">
+
+      <forms>
+
+         <form>
+
+            <field-visibility>
+
+                <show id="qswfgd:estadoPago" />
+
+                <show id="qswfgd:valor" />
+
+                <show id="qswfgd:fechaConsignacion" />              
+
+                <show id="qswfgd:entidadPago" />                
+
+                <show id="packageItems" />
+
+                <show id="transitions" />
+
+            </field-visibility>
+
+            <appearance>
+
+               <set id="" appearance="title" label-id="workflow.set.general" />
+
+               <field id="qswfgd:conceptodocumentacion">
+
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+
+                    <control-param name="style">width: 95%</control-param>
+
+                  </control>
+
+               </field>
+
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+
+               <field id="packageItems" set="items" />
+
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+
+               <field id="transitions" set="response" />
+
+            </appearance>
+
+         </form>
+
+      </forms>
+
+   </config>     
+   <config evaluator="task-type" condition="qswfgd:recibedocumentos">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfgd:fechaRecibeDocumentos" />
+                <show id="qswfgd:documento" />
+                <show id="qswfgd:fotocopiadocumento" />
+                <show id="qswfgd:fotografias" />
+                <show id="qswfgd:consignacion" />
+                <show id="qswfgd:estudios" />
+                <show id="qswfgd:titulaciones" />
+                <show id="qswfgd:experiencia" />
+                <show id="qswfgd:detalleexperiencia" />
+                <show id="transitions" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>   
+   
+      <config evaluator="task-type" condition="qswfgd:digitalizadocumentos">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfgd:folios" />
+                <show id="qswfgd:ckdigitalizadocumentos" />
+                <show id="qswfgd:generadoEn" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+    <config evaluator="task-type" condition="qswfgd:notificarSolicitante">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfgd:telefonico"/>
+                <show id="qswfgd:fisica"/>
+                <show id="qswfgd:electronica"/>
+                <show id="qswfgd:donde"/>
+                <show id="qswfgd:redaccionCartaInadmitidos"/>
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+  
+    <config evaluator="task-type" condition="qswfgd:imprimirDuplicadoSolicitud">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />               
+            </appearance>
+         </form>
+      </forms>
+   </config>
+      
+   <config evaluator="task-type" condition="qswfgd:enviarDuplicado">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfgd:tipoNotificacion" />
+                <show id="qswfgd:notificacionGenerar" />
+                <show id="qswfgd:empresaEnvio" />
+                <show id="qswfgd:cualEmpresaEnvio" />
+                <show id="qswfgd:numeroGuia2" />
+                <show id="qswfgd:fechaMatricula" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+      <config evaluator="task-type" condition="qswfgd:ubicarExpediente">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" /> 
+                <show id="transitions" />               
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />               
+            </appearance>
+         </form>
+      </forms>
+   </config>
+
+   
+   
+   
+    <!-- PQRS 
+   <config evaluator="string-compare" condition="activiti$process14">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswf:tipodocumento" />
+                <show id="qswf:numerodocumento" />
+                <show id="qswf:nombrecompleto" />
+                <show id="qswf:telefono" />
+                <show id="qswf:celular" />
+                <show id="qswf:departamento" />
+                <show id="qswf:ciudad" />
+                <show id="qswf:email" />
+                <show id="qswf:tiposolicitud" />
+                <show id="qswf:redaccionsolicitud" />
+                <show id="qswf:razonSocial" />
+                <show id="qswf:cargo" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswf:email">
+                  <constraint-handlers>
+                    <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.email" message="Email invalido." event="keyup"/>
+                  </constraint-handlers>
+               </field>
+               <field id="qswf:redaccionsolicitud">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswf:asignaresponsable">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswf:tipodocumento" />
+                <show id="qswf:numerodocumento" />
+                <show id="qswf:nombrecompleto" />
+                <show id="qswf:telefono" />
+                <show id="qswf:celular" />
+                <show id="qswf:departamento" />
+                <show id="qswf:ciudad" />
+                <show id="qswf:email" />
+                <show id="qswf:tiposolicitud" />
+                <show id="qswf:redaccionsolicitud" />
+               <show id="bpm:assignee" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswf:redaccionsolicitud">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswf:respondepqrs">
+      <forms>
+         <form>
+            <field-visibility>
+                
+                <show id="qswf:tipodocumento" />
+                <show id="qswf:numerodocumento" />
+                <show id="qswf:nombrecompleto" />
+                <show id="qswf:telefono" />
+                <show id="qswf:celular" />
+                <show id="qswf:departamento" />
+                <show id="qswf:ciudad" />
+                <show id="qswf:email" />
+                <show id="qswf:tiposolicitud" />
+                <show id="qswf:redaccionsolicitud" />
+            
+                <show id="qswf:accionrealizada" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswf:redaccionsolicitud">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="qswf:accionrealizada">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswf:revisarespuesta">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswf:redaccionsolicitud" />
+                <show id="qswf:accionrealizadaxrespuesta" />
+                <show id="qswf:brespuesta" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswf:redaccionsolicitud">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="qswf:accionrealizadaxrespuesta">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>   
+   
+   <config evaluator="task-type" condition="qswf:nuevasacciones">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswf:redaccionsolicitud" />
+                <show id="qswf:accionanterior" />       
+                <show id="qswf:nuevaaccionrealizada" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswf:redaccionsolicitud">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="qswf:accionanterior">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="qswf:nuevaaccionrealizada">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+-->
+   <!-- Formulario radicacion -->   
+   <config evaluator="string-compare" condition="activiti$radicacion">
+      <forms>
+         <form>
+            <field-visibility>
+                <!-- <show id="bpm:assignee" />  -->
+                <show id="qswfr:numeroformulario"/>                     
+                <show id="qswfr:tiposolicitud"/>
+                <show id="qswfr:tipodocumento"/>
+                <show id="qswfr:numerodocumento"/>
+                <show id="qswfr:nombres"/>
+                <show id="qswfr:apellidos"/>                    
+                <show id="qswfr:fechaNacimiento"/>              
+                <show id="qswfr:direccionResidencia"/>              
+                <show id="qswfr:dependiente"/>          
+                <show id="qswfr:notificacion"/> 
+                <show id="qswfr:email"/>                
+                <show id="qswfr:departamento"/>             
+                <show id="qswfr:ciudad"/>               
+                <show id="qswfr:celular"/>              
+                <show id="qswfr:telefono"/>             
+                <show id="qswfr:empresa"/>              
+                <show id="qswfr:direccionEmpresa"/>             
+                <show id="qswfr:departamentoEmpresa"/>          
+                <show id="qswfr:ciudadEmpresa"/>                
+                <show id="qswfr:telefonoEmpresa"/>              
+                <show id="qswfr:nombresReferencia1"/>               
+                <show id="qswfr:direccionReferencia1"/>
+                <show id="qswfr:telefonoReferencia1"/>              
+                <show id="qswfr:nombresReferencia2"/>               
+                <show id="qswfr:direccionReferencia2"/>             
+                <show id="qswfr:telefonoReferencia2"/>              
+                <show id="qswfr:tramitePor"/>               
+                <show id="qswfr:realizadoEn"/>
+                <show id="qswfr:asociacion"/>
+                <show id="qswfr:identificacionInspector"/>                              
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswfr:email">
+                  <constraint-handlers>
+                    <constraint type="MANDATORY" validation-handler="Alfresco.forms.validation.email" message="Email invalido." event="keyup"/>
+                  </constraint-handlers>
+               </field>
+               <field id="qswfr:redaccionsolicitud">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:recibedocumentos">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:fechaRecibeDocumentos" />
+                <show id="qswfr:documento" />
+                <show id="qswfr:fotocopiadocumento" />
+                <show id="qswfr:fotografias" />
+                <show id="qswfr:consignacion" />
+                <show id="qswfr:estudios" />
+                <show id="qswfr:titulaciones" />
+                <show id="qswfr:experiencia" />
+                <show id="qswfr:detalleexperiencia" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswfr:detalleexperiencia">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+   <config evaluator="task-type" condition="qswfr:digitalizadocumentos">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:numradicado" />
+                <show id="qswfr:folios" />
+                <show id="qswfr:ckdigitalizadocumentos" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config> 
+   
+   <config evaluator="task-type" condition="qswfr:crearclasificarexpediente">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="packageItems" set="items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config> 
+   
+   <config evaluator="task-type" condition="qswfr:verificadocumentacion">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:documentacionverificada" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="qswfr:documentacionverificada">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="packageItems" set="items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config> 
+
+   <config evaluator="task-type" condition="qswfr:validaexpediente">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:conceptodocumentacion" />
+                <show id="qswfr:validezdocumentacion" />
+                <show id="qswfr:requiereconsultoria" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <field id="qswfr:conceptodocumentacion">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="packageItems" set="items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+   
+   <config evaluator="task-type" condition="qswfr:validarPago">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:estadoPago" />
+                <show id="qswfr:valor" />
+                <show id="qswfr:fechaConsignacion" />               
+                <show id="qswfr:entidadPago" />             
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+    <!--           <field id="qswfr:conceptodocumentacion">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field> -->
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="packageItems" set="items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+   <config evaluator="task-type" condition="qswfr:conceptodocumentacionconsejero">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:conceptodocumentacion1" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <field id="qswfr:conceptodocumentacion1">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="packageItems" set="items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+   <config evaluator="task-type" condition="qswfr:validaconceptoconsejero">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:vconceptodocumentacion1" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="packageItems" set="items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+   <config evaluator="task-type" condition="qswfr:registraconceptoconsejero">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:conceptodocumentacion2" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswfr:conceptodocumentacion2">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>  
+   
+   <config evaluator="task-type" condition="qswfr:notificacionsolicitante">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:fechaNotificaTecnico"/>
+                <show id="qswfr:telefonico"/>
+                <show id="qswfr:fisica"/>
+                <show id="qswfr:electronica"/>
+                <show id="qswfr:donde"/>
+                <show id="qswfr:redaccionCartaInadmitidos"/>
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+                <set id="" appearance="title" label-id="workflow.set.general" />
+                <set id="items" appearance="title" label-id="workflow.set.items" />
+                <set id="response" appearance="title" label-id="workflow.set.response" />
+                <field id="qswfr:donde">
+                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                        <control-param name="style">width: 95%</control-param>
+                    </control>
+                </field>
+                <field id="qswfr:redaccionCartaInadmitidos">
+                    <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                        <control-param name="style">width: 95%</control-param>
+                    </control>
+                </field>
+                <field id="packageItems" set="items" />
+                <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:recibedocumentos2">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:fechaRecibeDocumentosII" />
+                <show id="qswfr:documento2" />
+                <show id="qswfr:fotocopiadocumento2" />
+                <show id="qswfr:fotografias2" />
+                <show id="qswfr:consignacion2" />
+                <show id="qswfr:estudios2" />
+                <show id="qswfr:titulaciones2" />
+                <show id="qswfr:experiencia2" />
+                <show id="qswfr:detalleexperiencia2" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="qswfr:detalleexperiencia2">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config> 
+
+   <config evaluator="task-type" condition="qswfr:imprimirresolucionrechazo">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>   
+   
+   <config evaluator="task-type" condition="qswfr:firmaResolucionPresidente">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:resolucionFirmadaPresidente" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:registrarEnvio">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:fechaEnvio" />
+                <show id="qswfr:direccionEnvio" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:registroguia">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:numeroGuia" />
+                <show id="qswfr:entregaEnConte" />
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:registraEntregaResolucion">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:digitalizaNotificacion">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:publicarAviso">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:digitalizarAviso">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="packageItems" />
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config  evaluator="node-type" condition="cm:content">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qsmd:tipoDocumento" for-mode="edit" force="true" />
+                <show id="qsmd:fechaVerificacion" for-mode="edit" force="true" />
+                <show id="qsmd:conQuienSeVerifico" for-mode="edit" force="true"/>
+                <show id="qsmd:telefono" for-mode="edit" force="true" />
+                <show id="qsmd:autenticado" for-mode="edit" force="true" /> 
+                <show id="qsmd:observaciones" for-mode="edit" force="true" />
+            </field-visibility>
+         </form>
+      </forms>
+   </config>
+   
+   <!-- Estudio y evaluacion -->
+   <config evaluator="task-type" condition="qswfr:distribuirflujo">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="bpm:assignee" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:distribuirflujo2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="bpm:assignee" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:evaluaexpediente">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:conceptoexpediente" />
+               <show id="qswfr:brespuesta2" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <field id="qswfr:conceptoexpediente">
+                  <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                    <control-param name="style">width: 95%</control-param>
+                  </control>
+               </field>
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:seleccionaformato">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:formatosdisponibles" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:realizacalificacion">
+      <forms>
+         <form>
+            <field-visibility>  
+                <show id="qswfr:solicitudFormato" />
+                <show id="qswfr:brespuesta3" />
+                <show id="qswfr:observacionesCalificacion" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+               <field id="qswfr:solicitudFormato">
+                    <control template="/iframe.ftl" />
+               </field>
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:pasaacomite">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:fechaActa" />
+               <show id="qswfr:numeroActa" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:pasaacomite2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:fechaActa2" />
+               <show id="qswfr:numeroActa2" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:apruebasolicitud">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:numeroRadicado2" />
+               <show id="qswfr:fechaRadicado2" />
+               <show id="qswfr:nombreCompleto2" />
+               <show id="qswfr:tipoDocumento2" />
+               <show id="qswfr:numeroDocumento2" />
+               <show id="qswfr:consejero2" />
+               <show id="qswfr:tipoTramite2" />
+               <show id="qswfr:fechaActa" />
+               <show id="qswfr:numeroActa" />
+               <!--
+               <show id="qswfr:numeroActaApruebaSolicitud" />
+               <show id="qswfr:fechaActaApruebaSolicitud" />
+               -->
+               <show id="qswfr:cbAceptacionPresidente" />
+               <show id="qswfr:formatoGenerar" />
+               <show id="qswfr:fechaResolucion" />             
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:apruebasolicitudII">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:numeroRadicado2" />
+               <show id="qswfr:fechaRadicado2" />
+               <show id="qswfr:nombreCompleto2" />
+               <show id="qswfr:tipoDocumento2" />
+               <show id="qswfr:numeroDocumento2" />
+               <show id="qswfr:consejero2" />
+               <show id="qswfr:tipoTramite2" />
+               <show id="qswfr:numeroActa3" />
+               <show id="qswfr:fechaActa3" />
+               <show id="qswfr:formatoGenerar2" />
+               <show id="qswfr:cbAceptacionPresidente2" />
+               <show id="qswfr:fechaResolucionII" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   <!-- notificacion y entrega -->
+   <config evaluator="task-type" condition="qswfr:revisadocumentosgenerados">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:imprimirdocumentos2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:firmardocumentos2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:cbFirmasRealizadas" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:organizarpaquetesenvio">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:tipoNotificacion" />
+                <show id="qswfr:notificacionGenerar" />
+                <show id="qswfr:empresaEnvio" />
+                <show id="qswfr:cualEmpresaEnvio" />
+                <show id="qswfr:numeroGuia2" />
+                <show id="qswfr:fechaMatricula" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:imprimircartanotificacion">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:digitalizacioncartanotificacion">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:cbcartanotificaciondigitalizada" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:asociarcartanotificacion">
+      <forms>
+         <form>
+            <field-visibility>
+               <!-- <show id="qswfr:fechaEnvioTecnico" /> --> 
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:recibenotificacion">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:recibenotificacionv" />
+               <show id="qswfr:fecharecepcion" />
+               <show id="qswfr:mediorecepcion" />
+               <show id="qswfr:fechaMatricula0" />
+               <show id="qswfr:interponerecursov" />
+               <show id="qswfr:tipoRecurso" />
+               <show id="qswfr:fecharecurso" />
+               <show id="qswfr:mediorecepcionrecurso" />
+               <show id="qswfr:clasesSolicitadas" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+ <config evaluator="task-type" condition="qswfr:seleccionarAvisoGenerar">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:avisoGenerar" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   <config evaluator="task-type" condition="qswfr:registrardatosentrega">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:listadoTipoEntrega" />
+               <show id="qswfr:fechanotificacion" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:seleccionaformato2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:formatosdisponibles" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   <!-- Formulario de tarea Evaluar Expediente Recurso -->
+   <config evaluator="task-type" condition="qswfr:evaluarExpedienteRecurso">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:recursoAceptado"/>
+               <show id="qswfr:clasesSolicitadas" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:realizacalificacion2">
+      <forms>
+         <form>
+            <field-visibility>  
+                <show id="qswfr:solicitudFormato2" />
+                <show id="qswfr:observacionesCalificacion2" />
+                <show id="qswfr:brespuesta32" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+               <field id="qswfr:solicitudFormato2">
+                    <control template="/iframe.ftl" />
+               </field>
+            </appearance>
+         </form>
+      </forms>
+    </config>
+   
+   <config evaluator="task-type" condition="qswfr:publicaravisos2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:interponerecursoAviso">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:interponerecursoAviso01" />
+               <show id="qswfr:tipoRecursoAviso" />
+               <show id="qswfr:fecharecursoAviso" />
+               <show id="qswfr:mediorecepcionrecurso" />
+               <show id="qswfr:clasesSolicitadasAviso" />   
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:digitalizaraviso2">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:avisoDigitalizado" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:recibenotificacion2">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="qswfr:recibenotificacion2v" />
+               <show id="qswfr:fecharecepcion2" />
+               <show id="qswfr:mediorecepcion2" />
+               <show id="qswfr:fechaMatricula1" />
+               <show id="qswfr:interponerecursov02" />
+               <show id="qswfr:tipoRecurso02" />
+               <show id="qswfr:fecharecurso02" />
+               <show id="qswfr:mediorecepcionrecurso02" />
+               <show id="qswfr:clasesSolicitadas02" />
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:revisavalidaexpediente">
+      <forms>
+         <form>
+            <field-visibility>
+                <show id="qswfr:opcionEnvio" /> 
+                <show id="qswfr:realizarEnvio" />
+                <show id="packageItems" /> 
+                <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+   
+   <config evaluator="task-type" condition="qswfr:archivar">
+      <forms>
+         <form>
+            <field-visibility>
+               <show id="packageItems" /> 
+               <show id="transitions" />
+            </field-visibility>
+            <appearance>
+               <set id="" appearance="title" label-id="workflow.set.general" />
+               <set id="items" appearance="title" label-id="workflow.set.items" />
+               <set id="response" appearance="title" label-id="workflow.set.response" />
+               <field id="packageItems" set="items" />
+               <field id="transitions" set="response" />
+            </appearance>
+         </form>
+      </forms>
+   </config>
+
+<!-- Inicia el flujo de procesos disciplinarios -->
+    <config evaluator="string-compare" condition="activiti$pdpqrs">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:tipodocumento" />
+                    <show id="qswfa:numerodocumento" />
+                    <show id="qswfa:nombres" />
+                    <show id="qswfa:apellidos" />
+                    <show id="qswfa:telefono" />
+                    <show id="qswfa:celular" />
+                    <show id="qswfa:departamento" />
+                    <show id="qswfa:ciudad" />
+                    <show id="qswfa:direccion" />
+                    <show id="qswfa:email" />
+                    <show id="qswfa:tiposolicitud" />
+                    <show id="qswfa:redaccionsolicitud" />
+                    <show id="qswfa:razonSocial" />
+                    <show id="qswfa:cargo" />
+                    <show id="qswfa:rutaarchivo" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:seleccionproceso">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:tiposolicitud02" />
+                    <show id="qswfa:redaccionsolicitud02" />
+                    <show id="qswfa:ltipopeticion" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:buscartecnico">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:numexpediente" />
+                    <show id="qswfa:fechapeticion" />
+                    <show id="qswfa:redaccionsolicitud11" />
+                    <show id="qswfa:numerodocumentot" />
+                    <show id="qswfa:nombrest" />
+                    <show id="qswfa:apellidost" />
+                    <show id="qswfa:numeromatricula" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud11">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:resultadosbusqueda">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud12" />
+                    <show id="qswfa:ltecnicos" />
+                    <show id="qswfa:lprocesosiguiente" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud12">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:presidentecomitedisciplinario">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud13" />
+                    <show id="qswfa:cbValido" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud13">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:asignacionconsejerocomite">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud14" />
+                    <show id="qswfa:fechaasignacionconsejero" />
+                    <show id="qswfa:fechahoracitaciontecnico" />
+                    <show id="bpm:assignee"/>
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud14">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:evaluacionconsejero">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud03" />
+                    <show id="qswfa:comentarios" />
+                    <show id="qswfa:lvalidez" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarios">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:evaluacioncomite">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud04" />
+                    <show id="qswfa:comentariosconsejero" />
+                    <show id="qswfa:comentarios02" />
+                    <show id="qswfa:lvalidez02" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud04">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarios02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:generacionfallo">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud15" />
+                    <show id="qswfa:comentariosconsejero02" />
+                    <show id="qswfa:comentariosc" />
+                    <show id="qswfa:lprocesosiguiente02" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosconsejero02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud15">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:notificacionpartes">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud16" />
+                    <show id="qswfa:comentariosconsejero03" />
+                    <show id="qswfa:comentariosc11" />
+                    <show id="qswfa:fechahoraconvocatoria" />
+                    <show id="qswfa:telefonica" />
+                    <show id="qswfa:electronica" />
+                    <show id="qswfa:fisica" />
+                    <show id="qswfa:lugar" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:lugar">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc11">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud16">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:convocarinculpado">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud17" />
+                    <show id="qswfa:comentariosconsejero04" />
+                    <show id="qswfa:comentariosc12" />
+                    <show id="qswfa:fechapresentacion" />
+                    <show id="qswfa:lrecurso" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosconsejero04">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc12">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud17">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:generacionfallo01">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:publicaraviso01">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:asignardefensoroficio">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="packageItems" /> 
+                    <show id="bpm:assignee"/>
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:aportarpruebas">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud18" />
+                    <show id="qswfa:comentariosconsejero05" />
+                    <show id="qswfa:comentariosc13" />
+                    <show id="qswfa:comentariosinculpado" />
+                    <show id="qswfa:cbpruebasdigitalizadas" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosinculpado">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero05">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc13">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud18">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:asignacionconsejerocomite02">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud19" />
+                    <show id="qswfa:comentariosconsejero06" />
+                    <show id="qswfa:comentariosc14" />
+                    <show id="bpm:assignee" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosconsejero06">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc14">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud19">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:evaluacionconsejero02">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud05" />
+                    <show id="qswfa:comentariosconsejero07" />
+                    <show id="qswfa:comentariosc02" />
+                    <show id="qswfa:comentarios03" />
+                    <show id="qswfa:lvalidez03" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosconsejero07">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud05">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarios03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:evaluacioncomite02">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud06" />
+                    <show id="qswfa:comentariosconsejero08" />
+                    <show id="qswfa:comentariosc15" />
+                    <show id="qswfa:comentariosc03" />
+                    <show id="qswfa:comentarios04" />
+                    <show id="qswfa:lvalidez04" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosconsejero08">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc15">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud06">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarios04">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:generacionfallo02">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:evaluacionconsejeroCONTE">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud07" />
+                    <show id="qswfa:comentariosconsejero09" />
+                    <show id="qswfa:comentariosc16" />
+                    <show id="qswfa:comentariosconsejeroII" />
+                    <show id="qswfa:comentariosc04" />
+                    <show id="qswfa:comentarios06" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:comentariosconsejero09">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc16">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejeroII">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:redaccionsolicitud07">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc04">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarios06">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:emitirsancionconsejo">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud08" />
+                    <show id="qswfa:comentariosconsejero10" />
+                    <show id="qswfa:comentariosc17" />
+                    <show id="qswfa:comentariosconsejeroII02" />
+                    <show id="qswfa:comentarioscomiteII" />
+                    <show id="qswfa:comentariosc05" />
+                    <show id="qswfa:comentarios07" />
+                    <show id="qswfa:lvalidez07" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud08">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero10">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc17">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejeroII02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarioscomiteII">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc05">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarios07">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:notificacionalaspartes02">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud09" />
+                    <show id="qswfa:comentariosconsejero11" />
+                    <show id="qswfa:comentariosc18" />
+                    <show id="qswfa:comentariosconsejeroII03" />
+                    <show id="qswfa:comentarioscomiteII02" />
+                    <show id="qswfa:comentariosconsejo" />
+                    <show id="qswfa:comentariosc06" />
+                    <show id="qswfa:telefonica02" />
+                    <show id="qswfa:electronica02" />
+                    <show id="qswfa:fisica02" />
+                    <show id="qswfa:lugar02" />
+                    <show id="packageItems" /> 
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud09">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero11">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc18">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejeroII03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarioscomiteII02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejo">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc06">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:lugar02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:publicacionsancion">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud10" />
+                    <show id="qswfa:comentariosconsejero12" />
+                    <show id="qswfa:comentariosc19" />
+                    <show id="qswfa:comentariosconsejeroII04" />
+                    <show id="qswfa:comentarioscomiteII03" />
+                    <show id="qswfa:comentariosconsejo02" />
+                    <show id="qswfa:comentariosc07" />
+                    <show id="packageItems" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud10">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero12">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc19">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejeroII04">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarioscomiteII03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejo02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc07">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:archivo">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitud21" />
+                    <show id="qswfa:comentariosconsejero13" />
+                    <show id="qswfa:comentariosc20" />
+                    <show id="qswfa:comentariosconsejeroII05" />
+                    <show id="qswfa:comentarioscomiteII04" />
+                    <show id="qswfa:comentariosconsejo03" />
+                    <show id="qswfa:comentariosc08" />
+                    <show id="qswfa:comentarios08" />
+                    <show id="packageItems" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitud21">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejero13">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc20">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejeroII05">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentarioscomiteII04">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosconsejo03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:comentariosc08">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <set id="items" appearance="title" label-id="workflow.set.items" />
+                    <field id="packageItems" set="items" />
+                    <field id="qswfa:comentarios08">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <!-- PQRS -->
+    <config evaluator="task-type" condition="qswfa:asignaresponsablep">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="bpm:assignee" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance />
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:respondepqrs">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitudp" />
+                    <show id="qswfa:accionrealizadap" />
+                    <show id="qswfa:fecharespuestap" />
+                    <show id="qswfa:telefonica03" />
+                    <show id="qswfa:electronica03" />
+                    <show id="qswfa:fisica03" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitudp">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:accionrealizadap">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:revisarespuestap">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitudp02" />
+                    <show id="qswfa:accionrealizadaxrespuestap" />
+                    <show id="qswfa:fecharp" />
+                    <show id="qswfa:observacionesrp" />
+                    <show id="qswfa:brespuestap" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitudp02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:accionrealizadaxrespuestap">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:observacionesrp">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+    <config evaluator="task-type" condition="qswfa:nuevasaccionesp">
+        <forms>
+            <form>
+                <field-visibility>
+                    <show id="qswfa:redaccionsolicitudp02" />
+                    <show id="qswfa:accionanteriorp" />
+                    <show id="qswfa:fecharp02" />
+                    <show id="qswfa:observacionesrp02" />
+                    <show id="qswfa:nuevaaccionrealizadap" />
+                    <show id="transitions" />
+                </field-visibility>
+                <appearance>
+                    <field id="qswfa:redaccionsolicitudp03">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:accionanteriorp">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:observacionesrp02">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                    <field id="qswfa:nuevaaccionrealizadap">
+                        <control template="/org/alfresco/components/form/controls/textarea.ftl">
+                            <control-param name="style">width: 95%</control-param>
+                        </control>
+                    </field>
+                </appearance>
+            </form>
+        </forms>
+    </config>
+</alfresco-config>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartaInadmitidos" pageWidth="612" pageHeight="792" columnWidth="428" leftMargin="99" rightMargin="85" topMargin="113" bottomMargin="99" uuid="d40a8295-029b-43ba-83d3-b4547c63a60e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numeroCDO" class="java.lang.String"/>
+	<parameter name="fechaNotificacion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NombreSolicitante" class="java.lang.String"/>
+	<parameter name="ApellidoSolicitante" class="java.lang.String"/>
+	<parameter name="direccionResidencia" class="java.lang.String"/>
+	<parameter name="telefonoResidencia" class="java.lang.String"/>
+	<parameter name="ciudadResidencia" class="java.lang.String"/>
+	<parameter name="numeroRadicado" class="java.lang.String"/>
+	<parameter name="redaccionNotificacion" class="java.lang.String"/>
+	<parameter name="identificacionInspector" class="java.lang.String"/>
+	<parameter name="nombreAsociacion" class="java.lang.String"/>
+	<parameter name="departamentoResidencia" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="204" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c8d7f94c-b438-49c6-bf28-cdfe8176e3ac" x="0" y="0" width="428" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDG-13-1302 "+$P{numeroCDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b039abca-944a-49da-8e2a-62ef5d311985" x="0" y="31" width="428" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bogotá, D.C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaNotificacion})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e70053b-5cae-4fcd-8ae5-9afcd0b55c20" x="0" y="62" width="428" height="98"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Señor"+"\n"+
+$P{NombreSolicitante}+" "+$P{ApellidoSolicitante}+"\n"+
+$P{direccionResidencia}+"\n"+
+"Tel: "+ $P{telefonoResidencia}+"\n"+
+$P{ciudadResidencia} +"-"+ $P{departamentoResidencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3393639b-ccfd-4825-a1b7-b9196113cccd" x="0" y="160" width="428" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Asunto: Solicitud de Matrícula Profesional Radicación  No. "+ $P{numeroRadicado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="580" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1f033aff-616d-4821-8c9b-0c6fa19e80a4" x="0" y="0" width="428" height="580"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Respetado señor:"
++ "\n\n" +
+"En atención a la solicitud de trámite de su matrícula profesional de técnico electricista, nos permitimos informarle que efectuada la revisión de su solicitud, se observa que se encuentra incompleta, razón por la cual le solicitamos en el término perentorio de un (1) mes de acuerdo al Artículo 17 del C.C.A., se sirva allegar a la entidad lo siguiente: "
++ "\n\n" +
+$P{redaccionNotificacion}
++ "\n\n" +
+"Vencido el término anterior, si usted no atiende el requerimiento, la entidad considera que desiste de la solicitud, lo cual generará el acto administrativo de rechazo."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="161" splitType="Stretch">
+			<textField>
+				<reportElement uuid="20e3ca19-2a8d-405e-8e49-c365fc0389cf" x="0" y="0" width="428" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sírvase tener en cuenta lo anterior."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b6e07b4f-1fff-46b5-aed0-8f541d011259" x="0" y="31" width="428" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Atentamente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="071b95f7-073a-473b-9353-f05372bcce8b" x="0" y="70" width="428" height="30"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WILSON OCHOA" + "\n" +
+"Presidente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="703d7527-e243-44ed-b623-e707d70fcdf8" x="0" y="113" width="428" height="21"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Copia: "
++  ($P{identificacionInspector}==null ||$P{identificacionInspector}.isEmpty() || $P{nombreAsociacion}== null || $P{nombreAsociacion}.isEmpty()  ? "CONTE" : "Inspector " + $P{identificacionInspector} + ", " + $P{nombreAsociacion} )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9489792-29c6-49ff-a1cc-92f951b75131" x="0" y="134" width="96" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gloria M."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

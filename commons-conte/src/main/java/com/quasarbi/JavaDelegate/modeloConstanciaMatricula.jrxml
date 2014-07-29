@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="modeloConstanciaMatricula" pageWidth="612" pageHeight="792" columnWidth="414" leftMargin="113" rightMargin="85" topMargin="134" bottomMargin="113" uuid="afabd18a-05bc-4130-8999-84673c6ade81">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="176"/>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="cedulaTecnico" class="java.lang.String"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="fechaMatricula" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreTenico" class="java.lang.String"/>
+	<parameter name="apellidoTenico" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="143" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3dcb2066-ae5c-42d5-9f6b-6511aec2c8e4" x="0" y="72" width="414" height="29"/>
+				<textElement>
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ciudad y Fecha: ______________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b17872cd-e5db-4c35-986a-8c386aa353d7" x="65" y="112" width="349" height="27"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RAD. "+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7927c39d-80a1-4660-95d5-8c8c50587042" x="0" y="0" width="414" height="27"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSTANCIA DE RECIBO"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="171" splitType="Stretch">
+			<textField>
+				<reportElement uuid="077435d4-7217-4d9d-b6ba-cb387452e2d6" x="0" y="25" width="414" height="144"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En la fecha recibí del CONSEJO NACIONAL DE TÉCNICOS ELECTRICISTAS-CONTE la Matricula Profesional de Técnico Electricista Tipo Diploma y Tipo Tarjeta MTE. "+$P{cedulaTecnico}+"-"+$P{numeroMatricula}+" expedida el "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaMatricula}) + " y bajo la gravedad del juramento, me obligo a acatar la ley 1264 de 2008, la Ley 19 de 1990, su decreto reglamentario y las demás disposiciones legales que rigen sobre la materia."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="168" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a8463195-c214-4f43-a8c5-e082f4fe18f6" x="0" y="11" width="414" height="27"/>
+				<textElement>
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Para constancia se firma,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="45b1993e-c928-46d9-bb68-e60de13906b7" x="0" y="62" width="414" height="59"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["_____________________________________________"+ "\n" +
+$P{nombreTenico}+" "+$P{apellidoTenico}+ "\n" +
+"C.C. "+$P{cedulaTecnico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

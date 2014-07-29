@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="estudioEvaluacion" name="Esdudio y Evaluacion" isExecutable="true">
+    <startEvent id="alfrescoStartevent1" name="Alfresco start" activiti:formKey="wf:submitAdhocTask"></startEvent>
+    <userTask id="alfrescoUsertask1" name="Distribuir Expedientes" activiti:assignee="admin" activiti:formKey="wf:adhocTask"></userTask>
+    <userTask id="evaluarExpediente" name="Evaluar Expediente" activiti:assignee="admin" activiti:formKey="wf:adhocTask"></userTask>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="seleccionarFormato" name="Seleccionar Formato" activiti:assignee="admin" activiti:formKey="wf:adhocTask"></userTask>
+    <userTask id="marcarSistema" name="Marcar en el Sistema" activiti:assignee="admin" activiti:formKey="wf:adhocTask"></userTask>
+    <userTask id="realizarEvaluacion" name="Realizar Evaluacion" activiti:assignee="admin" activiti:formKey="wf:adhocTask"></userTask>
+    <userTask id="pasarSolicitud" name="Pasar Solicitud" activiti:formKey="wf:adhocTask"></userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow1" sourceRef="marcarSistema" targetRef="endevent1"></sequenceFlow>
+    <userTask id="aprobarSolicitud" name="Aprobar Solicitud" activiti:assignee="admin" activiti:formKey="wf:adhocTask"></userTask>
+    <sequenceFlow id="flow2" sourceRef="alfrescoStartevent1" targetRef="alfrescoUsertask1"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="alfrescoUsertask1" targetRef="evaluarExpediente"></sequenceFlow>
+    <sequenceFlow id="flow4" sourceRef="evaluarExpediente" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow5" sourceRef="exclusivegateway1" targetRef="marcarSistema"></sequenceFlow>
+    <sequenceFlow id="flow6" sourceRef="exclusivegateway1" targetRef="seleccionarFormato"></sequenceFlow>
+    <sequenceFlow id="flow7" sourceRef="seleccionarFormato" targetRef="realizarEvaluacion"></sequenceFlow>
+    <sequenceFlow id="flow8" sourceRef="realizarEvaluacion" targetRef="pasarSolicitud"></sequenceFlow>
+    <sequenceFlow id="flow9" sourceRef="pasarSolicitud" targetRef="aprobarSolicitud"></sequenceFlow>
+    <sequenceFlow id="flow10" sourceRef="aprobarSolicitud" targetRef="endevent1"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_estudioEvaluacion">
+    <bpmndi:BPMNPlane bpmnElement="estudioEvaluacion" id="BPMNPlane_estudioEvaluacion">
+      <bpmndi:BPMNShape bpmnElement="alfrescoStartevent1" id="BPMNShape_alfrescoStartevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="60.0" y="310.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="alfrescoUsertask1" id="BPMNShape_alfrescoUsertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="140.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="450.0" y="307.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="780.0" y="364.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="evaluarExpediente" id="BPMNShape_evaluarExpediente">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="seleccionarFormato" id="BPMNShape_seleccionarFormato">
+        <omgdc:Bounds height="55.0" width="105.0" x="600.0" y="246.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="marcarSistema" id="BPMNShape_marcarSistema">
+        <omgdc:Bounds height="55.0" width="105.0" x="600.0" y="354.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="realizarEvaluacion" id="BPMNShape_realizarEvaluacion">
+        <omgdc:Bounds height="55.0" width="105.0" x="770.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="pasarSolicitud" id="BPMNShape_pasarSolicitud">
+        <omgdc:Bounds height="55.0" width="105.0" x="940.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="aprobarSolicitud" id="BPMNShape_aprobarSolicitud">
+        <omgdc:Bounds height="55.0" width="105.0" x="1090.0" y="300.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="705.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="780.0" y="381.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="95.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="140.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="245.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="395.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="450.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5">
+        <omgdi:waypoint x="470.0" y="347.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="381.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow6" id="BPMNEdge_flow6">
+        <omgdi:waypoint x="470.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="470.0" y="273.0"></omgdi:waypoint>
+        <omgdi:waypoint x="600.0" y="273.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="705.0" y="273.0"></omgdi:waypoint>
+        <omgdi:waypoint x="824.0" y="273.0"></omgdi:waypoint>
+        <omgdi:waypoint x="822.0" y="300.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="875.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="940.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="1045.0" y="327.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1090.0" y="327.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="1142.0" y="355.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1144.0" y="381.0"></omgdi:waypoint>
+        <omgdi:waypoint x="815.0" y="381.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

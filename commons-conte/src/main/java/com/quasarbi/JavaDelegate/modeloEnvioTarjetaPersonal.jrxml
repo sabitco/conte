@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="modeloEnvioTarjetaPersonal" pageWidth="612" pageHeight="792" columnWidth="428" leftMargin="99" rightMargin="85" topMargin="113" bottomMargin="99" uuid="90dd25d3-c1c5-47bc-99dd-1f51d3eb71a3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="fechaEnvio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreTecnico" class="java.lang.String"/>
+	<parameter name="apellidoTecnico" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="telefono" class="java.lang.String"/>
+	<parameter name="ciudad" class="java.lang.String"/>
+	<parameter name="departamento" class="java.lang.String"/>
+	<parameter name="numeroRadicado" class="java.lang.String"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="151" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f641387d-0c4b-43d7-ac93-18885623b0de" x="0" y="0" width="428" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDO-13-1302 "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b4cf36e7-f002-4988-acab-b5f9a6a559f8" x="0" y="20" width="428" height="131"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bogotá, D. C., " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaEnvio}) +
+"\n\n\nSeñor "+"\n"+ $P{nombreTecnico} +" "+$P{apellidoTecnico}+
+"\n"+ $P{direccion} +
+"\n"+ "Tel. "+ $P{telefono} +
+"\n" + $P{ciudad}+ "-" +$P{departamento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="269" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1e266c4e-f339-493b-ad23-3b2a2115be41" x="0" y="0" width="428" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Asunto: Envío de la Matricula profesional Tipo Tarjeta, radicado No. "+ $P{numeroRadicado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c7701483-0476-44ad-9037-e3f1bfc05c65" x="0" y="31" width="428" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Respetado señor:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eaf7c781-b02b-4b45-b1f4-73537249ebf2" x="0" y="51" width="428" height="172"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Remitimos la Matricula Profesional Tipo Tarjeta, número No. "+ $P{numeroMatricula}+",  por lo cual debe tener en cuenta que este es un documento personal e intransferible."
++"\n\n"+
+"Por lo anterior, adjuntamos constancia de recibido de la matricula la cual agradecemos nos sea devuelta en la mayor brevedad posible debidamente firmada por el titular de la matricula, para ser anexada al respectivo expediente, la cual la puede remitir al correo electrónico notificaciones@conte.org.co."
++"\n\n"+
+"De otra parte, le informamos que las líneas de atención al usuario PBX. 4820606 y fax 2328991, están a su  disposición para suplir cualquier consulta o solicitud de su parte."
++"\n\n"+
+"Cordialmente,"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="147" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4455c834-6382-4944-a7f9-9f0e12621646" x="0" y="81" width="100" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ángela C. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="675a183b-1be9-4036-940d-b742422ecc56" x="0" y="61" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Anexo: Lo enunciado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="873bef64-f2eb-4b75-997a-e487a5022cb6" x="0" y="41" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Coordinadora Operativa"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e7de7312-d0d6-4361-b969-fe9d9dbee2d3" x="0" y="21" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NUBIA PATRICIA LEON"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

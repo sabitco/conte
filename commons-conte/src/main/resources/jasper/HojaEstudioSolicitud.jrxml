@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="evaluacion" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75a54845-b895-40f8-97ad-7c4a31ee6da4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["jasper/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="solicitud_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="observaciones" class="java.lang.String"/>
+	<parameter name="nombres" class="java.lang.String"/>
+	<parameter name="apellidos" class="java.lang.String"/>
+	<parameter name="documento" class="java.lang.String"/>
+	<parameter name="expediente" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     evaluacion.`solicitud_id` AS evaluacion_solicitud_id,
+     evaluacion.`activity_id` AS evaluacion_activity_id,
+     clase_generica.`codigo` AS clase_generica_codigo,
+     clase_generica.`nombre` AS clase_generica_nombre,
+     actividad_generica.`codigo` AS actividad_generica_codigo,
+     actividad_generica.`c_clase` AS actividad_generica_c_clase,
+     actividad_generica.`nombre` AS actividad_generica_nombre,
+     actividad_generica.`descripcion` AS actividad_generica_descripcion,
+     actividad_generica.`editable` AS actividad_generica_editable
+FROM
+     `actividad_generica` actividad_generica INNER JOIN `evaluacion` evaluacion ON actividad_generica.`codigo` = evaluacion.`activity_id`
+     INNER JOIN `clase_generica` clase_generica ON actividad_generica.`c_clase` = clase_generica.`codigo`
+WHERE
+     evaluacion.`documento` = $P{documento}
+GROUP BY
+     clase_generica_codigo]]>
+	</queryString>
+	<field name="evaluacion_solicitud_id" class="java.lang.Long"/>
+	<field name="evaluacion_activity_id" class="java.lang.Integer"/>
+	<field name="clase_generica_codigo" class="java.lang.Integer"/>
+	<field name="clase_generica_nombre" class="java.lang.String"/>
+	<field name="actividad_generica_codigo" class="java.lang.Integer"/>
+	<field name="actividad_generica_c_clase" class="java.lang.Integer"/>
+	<field name="actividad_generica_nombre" class="java.lang.String"/>
+	<field name="actividad_generica_descripcion" class="java.lang.String"/>
+	<field name="actividad_generica_editable" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="109" y="0" width="357" height="23" uuid="ad8b3927-0426-47d9-b3be-5c9da91f0be7"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[HOJA DE ESTUDIO PARA SOLICITUD DE MATRICULA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="477" y="-1" width="96" height="58" uuid="331416db-d62c-4451-a614-b6b5313408a2"/>
+				<textFieldExpression><![CDATA["EXPEDIENTE \n\n" + "No." + $P{expediente}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="109" y="23" width="357" height="1" uuid="397de8cc-e693-4bc3-9a4c-96495e4f7cf7"/>
+			</line>
+			<staticText>
+				<reportElement x="109" y="35" width="357" height="23" uuid="1c439518-9045-49f1-932d-00c3bfe16507"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[CONSEJO NACIONAL DE TÉCNICOS ELECTRICISTAS]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="57" width="570" height="1" uuid="27c93dfa-aba7-4055-847b-13757827de58"/>
+			</line>
+			<line>
+				<reportElement x="109" y="0" width="1" height="58" uuid="454e8c18-a305-4927-bf13-f2e6a3cc50be"/>
+			</line>
+			<line>
+				<reportElement x="466" y="-2" width="1" height="60" uuid="b3bf5250-fe7d-42fb-b9ee-b01489a468e3"/>
+			</line>
+			<line>
+				<reportElement x="1" y="-2" width="572" height="1" uuid="98ded628-ef62-40a4-af81-08864b0be029"/>
+			</line>
+			<line>
+				<reportElement x="571" y="-2" width="1" height="81" uuid="7d13fb2c-9bed-4e95-9fa3-22e4f0b313af"/>
+			</line>
+			<line>
+				<reportElement x="0" y="-2" width="2" height="81" uuid="5e607c78-c4d0-43b5-aa60-fc5064322946"/>
+			</line>
+			<textField>
+				<reportElement x="13" y="57" width="545" height="22" uuid="96ad3db2-6c24-481c-94b3-e7d5977df4f1"/>
+				<textFieldExpression><![CDATA["Nombres: " + $P{nombres} + "\tApellidos: " + $P{apellidos} + "\tDocumento: " + $P{documento}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="2" y="0" width="107" height="57" uuid="f32cddeb-4694-4e31-a817-a884add53a3d"/>
+				<imageExpression><![CDATA["jasper/images/logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<line>
+				<reportElement x="2" y="0" width="569" height="1" uuid="a74aa7e6-4722-4fd2-beaf-331772c8c0e4"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="572" height="20" uuid="7b3511ae-1eef-406d-b8e4-a511eef2f02d"/>
+				<textFieldExpression><![CDATA[$F{clase_generica_nombre}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="20" width="572" height="20" uuid="97c4e5fd-357c-432e-92a9-a39b3b838df3"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="class_id">
+					<subreportParameterExpression><![CDATA[$F{clase_generica_codigo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="solicitud_id">
+					<subreportParameterExpression><![CDATA[$P{solicitud_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="documento">
+					<subreportParameterExpression><![CDATA[$P{documento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "evaluacion_actividad.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="330" height="42" uuid="9d0473c9-c14a-44ec-833b-33d2307b9a5c"/>
+				<textFieldExpression><![CDATA["OBSERVACIONES: \n\n" + $P{observaciones}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="332" y="0" width="242" height="31" uuid="325de6b8-a22b-4dcf-8c79-a5ab7968f56f"/>
+				<textFieldExpression><![CDATA["FIRMA CONSEJERO PONENTE"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="330" y="48" width="242" height="1" uuid="a129d844-e70c-4070-bc68-f1ab900edd1b"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

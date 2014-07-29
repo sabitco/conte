@@ -1,0 +1,371 @@
+@import "../runo/styles.css";
+/*** Common ***/
+/* Contain floats: h5bp.com/q */
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+.info, .success, .warning, .error, .validation, .expired, .pre, .technical, .wrong {
+  border: 1px solid;
+  margin: 0;
+  padding: 3px 3px 3px 38px;
+  background-repeat: no-repeat;
+  background-position: 3px center;
+  font-size: 85%;
+}
+.info, .expired {
+  color: #00529B;
+  background-color: #BDE5F8;
+  background-image: url('icons/messages/info.png');
+}
+.success {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+  background-image:url('icons/messages/success.png');
+}
+.warning, .pre {
+  color: #9F6000;
+  background-color: #FEEFB3;
+  background-image: url('icons/messages/warning.png');
+}
+.error, .technical {
+  color: #D8000C;
+  background-color: #FFBABA;
+  background-image: url('icons/messages/error.png');
+}
+.validation, .wrong {
+  color: #D63301;
+  background-color: #FFCCBA;
+  background-image: url('icons/messages/validation.png');
+}
+/*** END Common ***/
+
+body {
+  margin: 10px;
+  padding: 0;
+  font-family: arial,helvetica,sans-serif
+}
+
+.cmenu {
+  top: 5px;
+  width: 176px;
+  height: 600px;
+  margin: 5px;
+  padding: 5px;
+  background: #C0C0C0 ;
+  color: #fff;
+  float: left;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.menu {
+  width: 180px;
+  height: 596px;
+  margin: 0px;
+  padding: 0px;
+  background: #fff ;
+  color: #333333;
+  float: left;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.main {
+  width: 810px;
+  height: 800px;
+  margin: 5px;
+  padding: 5px;
+  background: #FFFFFF;
+  color: #fff;
+  float: left;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+}
+
+.content {
+  width: 800px;
+  height: 600px;
+  margin: 5px;
+  padding: 5px;
+  background: #C0C0C0;
+  color: #fff;
+  float: left;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+}
+.btn-query-engine{
+  margin-top: 16px;
+  margin-left: 5px;
+
+}
+
+/* Button-link Styles for V&P LinkItems */
+
+.link-execution .v-button-caption {
+  color: #8fd44d; /* light green */
+}
+
+.link-stop .v-button-caption {
+  color: blue;
+}
+
+.link-finished span.v-button-caption {
+  color: red;
+}
+
+.link-error .v-button-caption {
+  color: crimson;
+}
+
+/* End of V&P styles */
+
+#validation-window {
+  background: transparent;
+}
+
+#breadcrumb {
+  position: absolute;
+  top: 72px;
+  left: 5px
+}
+
+#bodysection {
+  position: absolute;
+  top: 0px;
+  left: 250px;
+  width: 800px;
+  height: 600px;
+  background-color: #fff;
+}
+
+#footersection {
+  position: absolute;
+  background-color: #fff;
+}
+
+#animation {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 400px;
+}
+
+#logo {
+  position: relative;
+  top: -15px;
+  left: 880px;
+}
+
+#tabcontent {
+  width: 100%;
+  height: auto;
+  margin: 4px ;
+}
+
+#maincontent {
+  position:  relative;
+  top:0px;
+  left:5px;
+  width:99%;
+  height:100%;
+  background-color:#fff;
+  overflow: hidden;
+}
+
+#breadcrumb{
+  position: relative;
+  top:0px;
+  left:0px;
+}
+
+#menusection {
+  position: relative;
+  top: 5px;
+  left: 0px;
+  width: 19%;
+  height: 500px;
+  background-color: #fff;
+  overflow: scroll;
+  float: left;
+}
+
+#contentpage {
+  position: relative;
+  float: left;
+  width: 77%;
+  margin: 13px;
+}
+
+/*** Login Page ***/
+#header {
+  height: 65px;
+}
+#logo_infovalmer {
+  float: left;
+  width: 305px;
+}
+#logo_bvc {
+  float: right;
+  width: 125px;
+}
+.section-header {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: .5em 0;
+}
+#login_page #page {
+  min-width: 800px;
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+#login_page #main {
+  margin-top: 10px;
+}
+#login_box_wrapper {
+  float: right;
+  width: 360px;
+}
+#login_box {
+  float: none;
+  background: none repeat scroll 0 0 #F1F1F1;
+  border: 1px solid #E5E5E5;
+  padding: 20px 20px 15px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+.field-wrapper {
+  margin: .5em 0;
+  display: block;
+}
+#login_box .field-label {
+  font: bold 81.25%/1 arial,helvetica,sans-serif;
+}
+#login_box .field-value {
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+  font-size: 15px;
+  margin: 0;
+  padding: 0 8px;
+  border: 1px solid #C0C0C0;
+  border-color: #C0C0C0 #D9D9D9 #D9D9D9;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#login_box .field-value:focus {
+  border: 1px solid #4D90FE;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset;
+  outline: medium none;
+}
+.button {
+  font-size: 13px;
+  height: 32px;
+  line-height: 29px;
+  vertical-align: middle;
+  border: 1px solid #3079ED;
+  color: #FFFFFF;
+  display: inline-block;
+  font-weight: bold;
+  min-width: 46px;
+  margin: 0;
+  padding: 0 8px;
+  text-align: center;
+  background-color: #4D90FE;
+  cursor: pointer;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background: -moz-linear-gradient(top, #4d90fe 0%, #4787ed 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#4787ed)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #4d90fe 0%,#4787ed 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #4d90fe 0%,#4787ed 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #4d90fe 0%,#4787ed 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #4d90fe 0%,#4787ed 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#4787ed',GradientType=0 ); /* IE6-9 */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.button:hover, .button:active {
+  border: 1px solid #2F5BB7;
+  background-color: #357AE8;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background: -moz-linear-gradient(top, #4d90fe 0%, #357ae8 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4d90fe), color-stop(100%,#357ae8)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #4d90fe 0%,#357ae8 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #4d90fe 0%,#357ae8 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #4d90fe 0%,#357ae8 100%); /* IE10+ */
+  background: linear-gradient(to bottom, #4d90fe 0%,#357ae8 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4d90fe', endColorstr='#357ae8',GradientType=0 ); /* IE6-9 */
+}
+.form-buttons {
+  margin-top: .6em;
+}
+/*** END Login Page ***/
+
+/*** Administracion Usuarios ***/
+.usuario-window {
+  width: 380px;
+}
+.usuario-password-window {
+  width: 380px;
+}
+.Usuario-form-buttons {
+  margin-top: 1.0em;
+}
+/*** END Administracion Usuarios ***/
+
+/*** Report Container ***/
+.report-container {
+  height: 300px;
+}
+
+.upload-vaadin .gwt-FileUpload,.upload-vaadin .v-button{
+  float: left;
+}
+/*** END Report Container ***/
+
+/*** Main Button Panel ***/
+.cuenta-usuario-link {
+  margin-right: .8em;
+}
+.cuenta-usuario-link .v-button-caption {
+  line-height: 18px
+}
+/*** END Main Button Panel ***/
+
+/**ESTILOS ENCUESTA**/
+#container {
+	height: 700px;
+	width: 1080px;
+}
+#banner {
+	background-image: url(../img/baneerconte.jpg);
+	height: 150px;
+	width: 1080px;
+	background-repeat: no-repeat;
+}
+#seccioncentral {
+	background-color: #CCC;
+	background-position: center center;
+	margin: 1px;
+	padding: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	background-repeat: no-repeat;
+	height: 400px;
+	width: 500px;
+	border-radius:0.5em;
+}

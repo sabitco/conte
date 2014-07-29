@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Modelo constancia Matricula-tarjeta" pageWidth="612" pageHeight="792" columnWidth="414" leftMargin="113" rightMargin="85" topMargin="113" bottomMargin="99" uuid="ea525cce-8cfb-453b-90f6-4776e09e2428">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nombreCiudad" class="java.lang.String"/>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="numeroCedulaSolicitante" class="java.lang.String"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="fechaMatricula" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="departamento" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="154" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9b1cad72-f981-47d5-b2c6-c4ecd0e76f00" x="0" y="0" width="414" height="28"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSTANCIA DE RECIBO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="56cd63a7-344b-47c4-98f5-0847c742c4f6" x="0" y="49" width="414" height="65"/>
+				<textElement>
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ciudad: "+$P{nombreCiudad}+" "+$P{departamento}
++"\n"+
+"Fecha: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4e1dab5e-758d-4ac2-8391-a82f073ad28b" x="69" y="114" width="345" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. No. "+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="194" splitType="Stretch">
+			<textField>
+				<reportElement uuid="408d1322-3e9b-4b61-b34f-f3927a5d0440" x="0" y="0" width="414" height="194"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En la fecha recibí del CONSEJO NACIONAL DE TÉCNICOS ELECTRICISTAS-CONTE la Matricula Profesional de Técnico Electricista Tipo Diploma y Tipo Tarjeta MTE. "+
+$P{numeroCedulaSolicitante}+"-"+$P{numeroMatricula}+" "+ "expedida en la "+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaMatricula})+" "+
+"y bajo la gravedad del juramento, me obligo a acatar la ley 1264 de 2008, la Ley 19 de 1990, su decreto reglamentario y las demás disposiciones legales que rigen sobre la materia."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="188" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0a6658a0-1d77-49e2-ac9e-0b6bfbb775b9" x="0" y="22" width="414" height="25"/>
+				<textElement>
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Para constancia se firma, "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="782953c5-ee84-45f6-878a-39029ed1c3d4" x="0" y="83" width="414" height="105"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["________________________________________"+"\n"+
+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+"\n"+
+"C.C. "+$P{numeroCedulaSolicitante}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

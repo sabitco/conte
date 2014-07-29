@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notificacionPersonalAsociacion" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="85" bottomMargin="85" uuid="b726f69f-5eaf-4ff2-a17d-27300d0824e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="436"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="nombreAsociacion" class="java.lang.String"/>
+	<parameter name="prefijo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<textField>
+				<reportElement uuid="6c7fc4dc-426e-468e-9c28-8283a0e51125" x="0" y="0" width="442" height="51"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DILIGENCIA DE NOTIFICACIÓN PERSONAL POR MEDIO DE LA CUAL SE NOTIFICA LA RESOLUCIÓN"+"\n"+"No. "+$P{prefijo}+
+$P{numeroResolucion} +" "+"DE"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4e1dab5e-758d-4ac2-8391-a82f073ad28b" x="207" y="51" width="235" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. No. "+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="342" splitType="Stretch">
+			<textField>
+				<reportElement uuid="93abfcdc-dcff-4743-9b1c-c572e5c892a9" x="0" y="0" width="442" height="342"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A los _______ días del mes de ___________ de ____________ siendo las ________ (a.m./p.m.) se procede a notificar personalmente a "+
+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+" "+
+"identificado con cédula de ciudadanía "+ $P{numeroCedula}+" "+
+"o a _________________________________con cedula__________________, persona autorizada mediante escrito adjunto, la Resolución "+$P{prefijo}+
+$P{numeroResolucion}+" de "+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+
+"advirtiéndole que contra la presente resolución procede el recurso de reposición, el cual será interpuesto ante el consejero calificador o en subsidio el de apelación ante el Comité Técnico del Consejo Nacional de Técnicos Electricistas, recursos que deberán ser interpuestos personalmente o por intermedio de apoderado, sustentando concretamente los motivos de inconformidad que invoca, dentro de los diez (10) días siguientes a la presente notificación, al respecto manifiesto: "+"\n"+
+"__________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"+"\n"+
+"\n"+
+"A la presente notificación se adjunta: copia de la Resolución "+$P{prefijo} + $P{numeroResolucion}+" "+"de"+" "+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+";"+" "+
+" la Matricula Profesional de Técnico Electricista tipo diploma y tipo tarjeta MTE. "+$P{numeroCedula}+"-"+$P{numeroMatricula}+", expedida por el Consejo Nacional de Técnicos Electricistas – CONTE y a su vez se entrega el Código de Ética Profesional del Técnico Electricista, señalado en la Ley 1264 de 2008."+"\n"+"\n"+
+"NOTA: en el evento de presentarse Recurso NO se hará entrega de la matricula tipo diploma y tipo tarjeta hasta tanto no se resuelva el Recurso."+"\n"+"\n"+
+"De igual modo se le informa que no es de recibo la presentación de nuevos documentos que no fueron aportados al momento de la radicación inicial de la solicitud."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="210" splitType="Stretch">
+			<textField>
+				<reportElement uuid="440eecea-8daf-457c-a727-9524b996bc4c" x="0" y="0" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QUIEN NOTIFICA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ac433e30-4f72-4100-89b2-0970e1d13791" x="0" y="20" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["_________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d7856b43-6fd3-453f-8db4-71f61ace11bd" x="0" y="40" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Firma"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b85d9d8e-d872-4ed5-b79f-8bae9df35137" x="0" y="60" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["C.C. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="60ace612-8052-4d0a-a3ba-025b0e88c4ce" x="0" y="80" width="442" height="19"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Asociación: "+ $P{nombreAsociacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3049381a-9e5f-465c-910d-f2170adf16a4" x="0" y="126" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EL NOTIFICADO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ac433e30-4f72-4100-89b2-0970e1d13791" x="0" y="146" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["_________________________________"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d7856b43-6fd3-453f-8db4-71f61ace11bd" x="0" y="166" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Firma"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ca7f22ef-07d8-45ee-ab5f-ce63847549c9" x="0" y="186" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["C.C. "+$P{numeroCedula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

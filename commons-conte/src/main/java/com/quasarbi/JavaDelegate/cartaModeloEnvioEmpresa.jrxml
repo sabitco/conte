@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cartaModeloEnvioEmpresa" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9487473-b9bd-411b-9fe1-4967c0d3b102">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="36"/>
+	<property name="ireport.y" value="702"/>
+	<parameter name="numeroCDO" class="java.lang.String"/>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreAsistenteAdmin" class="java.lang.String"/>
+	<parameter name="nombreEmpresa" class="java.lang.String"/>
+	<parameter name="direccionEmpresa" class="java.lang.String"/>
+	<parameter name="telefonoEmpresa" class="java.lang.String"/>
+	<parameter name="ciudadEmpresa" class="java.lang.String"/>
+	<parameter name="departamentoEmpresa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="225" splitType="Stretch">
+			<textField>
+				<reportElement uuid="85e4d351-a02e-49a7-b424-1749ad076847" x="30" y="110" width="501" height="99"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Señor (a)" + "\n\n" +
+$P{nombreAsistenteAdmin}+ "\n" +
+$P{nombreEmpresa}+ "\n" +
+$P{direccionEmpresa}+ "\n" +
+"Tel.: "+ $P{telefonoEmpresa}+ "\n" +
+$P{ciudadEmpresa}+"-"+$P{departamentoEmpresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="124ced06-2635-43da-9204-ea5f386a8c31" x="30" y="33" width="501" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDO-20-"+$P{numeroCDO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3fa27f62-124f-4de0-8692-88ab2da30d5d" x="30" y="63" width="501" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bogotá, D. C.,  "+ new SimpleDateFormat("dd-MM-yyy").format($P{fecha})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="6" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="5" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="324" splitType="Stretch">
+			<textField>
+				<reportElement uuid="3462b0f9-7ab1-4178-a8f9-872ff317e890" x="30" y="0" width="387" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Respetado Señor (a): "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="003e9495-9ce8-41b3-8f54-f110eadb9c01" x="30" y="20" width="501" height="37"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Enviamos la resolución de la solicitud tramitada por intermedio de la gestión desarrollada por esta empresa, para que por su mismo conducto, el Técnico sea notificado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5fb78fb3-2a9b-4cce-aefe-933c65a13716" x="30" y="57" width="501" height="64"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Asimismo, adjuntamos formato de notificación correspondiente, con el fin de que sean diligenciados en un término no superior a 15 días la cual puede ser enviada al siguiente correo electrónico notificaciones@conte.org.co.  En caso de no ser posible la comunicación con el Técnico Electricista, favor devolver estos documentos a nuestras oficinas, en la mayor brevedad posible, a fin de continuar el  trámite."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="614cd913-fab1-4de1-8a2d-f3d5d145d508" x="30" y="168" width="100" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TABLA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c159f3d-8a71-4d9f-bc0b-3dea07866923" x="30" y="255" width="501" height="69"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTA: Una vez culminen la lectura de la Resolución deben diligenciar el formato de notificación personal indicando si se encuentran o no conformes cada  Técnico como se indica en cada desprendible, a su vez deben registrar la firma ya sea de la cédula o la del formulario de solicitud; Realizar únicamente el envío de la notificación personal al correo electrónico ya antes mencionado para evitar duplicidad de documentación."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="189" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4c3f722f-414a-4e59-98e0-7f4632048cfa" x="30" y="98" width="501" height="41"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NUBIA PATRICIA LEON" + "\n" +
+"Coordinación Operativa"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6fa72a20-6e11-4790-aee4-da8a31a04b1c" x="30" y="61" width="165" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Atentamente,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="aa21613d-03b7-45eb-9273-3fd306d6324c" x="30" y="159" width="268" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="7" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Angela C."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c1dfec24-7a9b-43fd-bdf6-5301e18dc387" x="30" y="139" width="268" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Anexo: Lo enunciado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="74caa5a4-a44f-420f-acf7-6eefc78b2924" x="30" y="0" width="501" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sin otro en particular, nos suscribimos."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

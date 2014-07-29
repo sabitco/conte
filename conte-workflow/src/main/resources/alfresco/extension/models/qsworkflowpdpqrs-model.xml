@@ -1,0 +1,809 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model name="qswfa:workflowmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0"
+			prefix="d" />
+		<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+	</imports>
+	<namespaces>
+		<namespace uri="http://www.quasarbi.com/model/workflowpqrs/1.0"
+			prefix="qswfa" />
+	</namespaces>
+	<constraints>
+		<constraint name="qswfa:codelabel" type="com.quasarbi.Constraints.ListadoTDocumentos" />
+		<constraint name="qswfa:codelabel02" type="com.quasarbi.Constraints.ListadoDepartamentos" />
+		<constraint name="qswfa:codelabel03" type="com.quasarbi.Constraints.ListadoCiudades" />
+   	</constraints>
+	<types>
+		<type name="qswfa:recepcionpeticion">
+			<parent>bpm:startTask</parent>
+			<properties>
+				<property name="qswfa:tipodocumento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+                  		<constraint ref="qswfa:codelabel" />
+               		</constraints>
+				</property>
+				<property name="qswfa:numerodocumento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:nombres">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:apellidos">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:telefono">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:celular">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:departamento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+                  		<constraint ref="qswfa:codelabel02" />
+               		</constraints>
+				</property>
+				<property name="qswfa:ciudad">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+                  		<constraint ref="qswfa:codelabel03" />
+               		</constraints>
+				</property>
+				<property name="qswfa:direccion">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:email">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:tiposolicitud">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Peticion</value>
+									<value>Queja</value>
+									<value>Reclamo</value>
+									<value>Sugerencia</value>
+									<value>Proceso disciplinario</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="qswfa:redaccionsolicitud">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:razonSocial">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:cargo">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:rutaarchivo">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:seleccionproceso">
+			<parent>qswfa:recepcionpeticion</parent>
+			<properties>
+				<property name="qswfa:tiposolicitud02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:redaccionsolicitud02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:ltipopeticion">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Peticion</value>
+									<value>Proceso disciplinario</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:buscartecnico">
+			<parent>qswfa:seleccionproceso</parent>
+			<properties>
+				<property name="qswfa:numexpediente">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fechapeticion">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:redaccionsolicitud11">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:numerodocumentot">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:nombrest">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:apellidost">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:numeromatricula">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:resultadosbusqueda">
+			<parent>qswfa:buscartecnico</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud12">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:ltecnicos">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lprocesosiguiente">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Presidente del comite disciplinario</value>
+									<value>Notificar solicitante</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:presidentecomitedisciplinario">
+			<parent>qswfa:resultadosbusqueda</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud13">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:cbValido">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:asignacionconsejerocomite">
+			<parent>qswfa:presidentecomitedisciplinario</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud14">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fechaasignacionconsejero">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fechahoracitaciontecnico">
+					<type>d:datetime</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+			<mandatory-aspects>
+				<aspect>bpm:assignee</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="qswfa:evaluacionconsejero">
+			<parent>qswfa:asignacionconsejerocomite</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lvalidez">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Procede investigacion</value>
+									<value>No procede investigacion</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="qswfa:comentarios">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:evaluacioncomite">
+			<parent>qswfa:evaluacionconsejero</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lvalidez02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Continuar investigacion</value>
+									<value>Solicitar pruebas</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="qswfa:comentarios02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:generacionfallo">
+			<parent>qswfa:evaluacioncomite</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud15">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lprocesosiguiente02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Notificar a las partes</value>
+									<value>Convocar inculpado</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:notificacionpartes">
+			<parent>qswfa:generacionfallo</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud16">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc11">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fechahoraconvocatoria">
+					<type>d:datetime</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:telefonica">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:electronica">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fisica">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lugar">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:convocarinculpado">
+			<parent>qswfa:notificacionpartes</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud17">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc12">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fechapresentacion">
+					<type>d:datetime</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lrecurso">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Si</value>
+									<value>No</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:generacionfallo01">
+			<parent>qswfa:convocarinculpado</parent>
+			<properties>
+			</properties>
+		</type>
+		<type name="qswfa:publicaraviso01">
+			<parent>qswfa:convocarinculpado</parent>
+			<properties>
+			</properties>
+		</type>
+		<type name="qswfa:asignardefensoroficio">
+			<parent>qswfa:publicaraviso01</parent>
+			<properties>
+			</properties>
+			<mandatory-aspects>
+				<aspect>bpm:assignee</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="qswfa:aportarpruebas">
+			<parent>qswfa:convocarinculpado</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud18">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero05">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc13">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosinculpado">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:cbpruebasdigitalizadas">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:asignacionconsejerocomite02">
+			<parent>qswfa:aportarpruebas</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud19">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero06">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc14">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:evaluacionconsejero02">
+			<parent>qswfa:asignacionconsejerocomite02</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud05">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero07">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarios03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lvalidez03">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:evaluacioncomite02">
+			<parent>qswfa:evaluacionconsejero02</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud06">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero08">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc15">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarios04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lvalidez04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Archivo definitivo</value>
+									<value>Sancion</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:generacionfallo02">
+			<parent>qswfa:evaluacioncomite02</parent>
+			<properties>
+			</properties>
+		</type>
+		<type name="qswfa:evaluacionconsejeroCONTE">
+			<parent>qswfa:evaluacioncomite02</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud07">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero09">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc16">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejeroII">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarios06">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:emitirsancionconsejo">
+			<parent>qswfa:evaluacionconsejeroCONTE</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud08">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero10">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc17">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejeroII02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarioscomiteII">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc05">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarios07">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lvalidez07">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<constraints>
+						<constraint type="LIST">
+							<parameter name="allowedValues">
+								<list>
+									<value>Archivo definitivo</value>
+									<value>Sancion</value>
+								</list>
+							</parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:notificacionalaspartes02">
+			<parent>qswfa:emitirsancionconsejo</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud09">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero11">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc18">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejeroII03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarioscomiteII02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejo">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc06">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:telefonica02">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:electronica02">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:fisica02">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:lugar02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:publicacionsancion">
+			<parent>qswfa:notificacionalaspartes02</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud10">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero12">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc19">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejeroII04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarioscomiteII03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejo02">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc07">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:archivo">
+			<parent>qswfa:publicacionsancion</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitud21">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejero13">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc20">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejeroII05">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarioscomiteII04">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosconsejo03">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentariosc08">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfa:comentarios08">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<!-- PQRS -->
+		<type name="qswfa:asignaresponsablep">
+			<parent>qswfa:recepcionpeticion</parent>
+			<properties>
+			</properties>
+			<mandatory-aspects>
+				<aspect>bpm:assignee</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="qswfa:respondepqrs">
+			<parent>qswfa:asignaresponsablep</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitudp">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:accionrealizadap">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:fecharespuestap">
+					<type>d:date</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:telefonica03">
+					<type>d:boolean</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:electronica03">
+					<type>d:boolean</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:fisica03">
+					<type>d:boolean</type>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:revisarespuestap">
+			<parent>qswfa:respondepqrs</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitudp02">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:accionrealizadaxrespuestap">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:fecharp">
+					<type>d:date</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:observacionesrp">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:brespuestap">
+					<type>d:text</type>
+					<default>Aprobado</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Aprobado</value>
+                                    <value>Rechazado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfa:nuevasaccionesp">
+			<parent>qswfa:revisarespuestap</parent>
+			<properties>
+				<property name="qswfa:redaccionsolicitudp03">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:accionanteriorp">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:fecharp02">
+					<type>d:date</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:observacionesrp02">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfa:nuevaaccionrealizadap">
+					<type>d:text</type>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+	</types>
+</model>

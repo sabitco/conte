@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="gestionDuplicados" name="Gestion Duplicados" isExecutable="true">
+    <startEvent id="startevent1" name="Diligenciar formulario" activiti:formKey="qswfgd:diligenciaformulario"></startEvent>
+    <userTask id="recibirDocumentos" name="Recibir Documentos" activiti:candidateGroups="GROUP_INSPECTORIAS_GESTION,GROUP_INSPECTORIAS_GESTION_RECIBIR_DOCUMENTOS" activiti:formKey="qswfgd:recibedocumentos">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfr_numeroRadicado', qswfgd_numeroformulario);
+execution.setVariable('qswfr_numeroformulario', qswfgd_numeroformulario);
+execution.setVariable('estadoPago', '');
+execution.setVariable('qswfr_numerodocumento', qswfgd_numerodocumento);
+execution.setVariable('qswfr_notificacion', qswfgd_notificacion);
+execution.setVariable('qswfr_tiposolicitud', qswfgd_tiposolicitud);
+execution.setVariable('qswfr_nombres', qswfgd_nombres);
+execution.setVariable('qswfr_apellidos', qswfgd_apellidos);
+execution.setVariable('qswfgd_direccionResidencia', qswfgd_direccionResidencia);
+execution.setVariable('qswfgd_departamento', qswfgd_departamento);
+execution.setVariable('qswfgd_ciudad', qswfgd_ciudad);
+execution.setVariable('qswfgd_celular', qswfgd_celular);
+execution.setVariable('qswfgd_empresa', qswfgd_empresa);
+execution.setVariable('qswfgd_departamentoEmpresa', qswfgd_departamentoEmpresa);
+execution.setVariable('qswfgd_telefonoEmpresa', qswfgd_telefonoEmpresa);
+execution.setVariable('qswfgd_direccionEmpresa',qswfgd_direccionEmpresa);
+execution.setVariable('qswfgd_asociacion',qswfgd_asociacion);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="com.quasarbi.TaskListener.GeneracionNumeroRadicado"></activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>var nombrecompleto = qswfgd_nombres + " " + qswfgd_apellidos;
+nombrecarpeta = execution.getVariable('qswfr_numeroRadicado') + " " + qswfgd_numerodocumento + " " + nombrecompleto;
+execution.setVariable('nombrecarpeta', nombrecarpeta);
+
+var node=companyhome.childByNamePath("CONTE");
+nombrecarpeta2 = execution.getVariable('nombrecarpeta ');
+if(node == null) {
+	node = companyhome.createFolder("CONTE");
+	node.setInheritsPermissions(true);
+	node.save();
+}
+if(node != null) {
+	if( companyhome.childByNamePath("CONTE/" + nombrecarpeta) != null ){
+		node = companyhome.childByNamePath("CONTE/" + nombrecarpeta);
+	} else {
+		node.createFolder(nombrecarpeta);
+		node = companyhome.childByNamePath("CONTE/" + nombrecarpeta);
+		if( node != null){
+			node.setInheritsPermissions(true);
+			node.createFolder("Digitalizacion");
+			node.createFolder("Documentos de gestion");
+			node.createFolder("Documentos operativos");
+			node.createFolder("4");
+			node.createFolder("5");
+		}	
+	}
+}
+node.save();</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="recibirDocumentos"></sequenceFlow>
+    <userTask id="digitalizarDocumentos" name="Digitalizar Documentos" activiti:candidateGroups="GROUP_INSPECTORIAS_GESTION,GROUP_INSPECTORIAS_GESTION_DIGITALIZAR_DOCUMENTOS" activiti:formKey="qswfgd:digitalizadocumentos">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('observaciones','');
+execution.setVariable('qswfr_numeroRadicado','');
+execution.setVariable('qswfgd_generadoEn',task.getVariable('qswfgd_generadoEn'));
+
+var throwException = true;
+				var tmpFNI;
+				var tmpFNII;
+				var tmpBPM;
+				var folderNode = companyhome.childByNamePath("CONTE/" + execution.getVariable('nombrecarpeta'));
+				var arrN = new Array();
+				for (var x=0; x &lt; bpm_package.children.length; x++){
+					tmpBPM = bpm_package.children[x];
+					arrN.push(tmpBPM.properties.name);
+				}
+				for (var i=0; i &lt; folderNode.children.length; i++){
+					tmpFNI = folderNode.children[i];
+					if ( tmpFNI.isContainer &amp;&amp; (tmpFNI.properties.name == "Digitalizacion" || tmpFNI.properties.name == "2") ) {
+						for (var j=0; j &lt; tmpFNI.children.length; j++){
+							tmpFNII = tmpFNI.children[j];
+							if( arrN.indexOf(tmpFNII.properties.name) == -1 ){
+								bpm_package.addNode( tmpFNII );
+								tmpFNII.addAspect("qsmd:personalizable");
+								throwException = false;
+							}
+						}
+					}
+				}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <serviceTask id="servicetask1" name="Validar pago" activiti:class="com.quasarbi.JavaDelegate.CruzarPago">
+      <extensionElements>
+        <activiti:field name="numeroFormulario">
+          <activiti:expression>${qswfgd_numeroformulario}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="numeroDocumento">
+          <activiti:expression>${qswfr_numerodocumento}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow3" sourceRef="digitalizarDocumentos" targetRef="servicetask1"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow4" sourceRef="servicetask1" targetRef="exclusivegateway1"></sequenceFlow>
+    <userTask id="imprimirDuplicadoSolicitud" name="Imprimir Duplicado Solicitud" activiti:candidateGroups="GROUP_ASISTENTE_COORDINACION_OPERATIVA" activiti:formKey="qswfgd:imprimirDuplicadoSolicitud">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>var tmpFN;
+				var tmpFNX;
+				var tmpBPMX;
+				var folderNode = companyhome.childByNamePath("CONTE/" + execution.getVariable('nombrecarpeta'));
+				var arrNX = new Array();
+				for (var x=0; x &lt; bpm_package.children.length; x++){
+					tmpBPMX = bpm_package.children[x];
+					arrNX.push(tmpBPMX.properties.name);
+				}
+				for (var i=0; i &lt; folderNode.children.length; i++){
+					tmpFN = folderNode.children[i];
+					if ( tmpFN.isContainer ) {
+						for (var j=0; j &lt; tmpFN.children.length; j++){
+							tmpFNX = tmpFN.children[j];
+							if( arrNX.indexOf(tmpFNX.properties.name) == -1 ){
+								bpm_package.addNode( tmpFNX );
+							}
+						}
+					} else {
+						if( arrNX.indexOf(tmpFN.properties.name) == -1 ){
+							bpm_package.addNode( tmpFN );
+						}
+					}
+				}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="notificarSolicitante" name="Notificar Solicitante" activiti:candidateGroups="GROUP_INSPECTORIAS_GESTION_NOTIFICAR" activiti:formKey="qswfgd:notificarSolicitante">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>var viaNoti = "";
+            	viaNoti = viaNoti + ((task.getVariable('qswfgd_telefonico')==true) ? "Telefonica,":"");
+            	viaNoti = viaNoti + ((task.getVariable('qswfgd_electronica')==true) ? "Electronica,":"");
+            	viaNoti = viaNoti + ((task.getVariable('qswfgd_fisica')==true) ? "Personal,":"");
+            	if(viaNoti.length!=0){
+					viaNoti = viaNoti.substring(0, viaNoti.length-1);
+				}
+            	execution.setVariable('viaNotificacion', viaNoti);
+execution.setVariable('generarCartaInadmitidos', 'NO');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="enviarDuplicado" name="Enviar Duplicado" activiti:candidateGroups="GROUP_SECRETARIA_ESPECIALIZADA" activiti:formKey="qswfgd:enviarDuplicado">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfgd_notificacionGenerar',task.getVariable('qswfgd_notificacionGenerar'));
+execution.setVariable('qswfgd_numeroGuia2',task.getVariable('qswfgd_numeroGuia2'));
+execution.setVariable('qswfgd_fechaMatricula', task.getVariable('qswfgd_fechaMatricula'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ActualizarEstadoProceso"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow12" sourceRef="notificarSolicitante" targetRef="generarFormatoInadmitidos"></sequenceFlow>
+    <serviceTask id="generarFormatoInadmitidos" name="Generar Formato Inadmitidos" activiti:class="com.quasarbi.JavaDelegate.GeneracionFormatoInadmitidos">
+      <extensionElements>
+        <activiti:field name="directorioAlfresco">
+          <activiti:expression>CONTE/${nombrecarpeta}/2</activiti:expression>
+        </activiti:field>
+        <activiti:field name="observaciones">
+          <activiti:expression>${observaciones}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="nombres">
+          <activiti:expression>${qswfgd_nombres}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="apellidos">
+          <activiti:expression>${qswfgd_apellidos}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="documento">
+          <activiti:expression>${qswfgd_numerodocumento}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="informoVia">
+          <activiti:expression>${viaNotificacion}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="dependencia">
+          <activiti:string>prueba</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <intermediateCatchEvent id="timerintermediatecatchevent1" name="TimerCatchEvent">
+      <timerEventDefinition>
+        <timeDuration>P0Y0M0DT0H0M10S</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="flow14" sourceRef="generarFormatoInadmitidos" targetRef="timerintermediatecatchevent1"></sequenceFlow>
+    <sequenceFlow id="flow15" sourceRef="timerintermediatecatchevent1" targetRef="servicetask1"></sequenceFlow>
+    <serviceTask id="servicetask2" name="Generar documentos" activiti:class="com.quasarbi.JavaDelegate.GeneracionDucumentosDuplicados">
+      <extensionElements>
+        <activiti:field name="numeroRadicacion">
+          <activiti:expression>${qswfr_numeroRadicado}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="directorioAlfresco">
+          <activiti:expression>CONTE/${nombrecarpeta}/Documentos operativos</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <intermediateCatchEvent id="timerintermediatecatchevent2" name="TimerCatchEvent">
+      <timerEventDefinition>
+        <timeDuration>P0Y0M0DT0H0M10S</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="flow17" sourceRef="timerintermediatecatchevent2" targetRef="imprimirDuplicadoSolicitud"></sequenceFlow>
+    <sequenceFlow id="flow18" sourceRef="servicetask2" targetRef="timerintermediatecatchevent2"></sequenceFlow>
+    <sequenceFlow id="flow19" sourceRef="exclusivegateway1" targetRef="servicetask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${estadoPago=="Completo"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow20" sourceRef="imprimirDuplicadoSolicitud" targetRef="enviarDuplicado"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway2" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow21" sourceRef="recibirDocumentos" targetRef="exclusivegateway2"></sequenceFlow>
+    <sequenceFlow id="flow22" sourceRef="exclusivegateway2" targetRef="digitalizarDocumentos">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfgd_notificacion=="NO"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow23" sourceRef="exclusivegateway2" targetRef="mailtask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfgd_notificacion=="Si"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="mailtask1" targetRef="digitalizarDocumentos"></sequenceFlow>
+    <serviceTask id="mailtask1" name="Enviar correo" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:expression>${qswfgd_email}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>registro@conte.org.co</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Se ha recibido sus documentos</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:string>Sus documentos se han recibido</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="servicetask3" name="Service Task" activiti:class="com.quasarbi.JavaDelegate.GeneracionDocumentosEnvioDuplicado">
+      <extensionElements>
+        <activiti:field name="numeroRadicacion">
+          <activiti:expression>${qswfr_numeroRadicado}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="directorioAlfresco">
+          <activiti:expression>CONTE/${nombrecarpeta}/Documentos operativos</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <intermediateCatchEvent id="timerintermediatecatchevent3" name="TimerCatchEvent">
+      <timerEventDefinition>
+        <timeDuration>P0Y0M0DT0H0M10S</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="flow26" sourceRef="enviarDuplicado" targetRef="servicetask3"></sequenceFlow>
+    <sequenceFlow id="flow27" sourceRef="servicetask3" targetRef="timerintermediatecatchevent3"></sequenceFlow>
+    <userTask id="usertask1" name="Ubicar Expediente" activiti:candidateGroups="GROUP_SECRETARIA_ESPECIALIZADA,GROUP_ASISTENTE_COORDINACION_OPERATIVA" activiti:formKey="qswfgd:ubicarExpediente"></userTask>
+    <sequenceFlow id="flow29" sourceRef="timerintermediatecatchevent3" targetRef="usertask1"></sequenceFlow>
+    <sequenceFlow id="flow30" sourceRef="usertask1" targetRef="endevent1"></sequenceFlow>
+    <userTask id="verificarPago" name="Verificar Pago" activiti:candidateGroups="GROUP_JEFE_INSPECTORIAS_GESTION" activiti:formKey="qswfgd:validarPago">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('estadoPago', task.getVariable('qswfgd_estadoPago'));
+execution.setVariable('qswfgd_valor', task.getVariable('qswfgd_valor'));
+execution.setVariable('qswfgd_fechaConsignacion', task.getVariable('qswfgd_fechaConsignacion'));
+execution.setVariable('qswfgd_entidadPago', task.getVariable('qswfgd_entidadPago'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow31" sourceRef="exclusivegateway1" targetRef="verificarPago">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${estadoPago!="Completo"}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow32" sourceRef="verificarPago" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow33" sourceRef="exclusivegateway3" targetRef="notificarSolicitante">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${estadoPago!="Completo"}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="servicetask4" name="Ingresar Pago" activiti:class="com.quasarbi.JavaDelegate.IngresarPago">
+      <extensionElements>
+        <activiti:field name="entidadPago">
+          <activiti:expression>${qswfgd_entidadPago}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="fechaConsignacion">
+          <activiti:expression>${qswfgd_fechaConsignacion}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="valor">
+          <activiti:expression>${qswfgd_valor}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow34" sourceRef="exclusivegateway3" targetRef="servicetask4">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${estadoPago=="Completo"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow35" sourceRef="servicetask4" targetRef="servicetask2"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_gestionDuplicados">
+    <bpmndi:BPMNPlane bpmnElement="gestionDuplicados" id="BPMNPlane_gestionDuplicados">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="47.0" y="114.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="recibirDocumentos" id="BPMNShape_recibirDocumentos">
+        <omgdc:Bounds height="55.0" width="105.0" x="110.0" y="104.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="digitalizarDocumentos" id="BPMNShape_digitalizarDocumentos">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask1" id="BPMNShape_servicetask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="170.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="560.0" y="177.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="imprimirDuplicadoSolicitud" id="BPMNShape_imprimirDuplicadoSolicitud">
+        <omgdc:Bounds height="55.0" width="105.0" x="820.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="notificarSolicitante" id="BPMNShape_notificarSolicitante">
+        <omgdc:Bounds height="55.0" width="105.0" x="820.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="enviarDuplicado" id="BPMNShape_enviarDuplicado">
+        <omgdc:Bounds height="55.0" width="105.0" x="985.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1460.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="generarFormatoInadmitidos" id="BPMNShape_generarFormatoInadmitidos">
+        <omgdc:Bounds height="55.0" width="105.0" x="985.0" y="10.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timerintermediatecatchevent1" id="BPMNShape_timerintermediatecatchevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1165.0" y="20.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask2" id="BPMNShape_servicetask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="630.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timerintermediatecatchevent2" id="BPMNShape_timerintermediatecatchevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="760.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway2" id="BPMNShape_exclusivegateway2">
+        <omgdc:Bounds height="40.0" width="40.0" x="240.0" y="111.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailtask1" id="BPMNShape_mailtask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="290.0" y="50.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask3" id="BPMNShape_servicetask3">
+        <omgdc:Bounds height="55.0" width="105.0" x="1130.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timerintermediatecatchevent3" id="BPMNShape_timerintermediatecatchevent3">
+        <omgdc:Bounds height="35.0" width="35.0" x="1270.0" y="270.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="1337.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="verificarPago" id="BPMNShape_verificarPago">
+        <omgdc:Bounds height="55.0" width="105.0" x="630.0" y="68.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="759.0" y="75.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask4" id="BPMNShape_servicetask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="820.0" y="122.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="82.0" y="131.0"></omgdi:waypoint>
+        <omgdi:waypoint x="110.0" y="131.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="395.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="420.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="525.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="560.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="925.0" y="37.0"></omgdi:waypoint>
+        <omgdi:waypoint x="985.0" y="37.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="1090.0" y="37.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1165.0" y="37.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="1182.0" y="20.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1182.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1029.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="862.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="754.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="754.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="813.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="-40.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="170.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="795.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="820.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="735.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="760.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="580.0" y="217.0"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="286.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="925.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="985.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="215.0" y="131.0"></omgdi:waypoint>
+        <omgdi:waypoint x="240.0" y="131.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="260.0" y="151.0"></omgdi:waypoint>
+        <omgdi:waypoint x="260.0" y="197.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="197.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow23" id="BPMNEdge_flow23">
+        <omgdi:waypoint x="260.0" y="111.0"></omgdi:waypoint>
+        <omgdi:waypoint x="259.0" y="78.0"></omgdi:waypoint>
+        <omgdi:waypoint x="290.0" y="77.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="342.0" y="105.0"></omgdi:waypoint>
+        <omgdi:waypoint x="342.0" y="170.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="1090.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1130.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="1235.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1270.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
+        <omgdi:waypoint x="1305.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1337.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow30" id="BPMNEdge_flow30">
+        <omgdi:waypoint x="1442.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1460.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
+        <omgdi:waypoint x="580.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="580.0" y="96.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="95.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow32" id="BPMNEdge_flow32">
+        <omgdi:waypoint x="735.0" y="95.0"></omgdi:waypoint>
+        <omgdi:waypoint x="759.0" y="95.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow33" id="BPMNEdge_flow33">
+        <omgdi:waypoint x="779.0" y="75.0"></omgdi:waypoint>
+        <omgdi:waypoint x="779.0" y="37.0"></omgdi:waypoint>
+        <omgdi:waypoint x="820.0" y="37.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow34" id="BPMNEdge_flow34">
+        <omgdi:waypoint x="779.0" y="115.0"></omgdi:waypoint>
+        <omgdi:waypoint x="779.0" y="149.0"></omgdi:waypoint>
+        <omgdi:waypoint x="820.0" y="149.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow35" id="BPMNEdge_flow35">
+        <omgdi:waypoint x="872.0" y="177.0"></omgdi:waypoint>
+        <omgdi:waypoint x="873.0" y="219.0"></omgdi:waypoint>
+        <omgdi:waypoint x="684.0" y="219.0"></omgdi:waypoint>
+        <omgdi:waypoint x="682.0" y="260.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

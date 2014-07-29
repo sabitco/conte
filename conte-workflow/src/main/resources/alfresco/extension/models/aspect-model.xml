@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<model name="qsmd:mimodelo" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+   <!-- Optional meta-data about the model -->
+   <description>Aspecto para documentos de radicacion</description>
+   <author>Andrés Mise Olivera</author>
+   <version>1.0</version>
+
+   <!-- Importar las referencias requeridas a otros modelos -->
+   <imports>
+      <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d"/>
+      <import uri="http://www.alfresco.org/model/content/1.0" prefix="cm"/>
+   </imports>
+
+   <!-- Incorporacion a los nuevos espacios el nombre de nuestro nuevo modelo -->
+   <namespaces>
+      <namespace uri="http://www.quasarbi.com/model/metadatos/1.0" prefix="qsmd"/>
+   </namespaces>
+
+    <aspects> 
+      <!-- Definición del aspecto para nuestro modelo -->
+      <aspect name="qsmd:personalizable">
+         <properties>
+         	<property name="qsmd:fechaVerificacion">
+               <type>d:date</type>
+			   <mandatory>true</mandatory>
+            </property>
+			<property name="qsmd:conQuienSeVerifico">
+               <type>d:text</type>
+            </property>			
+			<property name="qsmd:telefono">
+               <type>d:text</type>
+            </property>
+			<property name="qsmd:autenticado">
+				<type>d:text</type>
+				<default></default>
+				<constraints>
+					<constraint type="LIST">
+						<parameter name="allowedValues">
+							<list>
+								<value></value>
+								<value>Aprobado</value>
+								<value>Rechazado</value>
+							</list>
+						</parameter>
+					</constraint>
+				</constraints>
+			</property>
+			<property name="qsmd:tipoDocumento">
+				<type>d:text</type>
+				<default></default>					
+				<constraints>
+					<constraint type="LIST">
+						<parameter name="allowedValues">
+							<list>
+								<value></value>
+								<value>Certificaciones laborales</value>
+								<value>Consignación</value>
+								<value>Fotocopia documento indentificación</value>
+								<value>Fotografías</value>
+								<value>Formulario de Solicitud</value>
+								<value>Portada de Expediente</value>
+								<value>Títulos de Estudio</value>
+								<value>Certificado de existencia y representación legal</value>
+								<value>Anexos</value>
+								<value>Carta Remisoria</value>
+								<value>Hoja de Estudio para Solicitud de Matricula</value>
+								<value>Hoja de Información de Inadmitidos</value>
+								<value>Comunicación  notificando rechazo a la persona que realizó la solicitud</value>
+								<value>Copia de la Resolución</value>
+								<value>Matrícula tipo diploma</value>
+								<value>Matricula tipo tarjeta</value>
+								<value>Recursos</value>
+								<value>Ampliaciones</value>
+								<value>Carta inadmisión</value>
+								<value>Aviso</value>
+								<value>Notificación Personal</value>
+							</list>
+						</parameter>
+					</constraint>
+				</constraints>
+			</property>
+			<property name="qsmd:observaciones">
+				<type>d:mltext</type>
+				<mandatory>false</mandatory>
+			</property>            
+         </properties>
+      </aspect>
+   </aspects>
+
+</model>

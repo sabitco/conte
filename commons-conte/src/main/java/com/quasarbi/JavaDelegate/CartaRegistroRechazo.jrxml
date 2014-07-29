@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CartaRegistroRechazo" pageWidth="612" pageHeight="792" columnWidth="428" leftMargin="99" rightMargin="85" topMargin="113" bottomMargin="99" uuid="f047a7cb-e830-4403-8a18-949bbdb30b69">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="nombreCompleto" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="telefono" class="java.lang.String"/>
+	<parameter name="ciudad" class="java.lang.String"/>
+	<parameter name="departamento" class="java.lang.String"/>
+	<parameter name="fechaEnvio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroResolucionRechazo" class="java.lang.String"/>
+	<parameter name="fechaResolucionRechazo" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicado" class="java.lang.String"/>
+	<parameter name="numeroCDO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="146" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cbabff5d-561e-4e73-99e1-86ffb3285ce8" x="0" y="29" width="428" height="117"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bogotá, D. C., " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaEnvio}) +
+"\n\n\nSeñor "+"\n"+ $P{nombreCompleto} +
+"\n"+ $P{direccion} +
+"\n"+ "Tel. "+ $P{telefono} +
+"\n" + $P{ciudad}+ "-" +$P{departamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="33205eda-ffa5-4424-b0d5-a7e75a9f2de8" x="0" y="0" width="428" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDG-13-1302 "+$P{numeroCDO}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="414" splitType="Stretch">
+			<textField>
+				<reportElement uuid="251c61f0-1405-4aea-8a13-8863d90c932d" x="0" y="30" width="428" height="384"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Apreciado señor:\n\n" +
+
+"En los términos del Art. 44 y siguientes del C. C. A., comedidamente me permito comunicarle que el Consejo Nacional de Técnicos Electricistas \"CONTE\", a través de su Comité Técnico, rechazo su solicitud de Matricula Profesional de Técnico Electricista mediante la Resolución No. 0000" +$P{numeroResolucionRechazo}+" del "+ new SimpleDateFormat("dd/MM/yyyy").format($P{fechaResolucionRechazo}) + ", por las razones expuestas en la parte motiva de dicha providencia.\n\n" +
+
+"En tal razón, usted debe acercarse a éste despacho dentro de los cinco (5) días siguientes al recibo del presente comunicado, con el fin de notificarse personalmente de la citada Resolución, de lo contrario, se procederá a notificación por aviso, el cual se fijará en la Secretaría del Consejo Nacional de Técnicos Electricistas, por el término de diez (10) días hábiles.\n\n"+
+
+"Vencido el término anterior, se desfijará el aviso dejándose correr cinco (5) días hábiles más, al cabo de los cuales la providencia quedará ejecutoriada.\n\n"+
+
+"Atentamente,\n\n\n\n"+
+
+"ATHENEA ORBEZ CAICEDO\n"+
+"Coordinadora de Inspectorías y Gestión\n\n"+
+
+"Anexo: Lo enunciado.\n\n"+
+
+"Gloria M."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="54609d1a-171d-423a-94d8-5ae3684ad21e" x="0" y="0" width="428" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Asunto: Matrícula Profesional Radicada bajo el número  No. "+ $P{numeroRadicado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>

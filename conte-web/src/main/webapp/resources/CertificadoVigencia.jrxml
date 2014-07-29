@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CertificadoVigencia" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="149908af-4fb9-4c50-bb0e-2f8ca8b6742d">
+	<property name="ireport.zoom" value="0.8264462809917354"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="148"/>
+	<parameter name="documento" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT CONCAT_WS(' ', t.nombres, t.primer_apellido, t.segundo_apellido) AS nombre_completo, t.documento,
+t.matricula, t.fecha_expedicion, sr.radicado,
+(SELECT GROUP_CONCAT(DISTINCT (cg.`nombre`)  SEPARATOR '\n') FROM `evaluacion` e
+INNER JOIN `actividad_generica` ag ON e.`activity_id` = ag.`codigo`
+INNER JOIN `clase_generica` cg ON ag.`c_clase` = cg.`codigo`
+WHERE e.`documento` = t.documento
+) AS 'clases'
+FROM tecnico t
+INNER JOIN solicitud_radicado sr ON sr.documento = t.documento
+WHERE sr.documento =  $P{documento}]]>
+	</queryString>
+	<field name="nombre_completo" class="java.lang.String"/>
+	<field name="documento" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="matricula" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_expedicion" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="radicado" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clases" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="439" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="dbcac962-ebd7-46f6-aa7d-5e90edafacd8" x="188" y="29" width="199" height="22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[CERTIFICADO DE VIGENCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d3d99c02-d30a-497f-bd28-bfcda1856bd1" x="92" y="66" width="368" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[LA SUSCRITA COORDINADORA OPERATIVA DEL CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS “CONTE”]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f08909a6-39fc-4527-b74c-9cf26bd7627c" x="239" y="114" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[HACE CONSTAR]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d6ac448d-375e-4788-98a8-6f19b6bf30aa" x="0" y="151" width="572" height="288"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que examinada la información existente en las bases de datos del CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS, "+
+"a la fecha, el señor " + $F{nombre_completo} +
+", identificado  con  la  Cédula  de  Ciudadanía  número "+$F{documento}+" portador de la Matrícula Profesional de " +
+"Técnico Electricista MTE. "+ $F{matricula}+" expedida por el Consejo Nacional de Técnicos Electricistas, "+
+"NO registra antecedentes disciplinarios. Por lo anterior, su Matrícula se encuentra vigente. "
++"\n\n"+
+"Que en la fecha " + new SimpleDateFormat("dd/MM/yyyy").format($F{fecha_expedicion}) + ", le fue otorgada la Matrícula Profesional de Técnico Electricista MTE. "+
+$F{matricula} + " en las siguientes clases:"
++"\n\n"+
+$F{clases}
++"\n\n"+
+"Para constancia se firma en Bogotá, D. C., a los " +  new SimpleDateFormat("dd/MM/yyyy").format(new Date())+", a solicitud del interesado. "
++"\n\n"+
+"NOTA:   Si el número de la Cédula de Ciudadanía no corresponde con el de la persona solicitada  ESTE CERTIFICADO CARECERA  DE VALIDEZ."]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="43" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement uuid="13f0abf3-b25e-41b8-be0c-2e4d930f7081" x="472" y="4" width="100" height="20"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RAD. " + $F{radicado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7569358f-e248-4ae7-944a-ca32c440fe2b" x="0" y="0" width="572" height="49"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["NUBIA PATRICIA LEON\n Coordinadora Operativa"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="carta recurso negado" pageWidth="612" pageHeight="792" columnWidth="428" leftMargin="99" rightMargin="85" topMargin="113" bottomMargin="99" uuid="283a10c0-8419-4112-9a73-3821018a9c55">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="319"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="nombreCompleto" class="java.lang.String"/>
+	<parameter name="fechaEnvio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="telefono" class="java.lang.String"/>
+	<parameter name="ciudad" class="java.lang.String"/>
+	<parameter name="departamento" class="java.lang.String"/>
+	<parameter name="numeroRadicado" class="java.lang.String"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="fechaMatricula" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="156" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9813e33d-339d-403d-b2a1-26e1e0748306" x="0" y="20" width="428" height="131"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Bogotá, D. C., " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaEnvio}) +
+"\n\n\nSeñor "+"\n"+ $P{nombreCompleto} +
+"\n"+ $P{direccion} +
+"\n"+ "Tel. "+ $P{telefono} +
+"\n" + $P{ciudad}+ "-" +$P{departamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c8246449-b28e-40a9-92b2-925c25fc6e7d" x="0" y="0" width="428" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDG-13-1302 "]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="280" splitType="Stretch">
+			<textField>
+				<reportElement uuid="eed01d94-9740-4358-9bed-cc5238b49648" x="0" y="229" width="428" height="37"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["De otra parte le informamos que las líneas de atención al usuario PBX 4820606 y fax 2328991, están a su disposición para suplir cualquier consulta o solicitud de su parte."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4b84d7ca-57ed-42a0-92b7-4aa7820384ee" x="0" y="121" width="428" height="56"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Así mismo procede también mediante el mismo documento a entregar de manera definitiva la Matricula Profesional de Técnico Electricista tipo diploma y tipo tarjeta MTE. "+ $P{numeroCedula}+"-"+$P{numeroMatricula}+", expedida en la fecha "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaMatricula})+", por lo cual debe tener en cuenta que estos son documentos personales e intransferibles."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a2cf2754-60a4-44ca-8e6b-7df880a9224f" x="0" y="177" width="428" height="52"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Por lo anterior, adjuntamos la Constancia de recibo de la matricula tipo diploma y tipo tarjeta, la cual agradecemos nos sea devuelta firmada a la mayor brevedad posible y adjuntarla al siguiente correo electrónico notificaciones@conte.org.co , para ser anexada al respectivo expediente. ."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c44718e-8d01-4927-9a24-0462bc83ee05" x="0" y="52" width="428" height="69"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En los términos del Art. 44 y siguientes del C. C. A., comedidamente me permito comunicarle que el Consejo Nacional de Técnicos Electricistas -CONTE-, a través de su Comité Técnico, negó el recurso de reposición por usted impetrado, por lo que estamos remitiendo copia de la Resolución M-R0" + $P{numeroResolucion}+ " del "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion}) +", en la cual se resuelve tal recurso."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="15893034-998d-4ad3-8541-804a68afe739" x="0" y="32" width="169" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Apreciado señor:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="58558b90-3d50-4b05-b9f7-c0c502e95234" x="0" y="0" width="428" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ref.: Matrícula Profesional Radicada bajo el número  No. "+ $P{numeroRadicado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="117" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e64a588f-812a-49b9-b872-7abf13aa7b92" x="0" y="0" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cordialmente,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e1d6925-8cc1-456f-9560-6ee46867a5fc" x="0" y="70" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Anexo: Lo enunciado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4b5cb2b9-32cc-4dd6-a958-9540576dfabe" x="0" y="50" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Coordinadora Operativa"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3480cb81-13ea-464b-9d39-6f070461bdb6" x="0" y="90" width="100" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ángela C. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="09ccda86-84a6-447f-87c8-b8f7b3ac8989" x="0" y="30" width="319" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NUBIA PATRICIA LEON"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

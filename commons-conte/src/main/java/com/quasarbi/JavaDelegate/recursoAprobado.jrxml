@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MODELO RECURSO APROBADO" pageWidth="612" pageHeight="1757" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="2adb7997-ff72-4baa-b968-3b189871388a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1321"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaNotificacion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroActa" class="java.lang.String"/>
+	<parameter name="numeroFolios" class="java.lang.String"/>
+	<parameter name="clasesDobles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreConsejero" class="java.lang.String"/>
+	<parameter name="clasesIniciales" class="java.lang.String"/>
+	<parameter name="clasesNuevas" class="java.lang.String"/>
+	<parameter name="clasesSolicitadas" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="158" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="72" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dfb92b64-d9e1-4b72-9a85-f892cd9b7a4c" x="261" y="52" width="196" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12b2331c-f40e-40f8-bafa-f4ea64875289" x="0" y="0" width="457" height="47"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resolución M-R0 "+$P{numeroResolucion}+"\n"+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
+"Por la cual se resuelve un recurso"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="1366" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a7a32a38-9588-4ab3-8822-ac513aba4432" x="0" y="297" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUELVE:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0a201ef0-5901-4c42-80ac-b706cf822d5d" x="0" y="317" width="457" height="1049"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PRIMERO: Reponer parcialmente la resolución recurrida, en el sentido de conferir matrícula profesional de técnico electricista, al señor "
++ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+ "en las siguientes clases: "
++ "\n\n" +
+$P{clasesDobles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ff344291-b3b0-4c2c-bb81-37e58bcb949d" x="0" y="87" width="457" height="210"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que para resolver la solicitud de Matrícula Profesional de Técnico Electricista del señor "+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+"radicada bajo el número "+ $P{numeroRadicacion}+","+" "+"ésta entidad profirió la Resolución M-R0 "+$P{numeroResolucion}+" "+"del"+" "
++ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion}) + ", notificada personalmente al peticionario el dia "
++ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaNotificacion})+"." +
+"\n\n"+
+"Que en el acto de notificación el peticionario interpuso recurso, con el fin de que se le conceda la clase :" + $P{clasesSolicitadas}
++ "\n\n" +
+"Que según consta en acta de Comité Técnico "+$P{numeroActa}+ ", revisados nuevamente los "+$P{numeroFolios}+" folios, se obtuvo que el peticionario tiene derecho no sólo a las clases :" +  $P{clasesIniciales} + "como inicialmente le fueron otorgadas, sino adicionalmente tiene derecho a la clase : " + $P{clasesNuevas} + "\n\nEn mérito de lo expuesto, el CONTE, fundado en las disposiciones antes citadas,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a25def0a-6095-4bb0-8def-ec829608e075" x="0" y="67" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSIDERANDO:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e4a5f5d1-c9ae-4f0b-8d07-dc643a455f99" x="0" y="0" width="457" height="67"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS"+"\n"+
+"en uso de sus facultades constitucionales y legales"+"\n"+
+"y en especial las conferidas por el numeral 1° y"+"\n"+
+"2° del articulo 35 de la ley 1264 del 2008"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="203" splitType="Stretch">
+			<textField>
+				<reportElement uuid="50413940-5dec-4920-a2b6-b4ae9af7b3f0" x="0" y="92" width="457" height="27"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dada en Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b68a129a-00a7-47ff-ad93-cf4d8ca7c4ed" x="0" y="119" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFÍQUESE Y CÚMPLASE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bc2c4651-e9ba-4e3b-8bf3-211d33ec5b67" x="0" y="139" width="457" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WILSON OCHOA"  +"\n"+
+"Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bb14c320-fb10-4374-b694-8c9f5473dfda" x="0" y="14" width="457" height="78"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SEGUNDO: Contra la presente resolución no procede recurso alguno y queda agotada la vía gubernativa."
++ "\n\n" +
+"TERCERO: Incorporar al listado de matriculados y habilitados al Señor "+ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+ ","+" "+ "de conformidad al numeral 2º  del articulo 35 de la ley 1264 del 2008." + "\n\nCUARTO: La presente resolución deroga todas las anteriores que le sean contrarias."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

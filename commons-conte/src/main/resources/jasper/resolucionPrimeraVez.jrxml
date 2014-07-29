@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resolucionPrimeraVez" pageWidth="612" pageHeight="2664" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="b4bc1c11-cc80-4ee1-92d5-395b19210638">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="333"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroFolios" class="java.lang.String"/>
+	<parameter name="numeroActa" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="clasesDobles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreConsejero" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79"/>
+	</title>
+	<columnHeader>
+		<band height="72">
+			<textField>
+				<reportElement uuid="8d414158-fe2d-4397-8207-aa6dcf2ae26e" x="0" y="43" width="457" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cc581c1d-f0a3-4c34-8648-f37004720a35" x="0" y="0" width="457" height="43"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resolución M-C0 "+$P{numeroResolucion}+"\n"+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
+"Por la cual se aprueba una solicitud"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="2273" splitType="Stretch">
+			<textField>
+				<reportElement uuid="761eb2e9-c89e-4d13-a82d-4c8c1c1f366a" x="0" y="67" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSIDERANDO:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5462db81-873e-4055-9fec-232c04f3f70c" x="0" y="87" width="457" height="378"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que de conformidad al artículo 26 de la Constitución Política cualquier persona es libre de escoger profesión u oficio, en donde la ley puede exigir títulos de idoneidad además de inspeccionar y vigilar el ejercicio de las mismas, a través del mandato que ellas señalen."
++"\n\n"+
+"Que de conformidad con la ley 19 de 1990, se reglamentó la Profesión de técnico electricista en el territorio nacional."
++"\n\n"+
+"Que el decreto 991 de 1991 clasificó las diferentes actividades en las que se desempeñan los técnicos electricistas, de conformidad a los estudios y las labores allí consignadas, razón por la cual nos debemos acoger a este texto."
++"\n\n"+
+"Que el artículo 35 de la Ley 1264 de 2008, facultó al Consejo Nacional de Técnicos Electricistas -CONTE, para expedir las Matrículas Profesionales a los Técnicos Electricistas, teniendo como obligación legal para estos la necesidad de obtenerla, como requisito indispensable en el ejercicio de la profesión de Técnico Electricista."
++"\n\n"+
+"Que el señor " + $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+ "mediante oficio radicado con el número " + $P{numeroRadicacion} +","+" "+ "solicitó el trámite y la expedición de la Matrícula Profesional de Técnico Electricista, expediente que consta de "+ $P{numeroFolios}+" folios."
++"\n\n"+
+"Que estudiada la documentación, según consta en el Acta de Comité Técnico" + $P{numeroActa}+","+" "+ "el CONSEJO NACIONAL DE TÉCNICOS ELECTRICISTAS - CONTE, encuentra que el solicitante reúne los requisitos legales exigidos y, en consecuencia es pertinente expedir MATRÍCULA PROFESIONAL DE TÉCNICO ELECTRICISTA."
++"\n\n"+
+"Que en mérito de lo expuesto, el CONTE, fundado en las disposiciones antes citadas, "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cceee09e-75a0-43ed-add1-a38d3cf72df5" x="0" y="465" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUELVE:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97dab8c4-8a73-4f3b-8147-3c7907ad1fdf" x="0" y="485" width="457" height="1788"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ARTICULO PRIMERO: Aprobar la solicitud de MATRICULA PROFESIONAL DE TECNICO ELECTRICISTA al Señor " + $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+ ","+" "+ "identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+ "de conformidad a lo expuesto en la parte motiva."
++ "\n\n" +
+"ARTICULO SEGUNDO: Ordenar la expedición de la Matrícula Profesional de Técnico Electricista así: "
++ "\n\n" +
+$P{clasesDobles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6bf94918-2bc3-4366-8059-4233451f54b8" x="0" y="0" width="457" height="57"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS"+"\n"+
+"en uso de sus facultades constitucionales y legales"+"\n"+
+"y en especial las conferidas por el numeral 1° y"+"\n"+
+"2° del articulo 35 de la ley 1264 del 2008"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="269" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e59089ce-018b-4246-9a4f-aea507da06be" x="0" y="111" width="457" height="71"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFÍQUESE Y CÚMPLASE"
++"\n\n"+
+"WILSON OCHOA"
++"\n"+
+"Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1ad4b9e7-9a3a-4df8-af56-3691b0430dd2" x="0" y="22" width="457" height="72"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ARTICULO TERCERO: Incorporar al listado de matriculados y habilitados al Señor "+ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+ ","+" "+ "de conformidad al numeral 2º  del articulo 35 de la ley 1264 del 2008." + "Dada en Bogotá, D. C., " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

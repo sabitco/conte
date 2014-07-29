@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="qswfgd:workflowmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<!-- Optional meta-data about the model -->
+	<description>Gestion Duplicados</description>
+	<author>Quasar soft</author>
+	<version>1.0</version>
+
+	<!-- Imports are required to allow references to definitions in other models -->
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+		<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+	</imports>
+
+	<!-- Introduction of new namespaces defined by this model -->
+	<namespaces>
+		<namespace uri="http://www.quasarbi.com/model/workflowduplicados/1.0" prefix="qswfgd"/>
+	</namespaces>
+
+	<types>
+		<type name="qswfgd:diligenciaformulario">
+			<parent>bpm:startTask</parent>
+			<properties>	
+				<property name="qswfgd:numeroformulario">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:tiposolicitud">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:tipodocumento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:numerodocumento">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:nombres">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:apellidos">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:fechaNacimiento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:direccionResidencia">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:dependiente">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:notificacion">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:email">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:departamento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:ciudad">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:celular">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:telefono">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:empresa">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:direccionEmpresa">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:departamentoEmpresa">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>								
+				<property name="qswfgd:ciudadEmpresa">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:telefonoEmpresa">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:nombresReferencia1">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:direccionReferencia1">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:telefonoReferencia1">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:nombresReferencia2">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:direccionReferencia2">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:telefonoReferencia2">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>				
+				<property name="qswfgd:tramitePor">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:realizadoEn">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:esEmpresa">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:nit">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:asociacion">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswfgd:identificacionInspector">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfgd:recibedocumentos">
+			<parent>qswfgd:diligenciaformulario</parent>
+			<properties>
+				<property name="qswfgd:fechaRecibeDocumentos">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:formulario">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:fotocopiadocumento">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:fotografias">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:consignacion">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:estudios">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:titulaciones">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:experiencia">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:detalleexperiencia">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfgd:digitalizadocumentos">
+			<parent>qswfgd:recibedocumentos</parent>
+			<properties>
+				<property name="qswfgd:folios">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:ckdigitalizadocumentos">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>				
+				<property name="qswfgd:generadoEn">
+					<type>d:text</type>
+					<default>CONTE</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Ministerio de Minas</value>
+                                    <value>CONTE</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfgd:imprimirDuplicadoSolicitud">
+			<parent>qswfgd:digitalizadocumentos</parent>
+			<properties>
+
+			</properties>
+		</type>
+		<type name="qswfgd:validarPago">
+			<parent>qswfgd:digitalizadocumentos</parent>
+			<properties>			
+				<property name="qswfgd:estadoPago">
+					<type>d:text</type>
+					<default>Completo</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Completo</value>
+                                    <value>Incompleto</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+				<property name="qswfgd:valor">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:fechaConsignacion">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:entidadPago">
+					<type>d:text</type>
+					<default>Bancolombia</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Bancolombia</value>
+                                    <value>Banco Caja Social</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswfgd:notificarSolicitante">
+			<parent>qswfgd:validarPago</parent>
+			<properties>
+				<property name="qswfgd:telefonico">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:electronica">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:fisica">
+					<type>d:boolean</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:donde">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:redaccionCartaInadmitidos">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+			</properties>
+		</type>
+		
+		<type name="qswfgd:enviarDuplicado">
+			<parent>qswfgd:imprimirDuplicadoSolicitud</parent>
+			<properties>
+				<property name="qswfgd:fechaMatricula">
+					<type>d:date</type>
+					<mandatory>false</mandatory>
+				</property>				
+				<property name="qswfgd:tipoNotificacion">
+					<type>d:text</type>
+					<default>Correo electronico</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo electronico</value>
+									<value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>			
+				<property name="qswfgd:notificacionGenerar">
+					<type>d:text</type>
+					<default>Asociacion</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                	<value>Asociacion</value>
+									<value>Personal</value>
+									<value>Empresa</value>                                    
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+				<property name="qswfgd:empresaEnvio">
+					<type>d:text</type>
+					<default>Servientrega</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Servientrega</value>
+                                    <value>Deprisa</value>
+									<value>Servicorra</value>
+									<value>Inter-rapidisimo</value>
+									<value>Otro</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+				<property name="qswfgd:cualEmpresaEnvio">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswfgd:numeroGuia2">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>				
+			</properties>
+		</type>
+		
+		<type name="qswfgd:ubicarExpediente">
+			<parent>qswfgd:enviarDuplicado</parent>
+			<properties>
+								
+			</properties>
+		</type>
+	</types>
+</model>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="evaluacion_actividad" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4fd30bee-7b6c-4380-942a-9cd93362a9af">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="solicitud_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="class_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="documento" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     evaluacion.`solicitud_id` AS evaluacion_solicitud_id,
+     evaluacion.`activity_id` AS evaluacion_activity_id,
+     actividad_generica.`codigo` AS actividad_generica_codigo,
+     actividad_generica.`c_clase` AS actividad_generica_c_clase,
+     actividad_generica.`nombre` AS actividad_generica_nombre,
+     actividad_generica.`descripcion` AS actividad_generica_descripcion
+FROM
+     `actividad_generica` actividad_generica INNER JOIN `evaluacion` evaluacion ON actividad_generica.`codigo` = evaluacion.`activity_id` WHERE evaluacion.`documento` = $P{documento} and actividad_generica.`c_clase` = $P{class_id} group by actividad_generica.`codigo`]]>
+	</queryString>
+	<field name="evaluacion_solicitud_id" class="java.lang.Long"/>
+	<field name="evaluacion_activity_id" class="java.lang.Integer"/>
+	<field name="actividad_generica_codigo" class="java.lang.Integer"/>
+	<field name="actividad_generica_c_clase" class="java.lang.Integer"/>
+	<field name="actividad_generica_nombre" class="java.lang.String"/>
+	<field name="actividad_generica_descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="316" height="20" uuid="e339586e-c2ea-4075-b3fb-c3b78ec4ef1d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{actividad_generica_descripcion}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="316" y="0" width="256" height="20" uuid="52208be1-6f8e-48c9-aeda-008a852dedcc"/>
+				<subreportParameter name="solicitud_id">
+					<subreportParameterExpression><![CDATA[$P{solicitud_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="activity_id">
+					<subreportParameterExpression><![CDATA[$F{evaluacion_activity_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="documento">
+					<subreportParameterExpression><![CDATA[$P{documento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "evaluacion_actividad_item.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

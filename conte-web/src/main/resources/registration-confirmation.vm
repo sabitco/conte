@@ -1,0 +1,164 @@
+<html>
+
+    <head>
+        <meta http-equiv=Content-Type content='text/html; charset=utf-8'>
+        <style>
+            <!--
+            /* Font Definitions */
+            @font-face
+            {font-family:Wingdings;
+             panose-1:5 0 0 0 0 0 0 0 0 0;}
+            @font-face
+            {font-family:Wingdings;
+             panose-1:5 0 0 0 0 0 0 0 0 0;}
+            @font-face
+            {font-family:Calibri;
+             panose-1:2 15 5 2 2 2 4 3 2 4;}
+            @font-face
+            {font-family:Tahoma;
+             panose-1:2 11 6 4 3 5 4 4 2 4;}
+            @font-face
+            {font-family:'Century Gothic';
+             panose-1:2 11 5 2 2 2 2 2 2 4;}
+            /* Style Definitions */
+            p.MsoNormal, li.MsoNormal, div.MsoNormal
+            {margin-top:0cm;
+             margin-right:0cm;
+             margin-bottom:10.0pt;
+             margin-left:0cm;
+             line-height:115%;
+             font-size:11.0pt;
+             font-family:'Calibri','sans-serif';}
+            a:link, span.MsoHyperlink
+            {color:blue;
+             text-decoration:underline;}
+            a:visited, span.MsoHyperlinkFollowed
+            {color:purple;
+             text-decoration:underline;}
+            p
+            {margin-right:0cm;
+             margin-left:0cm;
+             font-size:12.0pt;
+             font-family:'Times New Roman','serif';}
+            p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+            {mso-style-link:'Texto de globo Car';
+             margin:0cm;
+             margin-bottom:.0001pt;
+             font-size:8.0pt;
+             font-family:'Tahoma','sans-serif';}
+            span.TextodegloboCar
+            {mso-style-name:'Texto de globo Car';
+             mso-style-link:'Texto de globo';
+             font-family:'Tahoma','sans-serif';}
+            .MsoChpDefault
+            {font-family:'Calibri','sans-serif';}
+            .MsoPapDefault
+            {margin-bottom:10.0pt;
+             line-height:115%;}
+            @page WordSection1
+            {size:595.3pt 841.9pt;
+             margin:70.85pt 3.0cm 70.85pt 3.0cm;}
+            div.WordSection1
+            {page:WordSection1;}
+            /* List Definitions */
+            ol
+            {margin-bottom:0cm;}
+            ul
+            {margin-bottom:0cm;}
+            -->
+        </style>
+        
+    </head>    
+    <body lang=ES-CO link=blue vlink=purple>
+        <div class=WordSection1>
+            
+            <p class=MsoNormal style='margin-left:70.8pt;line-height:normal'>
+                <span lang="es" style="font-family:'Arial','sans-serif'">
+                      BIENVENIDO
+                </span>
+                <span style="font-size:8.0pt;font-family:'Century Gothic','sans-serif'">
+                    <img width=114 height=56 src="$link.getContextURL()/resources/logo.png" alt="Logo Conte"/>
+                </span>
+            </p>
+            <div class=MsoNormal align=center style="text-align:center;line-height:normal">
+                <span lang=ES style="font-family:'Arial','sans-serif'">                    
+                    <hr size="2" width="100%" align="center"/>
+                </span>
+            </div>            
+            <p class=MsoNormal style='line-height:normal'>
+                <span lang=ES style="font-family: 'Arial','sans-serif'">
+                    Estimado(a) usuario (a)
+                </span>
+            </p>
+            <p class=MsoNormal style='line-height:normal'>
+                <span lang=ES style="font-family:'Arial','sans-serif'">
+                    ${user.nombres} ${user.primerApellido} ${user.segundoApellido} 
+                </span>
+            </p>
+            <p class=MsoNormal style='text-align:justify;line-height:normal'>
+                <span lang=ES style="font-family:'Arial','sans-serif'">&nbsp;</span>
+            </p>
+
+            <p class=MsoNormal style='text-align:justify;line-height:normal'>
+                <span lang=ES style="font-family:'Arial','sans-serif'">
+                    Le damos la Bienvenida a nuestro Sistema de Gesti&oacute;n de Matr&iacute;culas. Su 
+                    <b>Clave Personal</b> de Internet <b>ha sido
+activada</b>. Desde ahora podr&aacute; conocer de manera f&aacute;cil, el estado de su
+matr&iacute;cula profesional de t&eacute;cnico electricista. 
+                </span>
+            </p>
+            <p class=MsoNormal style="text-align:justify;line-height:normal">
+                <span lang=ES style="font-family:'Arial','sans-serif'">Recuerde que:</span></p>
+            <ul type=disc>
+                <li class=MsoNormal style='text-align:justify;line-height:normal'>
+                    <span lang=ES style="font-family:'Arial','sans-serif'">
+                        Su clave es personal es ${user.contrasena}.
+                    </span>
+                </li>
+                <li class=MsoNormal style='text-align:justify;line-height:normal'>
+                    <span lang=ES style="font-family:'Arial','sans-serif'">
+                        Ingrese a nuestro sistema s&oacute;lo desde un computador confiable, en su casa u oficina.
+                    </span>
+                </li>
+            </ul>
+            <p class=MsoNormal style='text-align:justify;line-height:normal'>
+                <span lang=ES style="font-family:'Arial','sans-serif'">
+                    Le invitamos a realizar sus consultas y notificaciones desde nuestra p&aacute;gina de Internet
+                </span>
+                <span lang=ES>
+                    <a href='http://www.conte.org.co'>
+                        <span style="font-family:'Arial','sans-serif'">
+                            www.conte.org.co
+                        </span>
+                    </a>                    
+                </span>
+                <span lang=ES style="font-family:'Arial','sans-serif'">
+                    
+                </span>
+            </p>
+            <p class=MsoNormal style='text-align:justify;line-height:normal'>
+                <span lang=ES style="font-family:'Arial','sans-serif'">
+          Si tiene alguna duda, sugerencia o recomendaci&oacute;n, por favor comun&iacute;quese a trav&eacute;s del correo 
+    </span>
+    <span lang=ES>
+        <a href='mailto:contactenos@conte.org.co'>
+            <span style="font-family:'Arial','sans-serif'">
+                  contactenos@conte.org.co
+            </span>
+        </a>
+        
+    </span>
+    <span lang=ES style="font-family:'Arial','sans-serif'" > 
+            o al PBX 4820606 en la ciudad de Bogot&aacute;.
+    </span>
+</p>
+
+<p class=MsoNormal style='text-align:justify;line-height:normal'>
+    <span lang=ES style="font-family:'Arial','sans-serif'">Cordial saludo, </span>
+</p>
+
+<p><b>CONTE </b></p>
+            <p class=MsoNormal><span lang=ES>&nbsp;</span></p>
+        </div>
+    </body>
+</html>

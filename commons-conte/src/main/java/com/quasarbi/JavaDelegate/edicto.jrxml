@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="edicto" pageWidth="612" pageHeight="1008" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="113" bottomMargin="134" uuid="ee02bcbd-d91e-4f4e-83d3-04a65dd399a5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="265"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="radicado" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombres" class="java.lang.String"/>
+	<parameter name="documento" class="java.lang.String"/>
+	<parameter name="textoResolucion" class="java.lang.String"/>
+	<parameter name="fechaDesfija" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5caa1d5c-93d5-47cd-af6c-20ba39b81003" x="0" y="0" width="442" height="16"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<text><![CDATA[EDICTO]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="20791709-9cc2-46b1-af21-9088aa5fbdcc" x="0" y="16" width="442" height="65"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["LA SUSCRITA COORDINADORA OPERATIVA DEL CONSEJO NACIONAL\n DE TECNICOS ELECTRICISTAS \"CONTE\"\n\n HACE SABER:"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="499" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e79b3dd0-17db-48a6-8505-334eeed58e38" x="0" y="0" width="442" height="288"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que en el expediente  de la solicitud de matrícula profesional de técnico electricista radicado bajo el número "+ $P{radicado} +" fue dictada la Resolución "+  $P{numeroResolucion} + " del " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion}) +", cuya parte Resolutiva es la siguiente:\n\n"
+
++ "ARTICULO PRIMERO: Aprobar la solicitud de MATRICULA PROFESIONAL DE TECNICO ELECTRICISTA al Señor " + $P{nombres} + ", identificado con  la cédula de ciudadanía número " + $P{documento}+ ", de conformidad a lo expuesto en la parte motiva.  ARTICULO SEGUNDO: Ordenar la expedición de la Matrícula Profesional de Técnico Electricista así: "
+
++"\n\n" + $P{textoResolucion} + "\n\n"
+
++ "ARTICULO TERCERO: Incorporar al listado de matriculas y habilitados al señor " + $P{nombres} + ", de conformidad al numeral 2° del articulo 35 de la ley 1264 del 2008.\n\n"
+
++ "Dada en Bogotá, D. C., a la fecha " +  new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion}) + " (Acta No. 194). NOTIFIQUESE Y CUMPLASE. Presidente Conte. Consejero Ponente.\n\n"
+
++ "Que para notificar la anterior Resolución se fija el presente Edicto en un lugar público y visible en la cartelera del CONTE, por el término de 10 días hábiles, contados a partir de la fecha, siendo las 8:00 a.m. del día de Hoy.\n\n"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f42ca19-2eb3-437c-b36e-1b75d57c2050" x="0" y="314" width="442" height="23"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1215a0ca-d21e-4393-aa42-ed21782a1196" x="0" y="396" width="442" height="44"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Se desfija a las 17:00 horas del día de hoy " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaDesfija}) + "."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="263e59d2-e7f6-485d-8dc8-4662ca054167" x="0" y="459" width="442" height="40"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ZENOBIA ATHENEA ORBEZ" +"\n"+ "Coordinadora Inspectoria y Gestion"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7a6ac7f1-35b7-45dc-b6d5-ee90666cb539" x="0" y="337" width="442" height="59"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ZENOBIA ATHENEA ORBEZ" + "\n"+ "Coordinadora Inspectoria y Gestion"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConteSolicitud" pageWidth="1152" pageHeight="1728" columnWidth="1112" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5278cc6-918f-42f2-ac3c-5a14e94465ba">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="375"/>
+	<parameter name="id" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codSolicitud" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tecnico.`codigo` AS tecnico_codigo,
+     tecnico.`documento` AS tecnico_documento,
+     tecnico.`nombres` AS tecnico_nombres,
+     tecnico.`primer_apellido` AS tecnico_primer_apellido,
+     tecnico.`segundo_apellido` AS tecnico_segundo_apellido,
+     tecnico.`direccion` AS tecnico_direccion,
+     tecnico.`c_ciudad` AS tecnico_c_ciudad,
+     tecnico.`telefono` AS tecnico_telefono,
+     tecnico.`celular` AS tecnico_celular,
+     tecnico.`email` AS tecnico_email,
+     ciudad.`c_depto` AS ciudad_c_depto,
+     ciudad.`nombre` AS ciudad_nombre,
+     ciudad.`codigo` AS ciudad_codigo,
+     departamento.`codigo` AS departamento_codigo,
+     departamento.`nombre` AS departamento_nombre,
+     solicitud.`radicado` AS solicitud_radicado,
+     solicitud.`c_tecnico` AS solicitud_c_tecnico,
+     solicitud.`dependiente` AS solicitud_dependiente,
+     solicitud.`direccion_empresa` AS solicitud_direccion_empresa,
+     solicitud.`c_ciudad_empresa` AS solicitud_c_ciudad_empresa,
+     solicitud.`telefono_empresa` AS solicitud_telefono_empresa,
+     solicitud.`entero` AS solicitud_entero,
+     solicitud.`entero_por` AS solicitud_entero_por,
+     solicitud.`empresa` AS solicitud_empresa,
+     solicitud.`c_tipo` AS solicitud_c_tipo,
+     referencia_personal.`codigo` AS referencia_personal_codigo,
+     referencia_personal.`c_solicitud` AS referencia_personal_c_solicitud,
+     referencia_personal.`nombres` AS referencia_personal_nombres,
+     referencia_personal.`direccion` AS referencia_personal_direccion,
+     referencia_personal.`telefono` AS referencia_personal_telefono,
+     referencia_personal.`parentesco` AS referencia_personal_parentesco,
+     solicitud.`c_inspector` AS solicitud_c_inspector,
+     tipo_solicitud.`codigo` AS tipo_solicitud_codigo,
+     tipo_solicitud.`nombre` AS tipo_solicitud_nombre,
+     ciudad_empresa.`nombre` AS ciudad_empresa_nombre,
+     departamento_empresa.`nombre` AS departamento_empresa_nombre,
+     asociacion.`codigo` AS asociacion_codigo,
+     asociacion.`sigla` AS asociacion_nombre,
+     tecnico.`fecha_nacimiento` AS tecnico_fecha_nacimiento,
+     tecnico.`notificacion` AS tecnico_notificacion,
+     tipo_solicitud_A.`nombre` AS tipo_solicitud_A_nombre,
+     tipo_solicitud_A.`codigo` AS tipo_solicitud_A_codigo,
+     tipo_solicitud.`porcentaje` AS tipo_solicitud_porcentaje,
+     parametro.`codigo` AS parametro_codigo,
+     parametro.`valor` AS parametro_valor,
+     referencia_personal_A.`codigo` AS referencia_personal_A_codigo,
+     referencia_personal_A.`c_solicitud` AS referencia_personal_A_c_solicitud,
+     referencia_personal_A.`nombres` AS referencia_personal_A_nombres,
+     referencia_personal_A.`direccion` AS referencia_personal_A_direccion,
+     referencia_personal_A.`telefono` AS referencia_personal_A_telefono,
+     referencia_personal_A.`parentesco` AS referencia_personal_A_parentesco
+FROM
+     `ciudad` ciudad INNER JOIN `tecnico` tecnico ON ciudad.`codigo` = tecnico.`c_ciudad`
+     INNER JOIN `departamento` departamento ON ciudad.`c_depto` = departamento.`codigo`
+     INNER JOIN `solicitud` solicitud ON tecnico.`codigo` = solicitud.`c_tecnico`
+     INNER JOIN `referencia_personal` referencia_personal ON solicitud.`radicado` = referencia_personal.`c_solicitud`
+     INNER JOIN `tipo_solicitud` tipo_solicitud ON solicitud.`c_tipo` = tipo_solicitud.`codigo`
+     LEFT JOIN `ciudad` ciudad_empresa ON solicitud.`c_ciudad_empresa` = ciudad_empresa.`codigo`
+     LEFT JOIN `asociacion` asociacion ON solicitud.`c_asociacion` = asociacion.`codigo`
+     LEFT JOIN `tipo_solicitud` tipo_solicitud_A ON solicitud.`c_tipo` = tipo_solicitud_A.`codigo`
+     INNER JOIN `referencia_personal` referencia_personal_A ON solicitud.`radicado` = referencia_personal_A.`c_solicitud`
+     LEFT JOIN `departamento` departamento_empresa ON ciudad_empresa.`c_depto` = departamento_empresa.`codigo`,
+     `parametro` parametro
+WHERE
+     solicitud.`radicado` = $P{codSolicitud}
+ AND `parametro`.codigo = 1 order by referencia_personal.`codigo`, referencia_personal_A.`codigo` desc LIMIT 1]]>
+	</queryString>
+	<field name="tecnico_codigo" class="java.lang.Long"/>
+	<field name="tecnico_documento" class="java.lang.String"/>
+	<field name="tecnico_nombres" class="java.lang.String"/>
+	<field name="tecnico_primer_apellido" class="java.lang.String"/>
+	<field name="tecnico_segundo_apellido" class="java.lang.String"/>
+	<field name="tecnico_direccion" class="java.lang.String"/>
+	<field name="tecnico_c_ciudad" class="java.lang.Integer"/>
+	<field name="tecnico_telefono" class="java.lang.String"/>
+	<field name="tecnico_celular" class="java.lang.String"/>
+	<field name="tecnico_email" class="java.lang.String"/>
+	<field name="ciudad_c_depto" class="java.lang.Integer"/>
+	<field name="ciudad_nombre" class="java.lang.String"/>
+	<field name="ciudad_codigo" class="java.lang.Integer"/>
+	<field name="departamento_codigo" class="java.lang.Integer"/>
+	<field name="departamento_nombre" class="java.lang.String"/>
+	<field name="solicitud_radicado" class="java.lang.Long"/>
+	<field name="solicitud_c_tecnico" class="java.lang.Long"/>
+	<field name="solicitud_dependiente" class="java.lang.Boolean"/>
+	<field name="solicitud_direccion_empresa" class="java.lang.String"/>
+	<field name="solicitud_c_ciudad_empresa" class="java.lang.Integer"/>
+	<field name="solicitud_telefono_empresa" class="java.lang.String"/>
+	<field name="solicitud_entero" class="java.lang.String"/>
+	<field name="solicitud_entero_por" class="java.lang.String"/>
+	<field name="solicitud_empresa" class="java.lang.String"/>
+	<field name="solicitud_c_tipo" class="java.lang.Integer"/>
+	<field name="referencia_personal_codigo" class="java.lang.Integer"/>
+	<field name="referencia_personal_c_solicitud" class="java.lang.Long"/>
+	<field name="referencia_personal_nombres" class="java.lang.String"/>
+	<field name="referencia_personal_direccion" class="java.lang.String"/>
+	<field name="referencia_personal_telefono" class="java.lang.String"/>
+	<field name="referencia_personal_parentesco" class="java.lang.String"/>
+	<field name="solicitud_c_inspector" class="java.lang.Integer"/>
+	<field name="tipo_solicitud_codigo" class="java.lang.Integer"/>
+	<field name="tipo_solicitud_nombre" class="java.lang.String"/>
+	<field name="ciudad_empresa_nombre" class="java.lang.String"/>
+	<field name="departamento_empresa_nombre" class="java.lang.String"/>
+	<field name="asociacion_codigo" class="java.lang.Integer"/>
+	<field name="asociacion_nombre" class="java.lang.String"/>
+	<field name="tecnico_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="tecnico_notificacion" class="java.lang.Boolean"/>
+	<field name="tipo_solicitud_A_nombre" class="java.lang.String"/>
+	<field name="tipo_solicitud_A_codigo" class="java.lang.Integer"/>
+	<field name="tipo_solicitud_porcentaje" class="java.lang.Float"/>
+	<field name="parametro_codigo" class="java.lang.Integer"/>
+	<field name="parametro_valor" class="java.lang.String"/>
+	<field name="referencia_personal_A_codigo" class="java.lang.Integer"/>
+	<field name="referencia_personal_A_c_solicitud" class="java.lang.Long"/>
+	<field name="referencia_personal_A_nombres" class="java.lang.String"/>
+	<field name="referencia_personal_A_direccion" class="java.lang.String"/>
+	<field name="referencia_personal_A_telefono" class="java.lang.String"/>
+	<field name="referencia_personal_A_parentesco" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="1580" splitType="Stretch">
+			<image isUsingCache="false">
+				<reportElement uuid="c28aad33-98ed-4cc1-97c9-e2b1607f19a4" x="0" y="1" width="1082" height="1560"/>
+				<imageExpression><![CDATA["/images/solicitud.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="c09fd558-8c87-4b22-a795-fd9a0af436f3" x="40" y="171" width="203" height="31"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[TIPO SOLICITUD]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="05ed8098-b4aa-4b19-b4f9-dfefdcb21016" x="40" y="330" width="309" height="23"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bf4c1bee-0b78-458b-b1ce-a9d80d623f22" x="40" y="288" width="270" height="22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bc17fa64-390b-4ff9-8bcd-f8c99f80fbd7" x="325" y="288" width="249" height="22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_primer_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fd4c3aad-d527-4120-bbc5-d39357dbb9a0" x="588" y="288" width="289" height="22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_segundo_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a5935a8c-a21a-4997-9838-70f06efd61d9" x="40" y="374" width="505" height="22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="417600bf-18f4-4b94-8c5f-3de5445efc4c" x="563" y="374" width="314" height="22"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c7a968d1-8d99-46a0-9a25-966bc2514573" x="349" y="418" width="196" height="21"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4668350a-0325-44a6-ba5e-332b88fdc321" x="588" y="418" width="289" height="21"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c305e521-8323-49c1-9596-02a5b2898ca1" x="95" y="422" width="126" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{departamento_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e9256efb-fbac-47ae-84bb-76860fbfc09c" x="95" y="401" width="148" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ciudad_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="92da5229-8d3b-4d7d-94b7-32a243775fc6" x="545" y="688" width="378" height="30"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tecnico_notificacion}) ? $F{tecnico_email} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="51d20ea1-b185-46ca-8ce7-664340cbaaaa" x="40" y="221" width="295" height="25"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ciudad_nombre} + " " +new SimpleDateFormat("dd-MM-yyyy hh:mm:ss a").format(new Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="26c1b257-fc75-4f9e-91f3-250ea2f2e921" x="889" y="221" width="157" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitud_radicado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d20c479f-2b7e-46b5-a676-ff638d271661" x="433" y="213" width="206" height="33"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitud_dependiente} ? "DEPENDIENTE" : "INDEPENDIENTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4323ca7e-054d-4fa0-a8a9-3899ca86f296" x="833" y="502" width="202" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitud_telefono_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f28bfbb7-4dc3-437d-b0bd-8311c4288135" x="40" y="461" width="824" height="21"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitud_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a97f041e-d2b6-43a6-a9f6-ed9b4debb079" x="40" y="502" width="505" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitud_direccion_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d0dd2459-7502-47e5-910a-be29603ea1f9" x="40" y="799" width="245" height="27"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{solicitud_entero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a0890315-a1c1-4fd2-a3d8-ec1889724cee" x="310" y="778" width="340" height="41"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{solicitud_entero_por} == null || $F{solicitud_entero_por}.isEmpty()) ?
+($F{asociacion_nombre}==null ? "" : $F{asociacion_nombre} ) : $F{solicitud_entero_por}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="47d4cd8c-5d58-4c12-bd34-192d8d88195b" x="40" y="577" width="385" height="24"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{referencia_personal_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="06d4b94b-d7c1-4f1c-adac-de7671731e7f" x="864" y="577" width="182" height="24"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{referencia_personal_telefono}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c2b55559-faa1-4234-8df6-28ea68b1ae3c" x="463" y="577" width="384" height="24"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{referencia_personal_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="91221dfa-a753-41d6-827e-47d0afa17af6" x="877" y="799" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{solicitud_c_inspector}!=null) ? $F{solicitud_c_inspector}: ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f35f8ba0-2173-4768-81b6-4224792b54ca" x="243" y="171" width="396" height="31"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_solicitud_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="810aff3b-ce17-462b-b5fa-8956e83f7d8b" x="103" y="1245" width="291" height="25"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0fba5c70-28b8-4efb-b067-a0e003686bea" x="606" y="487" width="213" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ciudad_empresa_nombre} != null ? $F{ciudad_empresa_nombre} : ""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9509c355-8381-4455-93b3-ffde311ff7d3" x="606" y="508" width="147" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{departamento_empresa_nombre} !=null ? $F{departamento_empresa_nombre} :""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae9952ae-87fe-4dba-9d1c-f690c3bac0cd" x="639" y="335" width="37" height="23"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd").format($F{tecnico_fecha_nacimiento})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae9952ae-87fe-4dba-9d1c-f690c3bac0cd" x="716" y="335" width="37" height="23"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("MM").format($F{tecnico_fecha_nacimiento})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ae9952ae-87fe-4dba-9d1c-f690c3bac0cd" x="796" y="335" width="37" height="23"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("yyyy").format($F{tecnico_fecha_nacimiento})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ce6cfd23-24ab-4f8c-8b28-a353408a0f3a" x="411" y="698" width="88" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tecnico_notificacion}) ? "Si" : "NO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d14d90ec-09d5-495b-ae60-4833378e3d6e" x="40" y="613" width="385" height="21"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{referencia_personal_codigo}.equals( $F{referencia_personal_A_codigo} )) ? "" : $F{referencia_personal_A_nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="77650fc4-df32-4925-9a4b-edb746038a88" x="463" y="613" width="384" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{referencia_personal_codigo}.equals( $F{referencia_personal_A_codigo} )) ? "" : $F{referencia_personal_A_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c09c0c87-bab9-4411-b5da-fe41c5865e68" x="864" y="613" width="182" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{referencia_personal_codigo}.equals( $F{referencia_personal_A_codigo} )) ? "" : $F{referencia_personal_A_telefono}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="1614">
+			<image>
+				<reportElement uuid="bdf8bded-5f4c-469c-b0e4-721e953747e5" x="0" y="0" width="1240" height="1609"/>
+				<imageExpression><![CDATA["images/recibo.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="bd183857-d283-485a-b914-26aed4f0ef62" x="202" y="364" width="404" height="27"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_nombres} +" " + $F{tecnico_primer_apellido} +" " + $F{tecnico_segundo_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b34390b6-38eb-49a7-ba17-0e6002c698f2" x="243" y="890" width="396" height="26"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_nombres} +" " + $F{tecnico_primer_apellido} +" " + $F{tecnico_segundo_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8a0f0ac8-0ac4-4e9f-b415-321c3aacb40a" x="221" y="1418" width="406" height="27"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tecnico_nombres} +" " + $F{tecnico_primer_apellido} +" " + $F{tecnico_segundo_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f8a9eb84-1bc9-41a2-b610-3f50c7f415e5" x="753" y="250" width="249" height="29"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{tecnico_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0b152a01-025a-4be9-952e-b704a4c50444" x="753" y="770" width="239" height="25"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8b5402e5-6c16-47b6-930c-9df157567da2" x="753" y="1297" width="249" height="29"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tecnico_documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f920eaa-4b2e-431f-9f97-04e7778d2089" x="221" y="413" width="406" height="27"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_solicitud_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e3d6d87e-e9f7-4fa8-8cca-42a1d36c4838" x="243" y="934" width="396" height="25"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_solicitud_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2d6b507a-d5ae-4efc-86a5-f1495bb5fa5d" x="221" y="1464" width="406" height="25"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_solicitud_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="02f5faa7-cae1-45f8-bb82-c3e9c3387ba2" x="716" y="371" width="305" height="20"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(int)(Integer.parseInt($F{parametro_valor})*$F{tipo_solicitud_porcentaje})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a1b360ee-7602-4c46-8754-bbcaaf993364" x="716" y="890" width="305" height="26"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(int)(Integer.parseInt($F{parametro_valor})*$F{tipo_solicitud_porcentaje})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="73cccac6-1f09-4e6a-bf24-f168bebf7b18" x="719" y="1418" width="302" height="27"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(int)(Integer.parseInt($F{parametro_valor})*$F{tipo_solicitud_porcentaje})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

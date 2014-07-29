@@ -1,0 +1,30 @@
+<webscript>
+<shortname>Create Workflow Instance</shortname>
+<description>
+Creates a workflow instance and returns a instance identification of the new workflow.
+</description>
+<url>/workflow-instance-duplicados?definition={definition}&amp;description={description}&amp;assign={assign}&amp;=fileNodeId{fileNodeId?}
+</url>
+<args>
+<arg>
+<shortname>definition</shortname>
+<description>the work flow definition name</description>
+</arg>
+<arg>
+<shortname>description</shortname>
+<description>the description for the new workflow</description>
+</arg>
+<!--
+<arg>
+<shortname>assign</shortname>
+<description>the person uid to assign the first task</description>
+</arg>
+-->
+<arg>
+<shortname>fileNodeId</shortname>
+<description>the file node id that we want to attach to the workflow</description>
+</arg>
+</args>
+<format default="json">extension</format>
+<authentication>guest</authentication>
+</webscript>

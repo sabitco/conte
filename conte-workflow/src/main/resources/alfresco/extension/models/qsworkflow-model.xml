@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="qswf:workflowmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+	<!-- Optional meta-data about the model -->
+	<description>Flujos CONTE</description>
+	<author>Daniel Valero</author>
+	<version>1.0</version>
+
+	<!-- Imports are required to allow references to definitions in other models -->
+	<imports>
+		<import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+		<import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+	</imports>
+
+	<!-- Introduction of new namespaces defined by this model -->
+	<namespaces>
+		<namespace uri="http://www.quasarbi.com/model/workflow/1.0" prefix="qswf"/>
+	</namespaces>
+
+	<types>
+		<type name="qswf:presentapqrs">
+			<parent>bpm:startTask</parent>
+			<properties>
+				<property name="qswf:tipodocumento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+				</property>
+				<property name="qswf:numerodocumento">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>					
+				</property>
+				<property name="qswf:nombrecompleto">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>					
+				</property>
+				<property name="qswf:razonSocial">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:cargo">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:telefono">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>					
+				</property>
+				<property name="qswf:celular">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>					
+				</property>
+				<property name="qswf:departamento">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:ciudad">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:direccion">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:email">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:tiposolicitud">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:redaccionsolicitud">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>					
+				</property>
+			</properties>
+		</type>
+		<type name="qswf:asignaresponsable">
+			<parent>qswf:presentapqrs</parent>
+			<properties>
+			</properties>
+			<mandatory-aspects>
+				<aspect>bpm:assignee</aspect>
+			</mandatory-aspects>
+		</type>
+		<type name="qswf:respondepqrs">
+			<parent>qswf:asignaresponsable</parent>
+			<properties>
+				<property name="qswf:accionrealizada">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+					<constraints>
+						<constraint type="LENGTH">
+							<parameter name="minLength"><value>0</value></parameter>
+							<parameter name="maxLength"><value>250</value></parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswf:revisarespuesta">
+			<parent>qswf:respondepqrs</parent>
+			<properties>
+				<property name="qswf:accionrealizadaxrespuesta">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+					<constraints>
+						<constraint type="LENGTH">
+							<parameter name="minLength"><value>0</value></parameter>
+							<parameter name="maxLength"><value>250</value></parameter>
+						</constraint>
+					</constraints>
+				</property>
+				<property name="qswf:brespuesta">
+					<type>d:text</type>
+					<default>Aprobado</default>
+					<constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Aprobado</value>
+                                    <value>Rechazado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+				</property>
+			</properties>
+		</type>
+		<type name="qswf:nuevasacciones">
+			<parent>qswf:revisarespuesta</parent>
+			<properties>
+				<property name="qswf:accionanterior">
+					<type>d:text</type>
+					<mandatory>false</mandatory>
+					<multiple>false</multiple>
+				</property>
+				<property name="qswf:nuevaaccionrealizada">
+					<type>d:text</type>
+					<mandatory>true</mandatory>
+					<multiple>false</multiple>
+					<constraints>
+						<constraint type="LENGTH">
+							<parameter name="minLength"><value>0</value></parameter>
+							<parameter name="maxLength"><value>250</value></parameter>
+						</constraint>
+					</constraints>
+				</property>
+			</properties>
+		</type>
+	</types>
+</model>

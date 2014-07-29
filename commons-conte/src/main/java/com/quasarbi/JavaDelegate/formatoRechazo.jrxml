@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formatoRechazo" pageWidth="612" pageHeight="1008" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="39d7e590-a6f8-4263-8163-590bd66e5a38">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="961"/>
+	<subDataset name="dataset2" uuid="9ee40a21-096f-4332-9173-b2d4ca4e7d74">
+		<field name="_THIS" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="dataset1" uuid="c6683d3c-fd6a-4e15-b3df-e307749ad2bb"/>
+	<parameter name="resolucionRechazo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="radicado" class="java.lang.String"/>
+	<parameter name="fechaRadicacion" class="java.util.Date"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="documentoSolicitante" class="java.lang.String"/>
+	<parameter name="documentosAnexos" class="java.util.List"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<pageHeader>
+		<band height="88" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c719f23f-ec4d-40da-9b56-d055c41d90e7" x="255" y="60" width="202" height="21"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. " + $P{radicado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f215d4f7-3320-4a78-b20e-ba6fcd49cbd5" x="0" y="0" width="457" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resolución No. 0000" + $P{resolucionRechazo} + "-" + $P{radicado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="17a25a29-3753-4ff5-9b97-9fa7030ae007" x="0" y="40" width="457" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<text><![CDATA["Por la cual se rechaza una solicitud de Matricula Profesional de Técnico Electricista"]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="ca5f3b78-f471-44fd-887c-43ea743bca64" x="0" y="20" width="457" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="601" splitType="Stretch">
+			<textField>
+				<reportElement uuid="b8a95d75-16f4-479e-b378-fa2be4248ca9" x="0" y="0" width="457" height="79"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["EL CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS \n En ejercicio de sus facultades y, en especial las que le confiere el Articulo 30 de la Ley 19 de 1990, El Articulo 35 de la ley 1264 de 2008 numerales 1 y 2." +
+"\n" +
+"\n" +
+"CONSIDERANDO:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d9675e41-9bfd-44bf-8369-38b1f829d404" stretchType="RelativeToTallestObject" x="0" y="79" width="457" height="63"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que mediante Formulario de Solicitud Radicado ante esta entidad bajo el Número " + $P{radicado} + " de " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaRadicacion}) +", el señor " + $P{nombreSolicitante} + " identificado con Cedula de Ciudadanía No. " + $P{documentoSolicitante} + ", presentó Solicitud de Tramite de la Matricula Profesional de Técnico Electricista, acompañada de los siguientes documentos:"]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="f18831c8-4eb9-497d-8732-14771c2a1569" x="0" y="142" width="457" height="17"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset2" uuid="dcee86f2-8e31-466e-9642-81d743c8401a">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{documentosAnexos})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="17" width="457">
+						<textField>
+							<reportElement uuid="2c448053-7893-49ac-8572-191c55ff59ea" x="0" y="0" width="457" height="14"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Californian FB" size="11"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{_THIS}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement uuid="c59b8f2f-5e89-4c9c-a594-3d3799f8e0eb" stretchType="RelativeToTallestObject" x="0" y="274" width="457" height="327"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["La Ley 19 de 1990, Marco jurídico general por la cual se reglamenta la Profesión de Técnico Electricista señalo de manera taxativa la obligatoriedad de porte de la Matricula Profesional a todos aquellas personas que se ocupen en el estudio y aplicaciones de la electricidad y ejercen a nivel medio o como auxiliar de los ingenieros electricistas o similares." +
+"\n" +
+"\n" +
+"Concomitante a la anterior norma sustantiva, el decreto reglamentario 991 de 1991  precisa el conjunto de  requisitos formales  necesarios para el estudio y tramite de la Matricula Profesional como asuntos esenciales para que el Consejo Nacional de Técnicos Electricistas proceda al Estudio y Tramite de la Matricula Profesional proceso que concluye con la respectiva expedición del Acto administrativo correspondiente." +
+"\n" +
+"\n" +
+"Revisado el expediente " + $P{radicado} + ", en el área  de gestión del Consejo  Nacional de Técnicos Electricistas constató a través de la respuesta por parte de El Servicio Nacional de Aprendizaje SENA, que la \"Constancia como Técnico Electricista y Certificado de Competencia Laboral en Aplicar Normas de Seguridad Industrial y Medio Ambiente en la Construcción y Montaje de Redes aereas de Distribución de Energía Eléctrica\", presume falsedad en los documentos aportados, teniendo en cuenta lo siguiente:" +
+"\n" +
+"\n" +
+"\n" +
+"La Entidad le solicitó mediante comunicación CDG-13-1208546 del 13/08/2012, se manifestara sobre la veracidad del requisito aportado para la Solicitud de Tramite de la Matricula Profesional." +
+"\n" +
+"\n" +
+"Trascurrido el término legal de requerimiento se advierte que usted no cumplió, circunstancia que al tenor de las normas establecidas en el Código Contencioso Administrativo la Entidadentiende que ha desistido de la solicitud de Matricula Profesional de Técnico Electricista." +
+"\n" +
+"\n" +
+"En Merito de lo expuesto, El CONTE,"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="436">
+			<textField>
+				<reportElement uuid="79b46735-963c-48a2-bc1c-afbf7aaec239" stretchType="RelativeToTallestObject" x="0" y="0" width="457" height="14"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUELVE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="04eecf72-3b7c-4982-8a30-01d1245a59e7" stretchType="RelativeToTallestObject" x="0" y="14" width="457" height="303"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ARTICULO PRIMERO: Rechazar de conformidad con la parte motiva de la presente Resolucion, la solicitud de peticion de estudio, tramite y expedicion de Matricula Profesional de Tecnico Electricista de " + $P{nombreSolicitante} + ", expediente radicado en la entidad el " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaRadicacion}) +
+".\n" +
+"\n" +
+"ARTICULO SEGUNDO: Proceder a la devolucion del valor consignado para el Estudio y Tramite de la Matricula Profesional de " + $P{nombreSolicitante} + ", expediente radicado en la entidad el " + new SimpleDateFormat("dd/MM/yyyy").format($P{fechaRadicacion}) + ", previa deducci�n del 1.5% del valor de la expedicion de la Matricula Profesional, dinero el cual sera devuelto a favor de quien realizo la consignacion." +
+"\n" +
+"\n" +
+"ARTICULO TERCERO: Notificarle de manera personal lo resuelto de acuerdo al Codigo Contencioso Administrativo. De no ser posible la notificacion personal dese cumplimiento a lo normado por el  C.C.A. mediante aviso." +
+"\n" +
+"\n" +
+"ARTICULO CUARTO: Dese  traslado de la copia de lo resuelto al SENA, correspondiente para lo de su competencia con respecto a la presunta falsedad." +
+"\n" +
+"\n" +
+"ARTICULO QUINTO: La presente resolucion rige a partir de la fecha de su notificacion y en su contra no procede recurso alguno."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="132">
+			<staticText>
+				<reportElement uuid="c44f4362-057f-44f8-96dd-a31cb0855715" x="0" y="98" width="457" height="28"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<text><![CDATA[Proyecto: Gloria M.
+Reviso: Athenea O. / D. Aldana
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="a3d84ec7-73ca-465d-9ec6-fd43eb62cae0" stretchType="RelativeToTallestObject" x="0" y="20" width="457" height="78"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFIQUESE Y CUMPLASE" +
+"\n" +
+"\n" +
+"WILSON OCHOA" +
+"\n" +
+"Presidente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1bc53fb8-f32c-4ac4-90fd-76442fbbdd55" stretchType="RelativeToTallestObject" x="0" y="0" width="457" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dada en Bogotá, D.C. " + new SimpleDateFormat("dd/MM/yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

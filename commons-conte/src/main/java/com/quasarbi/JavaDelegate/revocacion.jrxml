@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MODELO REVOCACION" pageWidth="612" pageHeight="1584" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="85661fc2-636e-4262-b3c8-92662cd5a154">
+	<property name="ireport.zoom" value="1.1"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="be11cfd9-f37a-491d-8a47-46955900c9e3">
+		<field name="_THIS" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="clases1" class="java.util.List"/>
+	<parameter name="numeroActa" class="java.lang.String"/>
+	<parameter name="numeroFolios" class="java.lang.String"/>
+	<parameter name="clases2" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="clase3" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreConsejero" class="java.lang.String"/>
+	<parameter name="clasesDobles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="clasesIniciales" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="46" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="62">
+			<textField>
+				<reportElement uuid="38d145cd-33c3-468e-85e0-029f17ad1e7c" x="213" y="39" width="244" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="91bc5416-4e11-419a-a462-eaf5079e11b2" x="0" y="0" width="457" height="39"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resolución M-C0"+$P{numeroResolucion}+"\n"+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
+"Por la cual se revoca directamente una decisión"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="1193" splitType="Stretch">
+			<textField>
+				<reportElement uuid="1bd4a54b-90c0-41fe-a453-ec85a9ab3f78" x="0" y="413" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUELVE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7e903f69-7adc-48e8-a849-a4adb57e14b3" x="0" y="433" width="457" height="760"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PRIMERO: Revocar directamente la resolución MC-0"+ $P{numeroResolucion}+","+" "+
+"emitida por el Consejo Nacional de Técnicos Electricistas el "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+ "conferida al señor "+ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con C.C. "+$P{numeroCedula}+","+" "+ "en el sentido de adicionar montaje de armario de  contadores en la clase: " +
+$P{clasesIniciales}
++ "\n\n" +
+$P{clasesDobles}
++ "\n\n" +
+"SEGUNDO: "+"\t"+ "Incorporar al listado de matriculados y habilitados al Señor "+ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+ "de conformidad al numeral 2º  del articulo 35 de la ley 1264 del 2008."
++ "\n\n" +
+"TERCERO: "+"\t"+ "Contra la presente resolución no procede recurso alguno;  quedando agotada la vía gubernativa. "
++ "\n\n" +
+"CUARTO: "+"\t"+ "La presente resolución deroga todas las anteriores que le sean contrarias."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a358294c-8291-47b2-932c-a16c9982936f" x="0" y="84" width="457" height="329"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que el Consejo Nacional de Técnicos Electricistas CONTE, mediante resolución M-C0 " +$P{numeroResolucion}+" "+"del"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+ "aprobó la solicitud de matrícula profesional de técnico electricista al señor  "+
+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con"+"\n"+ "C.C. "+$P{numeroCedula}+","+" "+ "ordenando la expedición de la matrícula en las clases: "
++ $P{clasesIniciales}
++ "\n\n" +
+"Que según consta en acta de Comité Técnico " + $P{numeroActa}+","+" "+ "revisada nuevamente la documentación que reposa en los "+ $P{numeroFolios} + " folios del expediente, se obtuvo que el peticionario tiene derecho no sólo a las clases: "
++ $P{clasesIniciales} +
+"como inicialmente le fue otorgada, sino adicionalmente tiene derecho a la clase: "
++ $P{clasesIniciales}
++ "\n\n" +
+"Que el artículo 69 del C.C.A., establece que los actos administrativos deben ser revocados por los mismos funcionarios que los hayan expedido de oficio, en uno cualquiera de los casos enunciados, cuando con ellos se cause agravio injustificado a una persona (númeral 3°)."
++ "\n\n" +
+"Que el Consejo Nacional de Técnicos Electricistas, al expedir la matrícula al peticionario y no otorgar las clases en las cuales puede ejercer la actividad de técnico electricista, estaria causando agravio injustificado al mismo peticionario. "
++ "\n\n" +
+"Que en consecuencia, el Consejo Nacional de Técnicos Electricistas - CONTE, fundado en las disposiciones antes citadas, "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9419bc37-c42b-425e-a442-bbb19b6e861b" x="0" y="64" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSIDERANDO"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="319f35cf-7428-4fd8-9596-1a4e9dcbe605" x="0" y="0" width="457" height="54"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS"+"\n"+
+"en uso de sus facultades constitucionales y legales"+"\n"+
+"y en especial las conferidas por el numeral 1° y"+"\n"+
+"2° del articulo 35 de la ley 1264 del 2008"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="121" splitType="Stretch">
+			<textField>
+				<reportElement uuid="322f19d7-a838-4333-afd7-38de1ded4981" x="0" y="44" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFÍQUESE Y CÚMPLASE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e49c2379-f3b5-4818-b775-49571c9cedb7" x="0" y="79" width="457" height="42"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WILSON OCHOA"  +"\n"+
+"Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b21b6667-5146-46d4-996e-8fd939aa7f8f" x="0" y="13" width="457" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dada en Bogotá, D. C., " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

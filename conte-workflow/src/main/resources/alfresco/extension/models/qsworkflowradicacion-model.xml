@@ -1,0 +1,1252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition of new Model -->
+<model name="qswfr:workflowmodel" xmlns="http://www.alfresco.org/model/dictionary/1.0">
+
+    <!-- Optional meta-data about the model -->
+    <description>Radicacion</description>
+    <author>Quasar soft</author>
+    <version>1.0</version>
+
+    <!-- Imports are required to allow references to definitions in other models -->
+    <imports>
+        <import uri="http://www.alfresco.org/model/dictionary/1.0" prefix="d" />
+        <import uri="http://www.alfresco.org/model/bpm/1.0" prefix="bpm" />
+    </imports>
+
+    <!-- Introduction of new namespaces defined by this model -->
+    <namespaces>
+        <namespace uri="http://www.quasarbi.com/model/workflowradicacion/1.0" prefix="qswfr"/>
+    </namespaces>
+    
+    <constraints>
+        <constraint name="qswfr:CodeLabel" type="com.quasarbi.Constraints.ListadoFormatos">
+        </constraint>
+    </constraints>
+
+    <types>
+        <type name="qswfr:diligenciaformulario">
+            <parent>bpm:startTask</parent>
+            <properties>    
+                <property name="qswfr:numeroformulario">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:tiposolicitud">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:tipodocumento">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numerodocumento">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:nombres">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:apellidos">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:fechaNacimiento">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:direccionResidencia">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:dependiente">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:notificacion">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:email">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:departamento">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:ciudad">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:celular">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:telefono">
+                    <type>d:text</type>
+                    <mandatory>true</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:empresa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:direccionEmpresa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:departamentoEmpresa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>                             
+                <property name="qswfr:ciudadEmpresa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:telefonoEmpresa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:nombresReferencia1">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:direccionReferencia1">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:telefonoReferencia1">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:nombresReferencia2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:direccionReferencia2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:telefonoReferencia2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>             
+                <property name="qswfr:tramitePor">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:realizadoEn">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:esEmpresa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:nit">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:asociacion">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:identificacionInspector">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:recibedocumentos">
+            <parent>qswfr:diligenciaformulario</parent>
+            <properties>
+                <property name="qswfr:fechaRecibeDocumentos">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:formulario">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fotocopiadocumento">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fotografias">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:consignacion">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:estudios">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:titulaciones">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:experiencia">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:detalleexperiencia">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:digitalizadocumentos">
+            <parent>qswfr:recibedocumentos</parent>
+            <properties>
+                <property name="qswfr:numradicado">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:folios">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:ckdigitalizadocumentos">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>             
+            </properties>
+        </type>
+        <type name="qswfr:crearclasificarexpediente">
+            <parent>qswfr:digitalizadocumentos</parent>
+            <properties>
+                <property name="qswfr:creaclasificaexpediente">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:verificadocumentacion">
+            <parent>qswfr:crearclasificarexpediente</parent>
+            <properties>
+                <property name="qswfr:documentacionverificada">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:validaexpediente">
+            <parent>qswfr:verificadocumentacion</parent>
+            <properties>
+                <property name="qswfr:conceptodocumentacion">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:requiereconsultoria">
+                    <type>d:text</type>
+                    <default>No</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>No</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:validezdocumentacion">
+                    <type>d:text</type>
+                    <default>Aprobado</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Aprobado</value>
+                                    <value>Rechazado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:validarPago">
+            <parent>qswfr:validaexpediente</parent>
+            <properties>            
+                <property name="qswfr:estadoPago">
+                    <type>d:text</type>
+                    <default>Completo</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Completo</value>
+                                    <value>Incompleto</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:valor">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fechaConsignacion">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:entidadPago">
+                    <type>d:text</type>
+                    <default>Bancolombia</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Bancolombia</value>
+                                    <value>Banco Caja Social</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:conceptodocumentacionconsejero">
+            <parent>qswfr:validaexpediente</parent>
+            <properties>
+                <property name="qswfr:conceptodocumentacion1">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:validaconceptoconsejero">
+            <parent>qswfr:conceptodocumentacionconsejero</parent>
+            <properties>
+                <property name="qswfr:vconceptodocumentacion1">
+                    <type>d:text</type>
+                    <default>Aprobado</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Aprobado</value>
+                                    <value>Rechazado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:registraconceptoconsejero">
+            <parent>qswfr:validaconceptoconsejero</parent>
+            <properties>
+                <property name="qswfr:conceptodocumentacion2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:notificacionsolicitante">
+            <parent>qswfr:registraconceptoconsejero</parent>
+            <properties>
+                <property name="qswfr:telefonico">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:electronica">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fisica">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:donde">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:redaccionCartaInadmitidos">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fechaNotificaTecnico">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:recibedocumentos2">
+            <parent>qswfr:notificacionsolicitante</parent>
+            <properties>
+                <property name="qswfr:fechaRecibeDocumentosII">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:formulario2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fotocopiadocumento2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fotografias2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:consignacion2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:estudios2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:titulaciones2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:experiencia2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:detalleexperiencia2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:imprimirresolucionrechazo">
+            <parent>qswfr:recibedocumentos2</parent>
+            <properties>
+            </properties>
+        </type>
+        <type name="qswfr:firmaResolucionPresidente">
+            <parent>qswfr:imprimirresolucionrechazo</parent>
+            <properties>
+                <property name="qswfr:resolucionFirmadaPresidente">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:registrarEnvio">
+            <parent>qswfr:firmaResolucionPresidente</parent>
+            <properties>
+                <property name="qswfr:fechaEnvio">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:direccionEnvio">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:registroguia">
+            <parent>qswfr:registrarEnvio</parent>
+            <properties>
+                <property name="qswfr:numeroGuia">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:entregaEnConte">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:registraEntregaResolucion">
+            <parent>qswfr:registrarEnvio</parent>
+            <properties>
+            </properties>
+        </type>
+        <type name="qswfr:digitalizaNotificacion">
+            <parent>qswfr:registraEntregaResolucion</parent>
+            <properties>
+            </properties>
+        </type>
+        <type name="qswfr:publicarAviso">
+            <parent>qswfr:registraEntregaResolucion</parent>
+            <properties>                            
+            </properties>
+        </type>
+        <type name="qswfr:digitalizarAviso">
+            <parent>qswfr:publicarAviso</parent>
+            <properties>
+            </properties>
+        </type>
+        <!-- Estudio y evaluacion -->
+        <type name="qswfr:distribuirflujo">
+            <parent>qswfr:validaconceptoconsejero</parent>
+            <properties>
+            </properties>
+            <mandatory-aspects>
+                <aspect>bpm:assignee</aspect>
+            </mandatory-aspects>
+        </type>
+        <type name="qswfr:evaluaexpediente">
+            <parent>qswfr:distribuirflujo</parent>
+            <properties>
+                <property name="qswfr:conceptoexpediente">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property> 
+                <property name="qswfr:brespuesta2">
+                    <type>d:text</type>
+                    <default></default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value></value>
+                                    <value>Aprobado</value>
+                                    <value>Rechazado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:seleccionaformato">
+            <parent>qswfr:evaluaexpediente</parent>
+            <properties>
+                <property name="qswfr:formatosdisponibles">
+                    <title>Formatos disponibles</title>
+                    <type>d:text</type>
+                    <constraints>
+                        <constraint ref="qswfr:CodeLabel" />
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:realizacalificacion">
+            <parent>qswfr:seleccionaformato</parent>
+            <properties>
+                <property name="qswfr:solicitudFormato">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:brespuesta3">
+                    <type>d:text</type>
+                    <default>NO</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:observacionesCalificacion">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:pasaacomite">
+            <parent>qswfr:realizacalificacion</parent>
+            <properties>    
+                <property name="qswfr:fechaActa">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroActa">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:apruebasolicitud">
+            <parent>qswfr:pasaacomite</parent>
+            <properties>                
+                <property name="qswfr:numeroRadicado2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fechaRadicado2">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:nombreCompleto2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:tipoDocumento2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroDocumento2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:consejero2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:clases2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:tipoTramite2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroActaApruebaSolicitud">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fechaActaApruebaSolicitud">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:cbAceptacionPresidente">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>             
+                <property name="qswfr:fechaResolucion">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:formatoGenerar">
+                    <type>d:text</type>
+                    <default>Resolucion Primera Vez</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Resolucion Primera Vez</value>
+                                    <value>Resolucion Ampliacion Aprobada</value>
+                                    <!-- 
+                                    <value>Resolucion Licencia Especial</value>
+                                    -->                                                                     
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <!-- Notificacion y entrega -->
+        <type name="qswfr:revisadocumentosgenerados">
+            <parent>qswfr:apruebasolicitud</parent>
+            <properties>                
+            </properties>
+        </type>
+        <type name="qswfr:imprimirdocumentos2">
+            <parent>qswfr:revisadocumentosgenerados</parent>
+            <properties>                
+            </properties>
+        </type>
+        <type name="qswfr:firmardocumentos2">
+            <parent>qswfr:imprimirdocumentos2</parent>
+            <properties>
+                <property name="qswfr:cbFirmasRealizadas">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:organizarpaquetesenvio">
+            <parent>qswfr:firmardocumentos2</parent>
+            <properties>            
+                
+                <property name="qswfr:fechaMatricula">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                
+                <property name="qswfr:tipoNotificacion">
+                    <type>d:text</type>
+                    <default>Correo electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo electronico</value>
+                                    <value>FAX</value>
+                                    <value>Corrreo certificado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            
+                <property name="qswfr:notificacionGenerar">
+                    <type>d:text</type>
+                    <default>Asociacion</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Asociacion</value>
+                                    <value>110 - Nacional</value>
+                                    <value>110 - Bogota</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:empresaEnvio">
+                    <type>d:text</type>
+                    <default>Servientrega</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Servientrega</value>
+                                    <value>Deprisa</value>
+                                    <value>Servicorra</value>
+                                    <value>Inter-rapidisimo</value>
+                                    <value>Otro</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:cualEmpresaEnvio">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroGuia2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:imprimircartanotificacion">
+            <parent>qswfr:organizarpaquetesenvio</parent>
+            <properties>                
+            </properties>
+        </type>
+        <type name="qswfr:digitalizacioncartanotificacion">
+            <parent>qswfr:imprimircartanotificacion</parent>
+            <properties>
+                <property name="qswfr:cbcartanotificaciondigitalizada">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:asociarcartanotificacion">
+            <parent>qswfr:digitalizacioncartanotificacion</parent>
+            <properties>                
+                <!-- <property name="qswfr:fechaEnvioTecnico">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property> -->
+            </properties>
+        </type>
+        <type name="qswfr:recibenotificacion">
+            <parent>qswfr:asociarcartanotificacion</parent>
+            <properties>
+                <property name="qswfr:recibenotificacionv">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fecharecepcion">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:mediorecepcion">
+                    <type>d:text</type>
+                    <default>Correo Electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo Electronico</value>
+                                    <value>Correo Certificado</value>
+                                    <value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fechaMatricula0">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:interponerecursov">
+                    <type>d:text</type>
+                    <default>NO</default>           
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:tipoRecurso">
+                    <type>d:text</type>
+                    <default></default>         
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value></value>
+                                    <value>Apelacion</value>
+                                    <value>Reposicion</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fecharecurso">
+                    <type>d:date</type>
+                </property> 
+                <property name="qswfr:mediorecepcionrecurso">
+                    <type>d:text</type>
+                    <default>Correo Electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo Electronico</value>
+                                    <value>Correo Certificado</value>
+                                    <value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:clasesSolicitadas">
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </type>
+        
+        <type name="qswfr:seleccionarAvisoGenerar">
+            <parent>qswfr:recibenotificacion</parent>
+            <properties>
+                <property name="qswfr:avisoGenerar">
+                    <type>d:text</type>
+                    <default>Aviso Primera Vez</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>                                    
+                                    <value>Aviso Primera Vez</value>
+                                    <value>Aviso Ampliacion</value>
+                                    <value>Aviso Recurso Ampliacion</value>
+                                    <value>Aviso Recurso Aprobado</value>
+                                    <value>Aviso Recurso Negado</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        
+        <type name="qswfr:registrardatosentrega">
+            <parent>qswfr:recibenotificacion</parent>
+            <properties>
+                <property name="qswfr:listadoTipoEntrega">
+                    <type>d:text</type>
+                    <default>Correo Electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo Electronico</value>
+                                    <value>Correo Certificado</value>
+                                    <value>Personal</value>
+                                    <value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fechanotificacion">
+                    <type>d:date</type>
+                </property>     
+            </properties>
+        </type>
+        <type name="qswfr:distribuirflujo2">
+            <parent>qswfr:registrardatosentrega</parent>
+            <properties>
+            </properties>
+            <mandatory-aspects>
+                <aspect>bpm:assignee</aspect>
+            </mandatory-aspects>
+        </type>     
+        <type name="qswfr:seleccionaformato2">
+            <parent>qswfr:distribuirflujo2</parent>
+            <properties>
+                <property name="qswfr:formatosdisponibles2">
+                    <title>Formatos disponibles</title>
+                    <type>d:text</type>
+                    <constraints>
+                        <constraint ref="qswfr:CodeLabel" />
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <!-- Formulario de tarea Evaluar Expediente Recurso -->
+        <type name="qswfr:evaluarExpedienteRecurso">
+            <parent>qswfr:seleccionaformato2</parent>
+            <properties>
+                <property name="qswfr:recursoAceptado">
+                    <type>d:text</type>
+                    <default>Si</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:realizacalificacion2">
+            <parent>qswfr:evaluarExpedienteRecurso</parent>
+            <properties>
+                <property name="qswfr:solicitudFormato2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:observacionesCalificacion2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                    <multiple>false</multiple>
+                </property>
+                <property name="qswfr:brespuesta32">
+                    <type>d:text</type>
+                    <default>Si</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:pasaacomite2">
+            <parent>qswfr:realizacalificacion2</parent>
+            <properties>            
+                <property name="qswfr:fechaActa2">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroActa2">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:apruebasolicitudII">
+            <parent>qswfr:pasaacomite2</parent>
+            <properties>                
+                <property name="qswfr:numeroRadicado3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fechaRadicado3">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:nombreCompleto3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:tipoDocumento3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroDocumento3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:consejero3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:clases3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:tipoTramite3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:numeroActa3">
+                    <type>d:text</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fechaActa3">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:cbAceptacionPresidente2">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:formatoGenerar2">
+                    <type>d:text</type>
+                    <default>Recurso Aprobado</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Recurso Aprobado</value>
+                                    <value>Recurso Negado</value>
+                                    <value>Resolucion Ampliacion Recurso Negado</value>
+                                    <value>Resolucion Ampliacion Recurso Aprobado</value>   
+                                    <value>Revocatoria</value>                              
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fechaResolucionII">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+            </properties>
+        </type>
+        
+        <type name="qswfr:publicaravisos2">
+            <parent>qswfr:recibenotificacion</parent>
+            <properties>                
+            </properties>
+        </type>
+        
+        <type name="qswfr:interponerecursoAviso">
+            <parent>qswfr:publicaravisos2</parent>
+            <properties>                
+                <property name="qswfr:interponerecursoAviso01">
+                    <type>d:text</type>
+                    <default>NO</default>           
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:tipoRecursoAviso">
+                    <type>d:text</type>
+                    <default></default>         
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value></value>
+                                    <value>Apelacion</value>
+                                    <value>Reposicion</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fecharecursoAviso">
+                    <type>d:date</type>
+                </property> 
+                <property name="qswfr:mediorecepcionrecursoAviso">
+                    <type>d:text</type>
+                    <default>Correo Electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo Electronico</value>
+                                    <value>Correo Certificado</value>
+                                    <value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:clasesSolicitadasAviso">
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </type>
+        
+        <type name="qswfr:digitalizaraviso2">
+            <parent>qswfr:interponerecursoAviso</parent>
+            <properties>                
+            </properties>
+        </type>
+        <type name="qswfr:recibenotificacion2">
+            <parent>qswfr:digitalizaraviso2</parent>
+            <properties>
+                <property name="qswfr:recibenotificacion2v">
+                    <type>d:boolean</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:fecharecepcion2">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:mediorecepcion2">
+                    <type>d:text</type>
+                    <default>Correo Electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo Electronico</value>
+                                    <value>Correo Certificado</value>
+                                    <value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fechaMatricula1">
+                    <type>d:date</type>
+                    <mandatory>false</mandatory>
+                </property>
+                <property name="qswfr:interponerecursov02">
+                    <type>d:text</type>
+                    <default>NO</default>           
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:tipoRecurso02">
+                    <type>d:text</type>
+                    <default></default>         
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value></value>
+                                    <value>Apelacion</value>
+                                    <value>Reposicion</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:fecharecurso02">
+                    <type>d:date</type>
+                </property> 
+                <property name="qswfr:mediorecepcionrecurso02">
+                    <type>d:text</type>
+                    <default>Correo Electronico</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Correo Electronico</value>
+                                    <value>Correo Certificado</value>
+                                    <value>FAX</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                <property name="qswfr:clasesSolicitadas02">
+                    <type>d:text</type>
+                </property>
+            </properties>
+        </type>
+        <type name="qswfr:revisavalidaexpediente">
+            <parent>qswfr:recibenotificacion2</parent>
+            <properties>            
+                
+                <property name="qswfr:opcionEnvio">
+                    <type>d:text</type>
+                    <default>Envío personal</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Envío personal</value>
+                                    <value>Envío empresa</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>
+                
+                <property name="qswfr:realizarEnvio">
+                    <type>d:text</type>
+                    <default>Si</default>
+                    <constraints>
+                        <constraint type="LIST">
+                            <parameter name="allowedValues">
+                                <list>
+                                    <value>Si</value>
+                                    <value>NO</value>
+                                </list>
+                            </parameter>
+                        </constraint>
+                    </constraints>
+                </property>             
+            </properties>
+        </type>
+        <type name="qswfr:archivar">
+            <parent>qswfr:revisavalidaexpediente</parent>
+            <properties>                
+            </properties>
+        </type>
+    </types>
+</model>

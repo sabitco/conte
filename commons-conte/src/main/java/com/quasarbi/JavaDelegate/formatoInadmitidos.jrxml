@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="formatoInadmitidos" pageWidth="864" pageHeight="1440" columnWidth="824" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1a02b634-efed-4cbc-96af-15ea7abdd733">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="65"/>
+	<subDataset name="dataset1" uuid="23419cf1-50a9-4e3c-ba23-f6993b9ef873">
+		<field name="_THIS" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="dataset2" uuid="d30622ae-5bcc-4db2-9786-2a42a796364c">
+		<field name="_THIS" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="dataset3" uuid="bb5c5dcf-076e-40c1-b2ca-5a04b4a38096">
+		<field name="_THIS" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="observaciones" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="requisitosFaltantes" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombres" class="java.lang.String"/>
+	<parameter name="apellidos" class="java.lang.String"/>
+	<parameter name="documento" class="java.lang.String"/>
+	<parameter name="informoVia" class="java.util.List"/>
+	<parameter name="dependencia" class="java.lang.String"/>
+	<parameter name="conceptoConsejero" class="java.lang.String"/>
+	<parameter name="radicado" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="680" splitType="Stretch">
+			<image>
+				<reportElement uuid="a3e15ab4-a828-4af7-ad1b-f9ab0a8d95b0" x="-10" y="0" width="814" height="678"/>
+				<imageExpression><![CDATA["com/quasarbi/JavaDelegate/inadmitidos.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="5839e66e-eba1-4310-b02d-4061c0d3d340" x="61" y="79" width="216" height="24"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b249af19-ef5d-4728-b9b2-2e7f52bd94b7" x="364" y="79" width="257" height="24"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d86a840b-85b2-4f0b-8dcc-23f0d68edaf7" x="663" y="79" width="151" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21cbc015-77f2-4759-810f-5445e14ea014" x="61" y="113" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bb262ca7-b6f0-4699-92ba-173c4f793f2a" x="289" y="113" width="278" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["Coordinación Inspectoría y Gestión"]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="a6d24c91-95b7-41fa-8ca3-739556c07fd3" x="0" y="180" width="548" height="21"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset1" uuid="01409a1d-dd68-4de9-b9fb-3d378d7cb097">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{requisitosFaltantes})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="21" width="548">
+						<textField>
+							<reportElement uuid="45be27cf-728c-463c-a341-a26ff0976a66" x="0" y="0" width="548" height="21"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$F{_THIS}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement uuid="90f5fd8e-4755-4076-b437-db6e8f0a5c4f" x="0" y="594" width="814" height="57"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$P{conceptoConsejero}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="d6a6023c-54f4-42f4-89c0-5b2f51bb8aac" x="567" y="181" width="237" height="20"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset2" uuid="4badcd32-6af5-46a6-bee1-215618146706">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{informoVia})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="20" width="237">
+						<textField>
+							<reportElement uuid="08470970-efe4-42f9-8dea-5ee4071e6382" x="0" y="0" width="237" height="20"/>
+							<textElement/>
+							<textFieldExpression><![CDATA[$F{_THIS}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<textField>
+				<reportElement uuid="e543d1ad-4563-47df-becc-0a19d5e44752" x="600" y="37" width="214" height="27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{radicado}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="877e8b78-7582-4672-97b4-c68ed6b472bd" x="567" y="276" width="237" height="19"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="dataset3" uuid="7fd0445f-04ed-4824-97b2-33e07545cf17">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{observaciones})]]></dataSourceExpression>
+					</datasetRun>
+					<jr:listContents height="19" width="237">
+						<textField isBlankWhenNull="true">
+							<reportElement uuid="d919595b-06f9-402b-9dfa-d93e3b13733b" x="0" y="0" width="237" height="19"/>
+							<textElement>
+								<font size="9"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{_THIS}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Notificacion 110 personal" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="113" bottomMargin="99" uuid="9daa30ab-1949-4bf8-b472-51fb6e5bc019">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="prefijo" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<textField>
+				<reportElement uuid="15a86a1f-df4c-46b4-ab7f-8be75657a9c7" x="0" y="0" width="442" height="51"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DILIGENCIA DE NOTIFICACÍON PERSONAL POR MEDIO DE LA CUAL SE NOTIFICA LA RESOLUCION"+"\n"+ " No. "+ $P{prefijo}+$P{numeroResolucion} +" "+"de"+" "+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c42bfc52-b950-484c-8919-f0680a85224a" x="225" y="51" width="217" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. No."+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="243" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0e925b66-7f8c-4b0f-9576-edfcd9157e09" x="0" y="0" width="442" height="237"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A los________días del mes de____________de_________siendo las___________(a.m./p.m.) se procede a notificar personalmente a "
++ $P{nombreSolicitante} +" "+ $P{apellidoSolicitante}+","+" "+
+"identificado con cédula de ciudadanía "+ $P{numeroCedula}+" "+
+"de la Resolución "+ $P{prefijo}+$P{numeroResolucion} +" "+"de"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})
++","+" "+"advirtiéndole que contra la presente resolución procede el recurso de reposición, el cual será interpuesto ante el consejero calificador o en subsidio el de apelación ante el Comité Técnico del Consejo Nacional de Técnicos Electricistas, recursos que deberán ser interpuestos personalmente o por intermedio de apoderado, sustentando concretamente los motivos de inconformidad que invoca, dentro de los diez (10) días siguientes a la presente notificación, al respecto manifiesto:" +"\n"+"\n"+"________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________"+"\n"+"\n"+
+"De igual modo se le informa que no es de recibo para la entidad  la presentación de nuevos documentos que no fueron aportados al momento del estudio inicial de la solicitud."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="135" splitType="Stretch">
+			<textField>
+				<reportElement uuid="dc642924-b88f-4405-8497-324710832928" x="0" y="0" width="442" height="119"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["_________________________________"+"\n"+
+"Firma del notificado"
++"\n"+
+"C.C"
++"\n"+"\n"+"\n"+
+"_________________________________"+"\n"+
+"(Espacio Reservado del CONTE)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

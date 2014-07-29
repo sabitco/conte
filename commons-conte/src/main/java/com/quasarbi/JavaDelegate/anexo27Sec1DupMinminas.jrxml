@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Anexo27-sec1Dup_Minminas" pageWidth="612" pageHeight="1584" columnWidth="510" leftMargin="51" rightMargin="51" topMargin="237" bottomMargin="115" uuid="2c2165ed-9b7c-4345-9c81-1df37c600934">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1723"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="ciudadCedula" class="java.lang.String"/>
+	<parameter name="dptoCedula" class="java.lang.String"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="clases" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="177" splitType="Stretch">
+			<textField>
+				<reportElement uuid="45d07b0f-719c-4d9b-891b-3341b3b362aa" x="0" y="0" width="510" height="59"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Se expide duplicado de la Matricula Profesional emitida por el Ministerio de Minas y Energía a: "
++ $P{nombreSolicitante} +" "+ $P{apellidoSolicitante} +","+" "+ "identificado con cédula de ciudadanía "+ $P{numeroCedula}+"."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a891bab6-72bc-48c6-a084-f90d23337502" x="0" y="59" width="510" height="111"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REPÙBLICA DE COLOMBIA"+"\n"+
+"MINISTERIO DE MINAS Y ENERGÍA"+"\n"+"\n"+
+"MATRÍCULA PROFESIONAL DE TÉCNICO ELECTRICISTA"+"\n"+"\n"+
+"No. " + $P{numeroMatricula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="1232" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9df6218f-423c-4c69-871d-d70e2eb92af5" x="0" y="0" width="510" height="1232"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El Ministerio de Minas y Energía en ejercicio de la facultad conferida por la Ley 19 de 1.990 y en cumplimiento de lo ordenado por Resolución No. "+
+$P{numeroResolucion} +" "+"de"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+
+"expide matrícula profesional de técnico electricista al señor " +
+$P{nombreSolicitante} +" "+ $P{apellidoSolicitante}+","+" "+
+"identificado con la cédula de ciudadanía No. " + $P{numeroCedula}
++","+" "+
+"de conformidad con la clasificación establecida en el Decreto 991 de 1.991, reglamentario de la Ley, en las siguientes categorías:"
++"\n\n"+
+$P{clases}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="354" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4ed3aae6-616f-4498-9f93-33b53628876f" x="0" y="146" width="510" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Se expide el anterior duplicado dado en Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1c72e5d0-c9fa-4b89-be6d-c6155ed21e71" x="0" y="203" width="510" height="25"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WILSON OCHOA"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="84e1eaab-1dd6-4a77-b4bb-6dcdcf92ac73" x="250" y="301" width="260" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="09984b66-14f3-41e0-b371-32cbee995fb8" x="0" y="228" width="510" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c89281a5-1066-48d5-8dfc-6dedf14214a8" x="0" y="51" width="262" height="77"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fdo"+"\n"+
+"BLANCA ELVIRA BUITRAGO CUELLAR SANCHEZ"+"\n"+
+"Jefe División Legal de Energía Eléctrica (Hay un sello)"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="65822a41-f97e-43a7-a632-0e65177bf420" x="284" y="51" width="255" height="77"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Fdo"+"\n"+
+"LUIS FERNANDO BOTERO"+"\n"+
+"Jefe División  de Energía Eléctrica (Hay un sello)”"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4f250c8c-db66-4704-a2bd-1f5ab02982e8" x="0" y="0" width="510" height="17"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["La presente matricula se expide en la ciudad de Santa Fe de Bogotá, D. C., el día 18 de marzo de 1993."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

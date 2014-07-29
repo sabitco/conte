@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory name="session">
+    <!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    
+    <property name="hibernate.connection.datasource">java:/comp/env/jdbc/ConteDS</property>
+     
+    <property name="hibernate.current_session_context_class">thread</property>
+    
+    
+   
+    <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+   <property name="hibernate.show_sql">true</property>  
+    
+    
+    <property name="connection.isolation">4</property>
+   
+<property name="hibernate.connection.url">jdbc:mysql://172.16.1.74:3306/sgm_conte_test</property>
+    -->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sgm_conte</property>
+    <property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <!--     
+    C3P0 Pool -->
+    <property name="hibernate.c3p0.acquire_increment">1</property>
+    <property name="hibernate.c3p0.idle_test_period">100</property> 
+    <property name="hibernate.c3p0.max_size">40</property>
+    <property name="hibernate.c3p0.max_statements">10</property>
+    <property name="hibernate.c3p0.min_size">5</property>
+    <property name="hibernate.c3p0.timeout">3600</property> 
+    <property name="hibernate.c3p0.validate">SELECT 1</property>
+    <property name="connection.autoReconect">true</property>   
+    <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>  
+
+    <mapping class="co.org.conte.sgm.entity.Asociacion"/>
+    <mapping class="co.org.conte.sgm.entity.Evaluacion"/>
+    <mapping class="co.org.conte.sgm.entity.Item"/>
+    <mapping class="co.org.conte.sgm.entity.Opcion"/>
+    <mapping class="co.org.conte.sgm.entity.Pais"/>
+    <mapping class="co.org.conte.sgm.entity.Pregunta"/>
+    <mapping class="co.org.conte.sgm.entity.Respuesta"/>
+    <mapping class="co.org.conte.sgm.entity.Ciudad"/>
+    <mapping class="co.org.conte.sgm.entity.Departamento"/>
+    <mapping class="co.org.conte.sgm.entity.Envio"/>
+    <mapping class="co.org.conte.sgm.entity.Estado"/>
+    <mapping class="co.org.conte.sgm.entity.Inspector"/>
+    <mapping class="co.org.conte.sgm.entity.Pago"/>
+    <mapping class="co.org.conte.sgm.entity.Parametro"/>
+    <mapping class="co.org.conte.sgm.entity.Sancion"/>
+    <mapping class="co.org.conte.sgm.entity.Solicitud"/>
+    <mapping class="co.org.conte.sgm.entity.Tecnico"/>
+    <mapping class="co.org.conte.sgm.entity.TipoDocumento"/>
+    <mapping class="co.org.conte.sgm.entity.TipoSolicitud"/>
+    <mapping class="co.org.conte.sgm.entity.Perfil"/>
+    <mapping class="co.org.conte.sgm.entity.Usuario"/>
+    <mapping class="co.org.conte.sgm.entity.Pagina"/>
+    <mapping class="co.org.conte.sgm.entity.LogPqrs"/>
+    <mapping class="co.org.conte.sgm.entity.Rol"/>
+    <mapping class="co.org.conte.sgm.entity.SolicitudFormato"/>
+    <mapping class="co.org.conte.sgm.entity.Pqrs"/>
+    <mapping class="co.org.conte.sgm.entity.PqrsDescripcion"/>
+    <mapping class="co.org.conte.sgm.entity.EncuestaSatisfaccion"/>
+    <mapping class="co.org.conte.sgm.entity.ActividadAgregada"/>
+    <mapping class="co.org.conte.sgm.entity.ReferenciaPersonal"/>
+    <mapping class="co.org.conte.sgm.entity.Resolucion"/>
+    <mapping class="co.org.conte.sgm.entity.RolPagina"/>
+    <mapping class="co.org.conte.sgm.entity.FormatoActividad"/>
+    <mapping class="co.org.conte.sgm.entity.InstitucionEducativa"/>
+    <mapping class="co.org.conte.sgm.entity.SolicitudFormatoId"/>
+    <mapping class="co.org.conte.sgm.entity.Observacion"/>
+    <mapping class="co.org.conte.sgm.entity.PerfilRol"/>
+    <mapping class="co.org.conte.sgm.entity.FormatoEstudio"/>
+    <mapping class="co.org.conte.sgm.entity.Inadmision"/>
+    <mapping class="co.org.conte.sgm.entity.TituloAcademico"/>
+    <mapping class="co.org.conte.sgm.entity.NotificacionSolicitud"/>
+    <mapping class="co.org.conte.sgm.entity.LogSolicitud"/>
+    <mapping class="co.org.conte.sgm.entity.ClaseGenerica"/>
+    <mapping class="co.org.conte.sgm.entity.RolPaginaId"/>
+    <mapping class="co.org.conte.sgm.entity.FormatoActividadId"/>
+    <mapping class="co.org.conte.sgm.entity.LogUsuario"/>
+    <mapping class="co.org.conte.sgm.entity.ActividadGenerica"/>
+    <mapping class="co.org.conte.sgm.entity.LogTecnico"/>
+    <mapping class="co.org.conte.sgm.entity.CausalInadmision"/>
+    <mapping class="co.org.conte.sgm.entity.PerfilRolId"/>
+    <mapping class="co.org.conte.sgm.entity.UsuarioContraseniaHistorial"/>
+    <!-- Activiti -->
+    <mapping class="co.org.conte.sgm.entity.activiti.ActRuTask"/>
+    <mapping class="co.org.conte.sgm.entity.activiti.ActReProcdef"/>
+    <mapping class="co.org.conte.sgm.entity.activiti.ActRuExecution"/>
+    <mapping class="co.org.conte.sgm.entity.activiti.ActRuIdentitylink"/>
+  </session-factory>
+</hibernate-configuration>

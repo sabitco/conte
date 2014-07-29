@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resolucionAmpliacionAprobada" pageWidth="612" pageHeight="1700" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="3ce32b54-5b6f-404a-ae1b-989ab9ffa28d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1493"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="fechaSolicitud" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroFolios" class="java.lang.String"/>
+	<parameter name="numeroActa" class="java.lang.String"/>
+	<parameter name="clasesDobles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="nombreConsejero" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="128" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="72">
+			<textField>
+				<reportElement uuid="bdeb8ff2-f6b0-42b4-966c-83f60c9fb2b3" x="261" y="52" width="196" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="deabd54f-3606-4289-8489-030481a0e628" x="0" y="0" width="457" height="47"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resolución M-A0 "+$P{numeroResolucion}+"\n"+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
+"Por la cual se aprueba una ampliación"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="1309" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a12e64e1-a1e0-4880-993d-ebb11acc9962" x="0" y="66" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSIDERANDO:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a5e982ff-97e9-46b2-addd-389c268186fc" x="0" y="86" width="457" height="1223"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que el artículo 3º de la Ley 19 de 1990 estableció la obligación de poseer la Matrícula Profesional como requisito sine quanon para el ejercicio de la profesión de Técnico Electricista. "
++ "\n\n" +
+"Que el artículo 4º del Decreto Reglamentario 991 de 1991, establece que quienes obtengan Matricula Profesional de Técnico Electricista y que adelanten estudios posteriores o demuestren haberlos hecho con anterioridad a la expedición de la misma, podrán solicitar ampliación de su correspondiente Matricula."
++ "\n\n" +
+"Que el artículo 35 de la Ley 1264 de 2008, facultó al Consejo Nacional de Técnicos Electricistas -CONTE, para expedir las Matrículas Profesionales a los Técnicos Electricistas, teniendo como obligación legal para estos la necesidad de obtenerla, como requisito indispensable en el ejercicio de la profesión de Técnico Electricista."
++ "\n\n" +
+"Que el señor " + $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+ "solicitó el "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaSolicitud})+","+ " la ampliación de su Matrícula Profesional de Técnico Electricista, para lo cual radicó "+$P{numeroFolios}+ " folios."
++ "\n\n" +
+"Que estudiada la documentación, según consta en el Acta de Comité Técnico "+ $P{numeroActa}+ ", el CONSEJO NACIONAL DE TÉCNICOS ELECTRICISTAS, encuentra que el solicitante reúne los requisitos legales, y, en consecuencia, se le puede AMPLIAR LA MATRÍCULA PROFESIONAL DE TÉCNICO ELECTRICISTA, de conformidad con la normatividad vigente, en la clase: "
++ "\n\n" +
+$P{clasesDobles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12b42d67-d288-4652-b2f7-0f042e07afb1" x="0" y="0" width="457" height="57"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS"+"\n"+
+"en uso de sus facultades constitucionales y legales"+"\n"+
+"y en especial las conferidas por el numeral 1° y"+"\n"+
+"2° del articulo 35 de la ley 1264 del 2008"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="248" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0a068b6b-47f4-435f-a965-54c1e06d4c42" x="0" y="179" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFÍQUESE Y CÚMPLASE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="073a6f3f-513c-45e8-aa08-30f0f5d40162" x="0" y="199" width="457" height="38"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WILSON OCHOA"  +"\n"+
+"Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="15c92303-412b-431a-a5f0-7eb79aeee774" x="0" y="60" width="457" height="119"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PRIMERO: 	Conceder la ampliación solicitada por el señor" + $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+ "identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+ "conforme lo expuesto en la parte motiva de esta providencia." + "\n\nSEGUNDO: 	Incorporar al listado de matriculados y habilitados al Señor "+ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+ "de conformidad al numeral 2º  del articulo 35 de la ley 1264 del 2008."
++ "\n\n" +
+"Dada en Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0a09712b-ed53-47eb-8d23-0ade17aaa34c" x="0" y="40" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUELVE: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a9de9201-9a2b-4b2f-95e3-eaf6f6082279" x="0" y="20" width="457" height="20"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En mérito de lo expuesto, el CONTE, fundado en las disposiciones antes citadas, "]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

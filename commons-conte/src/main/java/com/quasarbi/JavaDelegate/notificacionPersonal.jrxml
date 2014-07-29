@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="notificacionPersonal" pageWidth="612" pageHeight="792" columnWidth="442" leftMargin="85" rightMargin="85" topMargin="85" bottomMargin="70" uuid="9bdf22fd-9cf2-4073-a20a-b10fdd6905f9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="64"/>
+	<parameter name="resolucionRechazo" class="java.lang.String"/>
+	<parameter name="radicado" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="documentoSolicitante" class="java.lang.String"/>
+	<parameter name="cedulaSolicitante" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="108">
+			<textField>
+				<reportElement uuid="11c64610-6558-4fc0-af65-f57af60589b5" stretchType="RelativeToTallestObject" x="0" y="0" width="442" height="75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DILIGENCIA DE NOTIFICACIÓN PERSONAL POR MEDIO DE LA CUAL SE NOTIFICA LA RESOLUCIÓN No.0000" + $P{resolucionRechazo} + "-" + $P{radicado} + " de " +
+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion}) + " Y SE DA A CONOCER UNA DECISIÓN ADMINISTRATIVA."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="304b5dee-21e9-449d-9bb6-72dc899f4ec5" x="166" y="75" width="276" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. " + $P{radicado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="110" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9da24021-49ee-4a50-bcd7-149e13850d11" stretchType="RelativeToTallestObject" x="0" y="0" width="442" height="107"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["A los _______ días del mes de _____________de ____________ siendo las ________ (a.m./p.m.) se procede a notificar personalmente a " + $P{nombreSolicitante} + " identificado con cédula de ciudadanía " + $P{documentoSolicitante} + " o a ____________________________ con cedula ______________, persona autorizada mediante escrito adjunto, la Resolución No.0000" + $P{resolucionRechazo} + "-" + $P{radicado} + " de " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+", "+"advirtiéndole que contra la presente NO procede Recurso alguno por haberse agotado la vía en sede administrativa."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="205">
+			<textField>
+				<reportElement uuid="4232bb9b-e425-4c3b-bed4-5d278900dac4" x="0" y="10" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QUIEN SE NOTIFICA:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f1b1aa1b-babc-44a8-80be-cc332f68e1e2" x="0" y="42" width="442" height="29"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["___________________________________"+ "\n" +
+"Firma del Notificado"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dfbf4e0a-6f43-41f4-82ad-434285a4c23b" x="0" y="71" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["C.C. "+ $P{documentoSolicitante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="69d47212-830c-43e3-8e96-89f08a69b1a7" x="0" y="111" width="442" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QUIEN NOTIFICA:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2a7167e0-3962-45a2-98f3-320a9e30a838" x="0" y="141" width="442" height="44"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["___________________________________"+ "\n" +
+"(Espacio Reservado del CONTE)"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Anexo27_sec1_DupConte" pageWidth="612" pageHeight="1584" columnWidth="510" leftMargin="51" rightMargin="51" topMargin="237" bottomMargin="115" uuid="8078ff47-44dc-4ce2-810d-99bf66f067a7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1757"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="numeroMatricula" class="java.lang.String"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaMatricula" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="clases" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="255" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e79e5edd-b84e-481b-9908-9060b7416b3f" x="0" y="0" width="510" height="61"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Se expide duplicado de la Matricula Profesional emitida por el Consejo Nacional de Técnicos Electricistas a: "
++ $P{nombreSolicitante} +" "+ $P{apellidoSolicitante} +","+" "+
+"identificado con cédula de ciudadanía " + $P{numeroCedula}+":"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bb9c8ac2-864c-4123-9406-69d3add05c1e" x="0" y="71" width="510" height="179"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REPÚBLICA DE COLOMBIA"+"\n"+
+"MINISTERIO DE MINAS Y ENERGÍA"+"\n"+"\n"+
+"Consejo NAcional de Técnicos Electricistas"+"\n"+"\n"+
+"Expide a: " +"\n"+"\n"+
+$P{nombreSolicitante} +" "+ $P{apellidoSolicitante}+"\n"+
+"C. de C. No. " + $P{numeroCedula}
++"\n"+"\n"+
+"MATRÍCULA PROFESIONAL DE TÉCNICO"+"\n"+
+"ELECTRICISTA No. "+ $P{numeroMatricula}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="1232" splitType="Stretch">
+			<textField>
+				<reportElement uuid="37cff113-a434-49df-8f3b-c4a856263edb" x="0" y="0" width="510" height="1232"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En las siguientes clases: (Resolución No. "+ $P{numeroResolucion}
++" "+"del"+" "+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+")"
++"\n\n"+
+$P{clases}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="358" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a10e6194-28d9-4801-a596-0c5f45dd8983" x="0" y="86" width="237" height="60"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MANUEL HECTOR OCHOA CRUZ"+"\n"+
+"“Presidente (No hay sello)”"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="25d0edcb-73ba-4359-a6f4-8da7b6971946" x="0" y="298" width="510" height="40"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["WILSON OCHOA"+"\n"+
+"Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e76f2328-2318-499e-8d94-a888c0d287ab" x="213" y="338" width="297" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+ $P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8cba3aa4-ad71-4531-b19c-d06490d6ae2f" x="0" y="3" width="510" height="23"/>
+				<textElement>
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Santafé de Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaMatricula})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="948a991d-4ad2-4586-a64a-33340b9151b7" x="262" y="86" width="248" height="60"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CLAUDIA PATRICIA MELO PARRA"+"\n"+
+"“Secretaría Ejecutiva (No hay sello)”"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2e1bef52-e365-40c8-b72d-034cbcc262be" x="0" y="246" width="510" height="20"/>
+				<textElement>
+					<font fontName="Californian FB" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Se expide el anterior duplicado dado en Bogotá, D. C., " + new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="modeloEnvioDuplicadoAsociacion" pageWidth="612" pageHeight="792" columnWidth="428" leftMargin="99" rightMargin="85" topMargin="113" bottomMargin="99" uuid="d4530b53-0559-4c97-a0b6-cc2150685d2d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="48"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FF7F50">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFD0BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#FF7F50">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#FFD0BF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="be006676-a2a0-40eb-b134-7ed9d19dbfc3">
+		<parameter name="numeroGuia" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+     envio_duplicado.`codigo` AS envio_duplicado_codigo,
+     envio_duplicado.`radicado` AS envio_duplicado_radicado,
+     envio_duplicado.`nombres` AS envio_duplicado_nombres,
+     envio_duplicado.`apellidos` AS envio_duplicado_apellidos,
+     envio_duplicado.`celular` AS envio_duplicado_celular,
+     envio_duplicado.`direccion` AS envio_duplicado_direccion,
+     envio_duplicado.`ciudad` AS envio_duplicado_ciudad,
+     envio_duplicado.`tramite` AS envio_duplicado_tramite,
+     envio_duplicado.`guia` AS envio_duplicado_guia
+FROM
+     `envio_duplicado` envio_duplicado
+WHERE
+     `envio_duplicado`.`guia` = $P{numeroGuia}]]>
+		</queryString>
+		<field name="envio_duplicado_codigo" class="java.lang.Integer"/>
+		<field name="envio_duplicado_radicado" class="java.lang.String"/>
+		<field name="envio_duplicado_nombres" class="java.lang.String"/>
+		<field name="envio_duplicado_apellidos" class="java.lang.String"/>
+		<field name="envio_duplicado_celular" class="java.lang.String"/>
+		<field name="envio_duplicado_direccion" class="java.lang.String"/>
+		<field name="envio_duplicado_ciudad" class="java.lang.String"/>
+		<field name="envio_duplicado_tramite" class="java.lang.String"/>
+		<field name="envio_duplicado_guia" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="asociacion_presidente" class="java.lang.String"/>
+	<parameter name="asociacion_sigla" class="java.lang.String"/>
+	<parameter name="direccion" class="java.lang.String"/>
+	<parameter name="asociacion_telefono" class="java.lang.String"/>
+	<parameter name="ciudad_nombre" class="java.lang.String"/>
+	<parameter name="departamento_nombre" class="java.lang.String"/>
+	<parameter name="numeroGuia" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     perfil.`codigo` AS perfil_codigo,
+     perfil.`nombre` AS perfil_nombre,
+     perfil.`activo` AS perfil_activo,
+     perfil.`descripcion` AS perfil_descripcion
+FROM
+     `perfil` perfil]]>
+	</queryString>
+	<field name="perfil_codigo" class="java.lang.Integer"/>
+	<field name="perfil_nombre" class="java.lang.String"/>
+	<field name="perfil_activo" class="java.lang.String"/>
+	<field name="perfil_descripcion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="431" splitType="Stretch">
+			<textField>
+				<reportElement uuid="aedabbc6-d51d-4c72-a76e-dea8841351d5" x="0" y="-1" width="428" height="251"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CDO-20 F17"
++ "\n" +
+"Bogotá D.C., " + new SimpleDateFormat("dd/MM/yyyy").format($P{fecha})
++ "\n\n" +
+"Señor\n"
++ "\n" +
+$P{asociacion_presidente}
++ "\n" +
+"Presidente"
++ "\n" +
+$P{asociacion_sigla}
++ "\n" +
+$P{direccion}
++ "\n" +
+"Tel.: " + $P{asociacion_telefono}+ "\n"
++$P{ciudad_nombre} + " - " + $P{departamento_nombre}
++ "\n\n\n\n" +
+"Respetado Señor:"]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="4ce61566-8824-4655-a27f-6bd2dc26dfc6" key="table 1" style="table 1" x="0" y="355" width="428" height="75"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="cc98c0f8-c4cb-4cf5-ba17-6c024fa4f35f">
+						<datasetParameter name="numeroGuia">
+							<datasetParameterExpression><![CDATA[$P{numeroGuia}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column uuid="1e83e467-de3c-47fa-b27c-d517304169a4" width="90">
+						<jr:columnHeader style="table 1_CH" height="30">
+							<staticText>
+								<reportElement uuid="c5986f5d-19b6-40a8-b5c8-6d6ccf23c5cb" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[RADICADO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20">
+							<textField>
+								<reportElement uuid="05a0a76e-d7e7-482b-8e7c-f1b4f3306b87" x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{envio_duplicado_radicado}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column uuid="0da7f5b9-e9ce-4a00-b9b9-80be8fc5a32c" width="90">
+						<jr:columnHeader style="table 1_CH" height="30">
+							<staticText>
+								<reportElement uuid="1fb2cfaa-df2a-4649-bde3-7f2e6cd5d377" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NOMBRES]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20">
+							<textField>
+								<reportElement uuid="6a4cabb8-919c-4a33-a032-eee97d8cf045" x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{envio_duplicado_nombres}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column uuid="05f60824-1f9a-416f-bf28-24c35d413fa8" width="90">
+						<jr:columnHeader style="table 1_CH" height="30">
+							<staticText>
+								<reportElement uuid="c7d75435-babf-4fd8-95d1-31eb542c2482" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[APELLIDOS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20">
+							<textField>
+								<reportElement uuid="f214227c-9290-4612-bfbc-c1a4373dd1ad" x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{envio_duplicado_apellidos}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column uuid="ff62e6b2-90e7-413e-bf8c-6d2d687644a2" width="90">
+						<jr:columnHeader style="table 1_CH" height="30">
+							<staticText>
+								<reportElement uuid="0d485806-3d5a-45fd-97b8-5f8deff5de6a" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[DIRECCION]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20">
+							<textField>
+								<reportElement uuid="4c8d951b-cae3-4f1d-81bd-210c9f824024" x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{envio_duplicado_direccion}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column uuid="be8b73d6-7774-46df-b8f7-23696d562b2a" width="90">
+						<jr:columnHeader style="table 1_CH" height="30">
+							<staticText>
+								<reportElement uuid="1224f726-2e68-4f87-a072-f0f139ab4d2d" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[CELULAR]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20">
+							<textField>
+								<reportElement uuid="2844ee20-817a-4c59-b0a7-e11c13ec053b" x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{envio_duplicado_celular}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column uuid="138249b8-582f-42c0-9911-6612472b2bf0" width="90">
+						<jr:columnHeader style="table 1_CH" height="30">
+							<staticText>
+								<reportElement uuid="aac2caa7-d843-4166-82e1-0daa0e9aa29a" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[CIUDAD]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 1_TD" height="20">
+							<textField>
+								<reportElement uuid="88ba85d6-db8a-489d-9cb9-0d674a3089c4" x="0" y="0" width="90" height="20"/>
+								<textElement/>
+								<textFieldExpression><![CDATA[$F{envio_duplicado_ciudad}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement uuid="d7d3bb8c-815c-44c2-89c1-117b7c1cb3a8" x="0" y="250" width="428" height="105"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relacionamos a continuación los duplicados de matricula tipo tarjeta tramitada por intermedio de esta asociación,  a fin de que por este mismo conducto, sea entregada al directo interesado, teniendo en cuenta que este es  un documento personal e intransferible."
++"\n\n"+
+"Asímismo adjunto a la solicitud encontrará la Constancia de Recibo, la cuál debe ser devuelta a esta oficina debidamente firmada por el titular de la Matricula, la cuál puede ser enviada al siguiente correo electrónico notificaciones@conte.org.co."]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="145" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d63748d2-d40f-4f8c-a2f4-39baa8892638" x="0" y="124" width="100" height="21"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ángela C. "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c3593710-5156-49da-959b-67dc5383c92a" x="0" y="82" width="319" height="21"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Coordinadora Operativa"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c15c1c8a-60bb-49c2-af0b-d1b9974a2683" x="0" y="61" width="319" height="21"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NUBIA PATRICIA LEON"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="97a36d39-c5b0-4e54-8a51-7ea9224066cf" x="0" y="103" width="319" height="21"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Anexo: Lo enunciado."]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2fd9a2bd-0c9f-40f6-b875-924216c72b25" x="0" y="-1" width="428" height="45"/>
+				<textElement>
+					<font fontName="Californian FB" size="11" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sin otro en particular, nos suscribimos."
++"\n\n"+
+"Cordialmente,"]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

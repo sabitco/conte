@@ -1,0 +1,1283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/test">
+  <process id="pdpqrs" name="pdpqrs" isExecutable="true">
+    <startEvent id="startevent1" name="Start" activiti:formKey="qswfa:recepcionpeticion"></startEvent>
+    <userTask id="utValidarDatos" name="Seleccion proceso" activiti:candidateGroups="GROUP_RECEPCION_PQRS" activiti:formKey="qswfa:seleccionproceso">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_tiposolicitud02', qswfa_tiposolicitud);
+task.setVariable('qswfa_redaccionsolicitud02', qswfa_redaccionsolicitud);
+execution.setVariable('etapa','I');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_ltipopeticion', task.getVariable('qswfa_ltipopeticion'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ValidarPeticion"></activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ActualizaPQRS"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow1" sourceRef="startevent1" targetRef="utValidarDatos"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow2" sourceRef="utValidarDatos" targetRef="exclusivegateway1"></sequenceFlow>
+    <sequenceFlow id="flow3" sourceRef="exclusivegateway1" targetRef="utBuscarTecnico">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_ltipopeticion=='Proceso disciplinario'}]]></conditionExpression>
+    </sequenceFlow>
+    <endEvent id="endevent1" name="End"></endEvent>
+    <sequenceFlow id="flow4" sourceRef="exclusivegateway1" targetRef="mailtask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_ltipopeticion=='Peticion'}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="mtNotificarSolicitante" name="Notificar solicitante" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:expression>${qswfa_email}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>registro@conte.org.co</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Notificación cierre proceso disciplinario</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:string>El proceso disciplinario solicitado ha sido cerrado por falta de datos.</activiti:string>
+        </activiti:field>
+        <activiti:field name="text">
+          <activiti:string>Hola</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <endEvent id="endevent2" name="End"></endEvent>
+    <sequenceFlow id="flow7" sourceRef="mtNotificarSolicitante" targetRef="endevent2"></sequenceFlow>
+    <userTask id="utBuscarTecnico" name="Buscar tecnico" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:buscartecnico">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.quasarbi.TaskListener.GeneracionNumeroExpediente"></activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud11', qswfa_redaccionsolicitud);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('fechapeticion', task.getVariable('qswfa_fechapeticion'));
+execution.setVariable('nombredisciplinado', '');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="utResultadosBusqueda" name="Resultados busqueda" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:resultadosbusqueda">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.quasarbi.TaskListener.SubirArchivoAlfresco">
+          <activiti:field name="rutaArchivo">
+            <activiti:expression>${qswfa_rutaarchivo}</activiti:expression>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud12', qswfa_redaccionsolicitud);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lprocesosiguiente', task.getVariable('qswfa_lprocesosiguiente'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow9" sourceRef="utBuscarTecnico" targetRef="servicetask7"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow10" sourceRef="utResultadosBusqueda" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow11" sourceRef="exclusivegateway3" targetRef="mtNotificarSolicitante">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lprocesosiguiente=='Notificar solicitante'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="utValidacionPresidente" name="Presidente comite disciplinario" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:presidentecomitedisciplinario">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud13', qswfa_redaccionsolicitud);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow12" sourceRef="exclusivegateway3" targetRef="utValidacionPresidente">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lprocesosiguiente=='Presidente del comite disciplinario'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow13" sourceRef="utValidacionPresidente" targetRef="utEvaluacionComite"></sequenceFlow>
+    <userTask id="utEvaluacionComite" name="Asignacion consejero comite" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:asignacionconsejerocomite">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud14', qswfa_redaccionsolicitud);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('bpm_assignee', task.getVariable('bpm_assignee'));
+execution.setVariable('fechaasignacionconsejero', task.getVariable('qswfa_fechaasignacionconsejero'));
+execution.setVariable('fechahoracitaciontecnico', task.getVariable('qswfa_fechahoracitaciontecnico'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow14" sourceRef="servicetask5" targetRef="utEvaluacionConsejero"></sequenceFlow>
+    <userTask id="utEvaluacionConsejero" name="Evaluacion consejero" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:evaluacionconsejero">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud03', qswfa_redaccionsolicitud);
+var tmp;
+var tmp02;
+var tmp03;
+var folderNode = companyhome.childByNamePath(execution.getVariable('nombrecarpeta'));
+var arrNX = new Array();
+for (var x=0; x &lt; bpm_package.children.length; x++){
+	tmp03 = bpm_package.children[x];
+	arrNX.push(tmp03.properties.name);
+}
+for (var i=0; i &lt; folderNode.children.length; i++){
+	tmp = folderNode.children[i];
+	if ( tmp.isContainer ) {
+		for (var j=0; j &lt; tmp.children.length; j++){
+			tmp02 = tmp.children[j];
+			if( arrNX.indexOf(tmp02.properties.name) == -1 ){
+				bpm_package.addNode( tmp02 );
+			}
+		}
+	} else {
+		if( arrNX.indexOf(tmp.properties.name) == -1 ){
+			bpm_package.addNode( tmp );
+		}
+	}
+}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lvalidez', task.getVariable('qswfa_lvalidez'));
+execution.setVariable('qswfa_comentariosc', task.getVariable('qswfa_comentarios'));
+execution.setVariable('qswfa_comentarios', task.getVariable('qswfa_comentarios'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow15" sourceRef="exclusivegateway12" targetRef="utArchivo">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lprocesosiguiente02=='Notificar a las partes'}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="utEvaluacionComiteII" name="Evaluacion comite" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:evaluacioncomite">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_comentariosconsejero', qswfa_comentariosc);
+task.setVariable('qswfa_redaccionsolicitud04', qswfa_redaccionsolicitud);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lvalidez02', task.getVariable('qswfa_lvalidez02'));
+execution.setVariable('qswfa_comentariosc', task.getVariable('qswfa_comentarios02'));
+execution.setVariable('qswfa_comentarios02', task.getVariable('qswfa_comentarios02'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="utValidacionDatosIII" name="Generacion fallo" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:generacionfallo">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_comentariosc', qswfa_comentariosc);
+task.setVariable('qswfa_redaccionsolicitud15', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero02', qswfa_comentarios);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lprocesosiguiente02', task.getVariable('qswfa_lprocesosiguiente02'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow17" sourceRef="exclusivegateway4" targetRef="utEvaluacionComiteII">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lvalidez=='Procede investigacion'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow18" sourceRef="exclusivegateway4" targetRef="utValidacionDatosIII">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lvalidez=='No procede investigacion'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow19" sourceRef="exclusivegateway9" targetRef="utValidacionDatosIII">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lvalidez02=='Continuar investigacion'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="utNotificacionInculpado" name="Convocar inculpado / recurso" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:convocarinculpado">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud17', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero04', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc12', qswfa_comentariosc);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lrecurso', task.getVariable('qswfa_lrecurso'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <endEvent id="endevent3" name="End"></endEvent>
+    <sequenceFlow id="flow24" sourceRef="btAviso" targetRef="mtNotificarAviso"></sequenceFlow>
+    <boundaryEvent id="btAviso" name="Timer" attachedToRef="utNotificacionInculpado" cancelActivity="true">
+      <timerEventDefinition>
+        <timeDuration>P0Y0M0DT0H1M0S</timeDuration>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <serviceTask id="mtNotificarAviso" name="Notificar Aviso" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:string>amise@quasarbi.com</activiti:string>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>amise@quasarbi.com</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Hola</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:string>Hola</activiti:string>
+        </activiti:field>
+        <activiti:field name="text">
+          <activiti:string>Hola</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <userTask id="utPublicarAviso" name="Publicar aviso" activiti:formKey="qswfa:publicaraviso01"></userTask>
+    <sequenceFlow id="flow25" sourceRef="mtNotificarAviso" targetRef="stGenerarAviso"></sequenceFlow>
+    <userTask id="utDigitalizarDocumentos" name="Aportar pruebas" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:aportarpruebas">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud18', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero05', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc13', qswfa_comentariosc);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow26" sourceRef="utNotificacionInculpado" targetRef="exclusivegateway10"></sequenceFlow>
+    <userTask id="utEvaluacionConsejeroII" name="Evaluacion consejero II" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:evaluacionconsejero02">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud05', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosc02', qswfa_comentariosc);
+task.setVariable('qswfa_comentariosconsejero07', qswfa_comentarios);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lvalidez03', task.getVariable('qswfa_lvalidez03'));
+execution.setVariable('qswfa_comentariosc', task.getVariable('qswfa_comentarios03'));
+execution.setVariable('qswfa_comentarios03', task.getVariable('qswfa_comentarios03'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow27" sourceRef="utDigitalizarDocumentos" targetRef="utAsignacionConsejero"></sequenceFlow>
+    <userTask id="utAsignacionConsejero" name="Asignacion consejero comite II" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:asignacionconsejerocomite02">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud19', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero06', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc14', qswfa_comentariosc);
+var tmp;
+var tmp02;
+var tmp03;
+var folderNode = companyhome.childByNamePath(execution.getVariable('nombrecarpeta'));
+var arrNX = new Array();
+for (var x=0; x &lt; bpm_package.children.length; x++){
+	tmp03 = bpm_package.children[x];
+	arrNX.push(tmp03.properties.name);
+}
+for (var i=0; i &lt; folderNode.children.length; i++){
+	tmp = folderNode.children[i];
+	if ( tmp.isContainer ) {
+		for (var j=0; j &lt; tmp.children.length; j++){
+			tmp02 = tmp.children[j];
+			if( arrNX.indexOf(tmp02.properties.name) == -1 ){
+				bpm_package.addNode( tmp02 );
+			}
+		}
+	} else {
+		if( arrNX.indexOf(tmp.properties.name) == -1 ){
+			bpm_package.addNode( tmp );
+		}
+	}
+}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow28" sourceRef="utAsignacionConsejero" targetRef="utEvaluacionConsejeroII"></sequenceFlow>
+    <serviceTask id="stGenerarAviso" name="Generar aviso" activiti:class="com.quasarbi.JavaDelegate.Prueba"></serviceTask>
+    <sequenceFlow id="flow29" sourceRef="stGenerarAviso" targetRef="utPublicarAviso"></sequenceFlow>
+    <sequenceFlow id="flow30" sourceRef="utPublicarAviso" targetRef="utAsignacionDefensorPresidente"></sequenceFlow>
+    <sequenceFlow id="flow31" sourceRef="utEvaluacionConsejeroII" targetRef="servicetask6"></sequenceFlow>
+    <userTask id="utAsignacionDefensorPresidente" name="Asignar Defensor de oficio" activiti:formKey="qswfa:asignardefensoroficio"></userTask>
+    <sequenceFlow id="flow32" sourceRef="utAsignacionDefensorPresidente" targetRef="utDigitalizarDocumentos"></sequenceFlow>
+    <userTask id="utEvaluacionComiteIII" name="Evaluacion comite II" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:evaluacioncomite02">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud06', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosc03', qswfa_comentariosc);
+task.setVariable('qswfa_comentariosconsejero08', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc15', qswfa_comentarios02);
+var tmp;
+var tmp02;
+var tmp03;
+var folderNode = companyhome.childByNamePath(execution.getVariable('nombrecarpeta'));
+var arrNX = new Array();
+for (var x=0; x &lt; bpm_package.children.length; x++){
+	tmp03 = bpm_package.children[x];
+	arrNX.push(tmp03.properties.name);
+}
+for (var i=0; i &lt; folderNode.children.length; i++){
+	tmp = folderNode.children[i];
+	if ( tmp.isContainer ) {
+		for (var j=0; j &lt; tmp.children.length; j++){
+			tmp02 = tmp.children[j];
+			if( arrNX.indexOf(tmp02.properties.name) == -1 ){
+				bpm_package.addNode( tmp02 );
+			}
+		}
+	} else {
+		if( arrNX.indexOf(tmp.properties.name) == -1 ){
+			bpm_package.addNode( tmp );
+		}
+	}
+}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_lvalidez04', task.getVariable('qswfa_lvalidez04'));
+execution.setVariable('qswfa_comentariosc', task.getVariable('qswfa_comentarios04'));
+execution.setVariable('qswfa_comentarios04', task.getVariable('qswfa_comentarios04'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <serviceTask id="stGenerarDocumentoCargos" name="Archivo definitivo / sancion" activiti:class="com.quasarbi.JavaDelegate.Prueba"></serviceTask>
+    <sequenceFlow id="flow33" sourceRef="utEvaluacionComiteIII" targetRef="stGenerarDocumentoCargos"></sequenceFlow>
+    <userTask id="utEvaluacionConsejoConte" name="Evaluacion consejo directivo CONTE" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:evaluacionconsejeroCONTE">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud07', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosc04', qswfa_comentariosc);
+task.setVariable('qswfa_comentariosconsejero09', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc16', qswfa_comentarios02);
+task.setVariable('qswfa_comentariosconsejeroII', qswfa_comentarios03);
+var tmp;
+var tmp02;
+var tmp03;
+var folderNode = companyhome.childByNamePath(execution.getVariable('nombrecarpeta'));
+var arrNX = new Array();
+for (var x=0; x &lt; bpm_package.children.length; x++){
+	tmp03 = bpm_package.children[x];
+	arrNX.push(tmp03.properties.name);
+}
+for (var i=0; i &lt; folderNode.children.length; i++){
+	tmp = folderNode.children[i];
+	if ( tmp.isContainer ) {
+		for (var j=0; j &lt; tmp.children.length; j++){
+			tmp02 = tmp.children[j];
+			if( arrNX.indexOf(tmp02.properties.name) == -1 ){
+				bpm_package.addNode( tmp02 );
+			}
+		}
+	} else {
+		if( arrNX.indexOf(tmp.properties.name) == -1 ){
+			bpm_package.addNode( tmp );
+		}
+	}
+}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_comentariosc', task.getVariable('qswfa_comentarios06'));
+execution.setVariable('qswfa_comentarios06', task.getVariable('qswfa_comentarios06'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="utEmitirSancion" name="Emitir sancion consejo" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:emitirsancionconsejo">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud08', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero10', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc17', qswfa_comentarios02);
+task.setVariable('qswfa_comentariosconsejeroII02', qswfa_comentarios03);
+task.setVariable('qswfa_comentarioscomiteII', qswfa_comentarios04);
+task.setVariable('qswfa_comentariosc05', qswfa_comentariosc);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_comentariosc', task.getVariable('qswfa_comentarios07'));
+execution.setVariable('qswfa_comentarios07', task.getVariable('qswfa_comentarios07'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow37" sourceRef="utEvaluacionConsejoConte" targetRef="utEmitirSancion"></sequenceFlow>
+    <serviceTask id="stGenerarSancion" name="Archivo definitivo / Sancion" activiti:class="com.quasarbi.JavaDelegate.Prueba"></serviceTask>
+    <sequenceFlow id="flow38" sourceRef="utEmitirSancion" targetRef="stGenerarSancion"></sequenceFlow>
+    <userTask id="utNotificacionDisciplinadoII" name="Notificacion a las partes II" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:notificacionalaspartes02">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud09', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero11', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc18', qswfa_comentarios02);
+task.setVariable('qswfa_comentariosconsejeroII03', qswfa_comentarios03);
+task.setVariable('qswfa_comentarioscomiteII02', qswfa_comentarios04);
+task.setVariable('qswfa_comentariosconsejo', qswfa_comentarios06);
+task.setVariable('qswfa_comentariosc06', qswfa_comentariosc);
+var tmp;
+var tmp02;
+var tmp03;
+var folderNode = companyhome.childByNamePath(execution.getVariable('nombrecarpeta'));
+var arrNX = new Array();
+for (var x=0; x &lt; bpm_package.children.length; x++){
+	tmp03 = bpm_package.children[x];
+	arrNX.push(tmp03.properties.name);
+}
+for (var i=0; i &lt; folderNode.children.length; i++){
+	tmp = folderNode.children[i];
+	if ( tmp.isContainer ) {
+		for (var j=0; j &lt; tmp.children.length; j++){
+			tmp02 = tmp.children[j];
+			if( arrNX.indexOf(tmp02.properties.name) == -1 ){
+				bpm_package.addNode( tmp02 );
+			}
+		}
+	} else {
+		if( arrNX.indexOf(tmp.properties.name) == -1 ){
+			bpm_package.addNode( tmp );
+		}
+	}
+}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow39" sourceRef="stGenerarSancion" targetRef="utNotificacionDisciplinadoII"></sequenceFlow>
+    <userTask id="utPublicacion" name="Publicacion sancion" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:publicacionsancion">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud10', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero12', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc19', qswfa_comentarios02);
+task.setVariable('qswfa_comentariosconsejeroII04', qswfa_comentarios03);
+task.setVariable('qswfa_comentarioscomiteII03', qswfa_comentarios04);
+task.setVariable('qswfa_comentariosconsejo02', qswfa_comentarios06);
+task.setVariable('qswfa_comentariosc07', qswfa_comentariosc);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="utArchivo" name="Archivo" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:archivo">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud21', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero13', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc20', qswfa_comentarios02);
+task.setVariable('qswfa_comentariosconsejeroII05', qswfa_comentarios03);
+task.setVariable('qswfa_comentarioscomiteII04', qswfa_comentarios04);
+task.setVariable('qswfa_comentariosconsejo03', qswfa_comentarios06);
+task.setVariable('qswfa_comentariosc08', qswfa_comentariosc);</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow42" sourceRef="utPublicacion" targetRef="utArchivo"></sequenceFlow>
+    <sequenceFlow id="flow43" sourceRef="utArchivo" targetRef="endevent3"></sequenceFlow>
+    <userTask id="utAsignarResponsableP" name="Asignar responsable" activiti:candidateGroups="GROUP_RECEPCION_PQRS" activiti:formKey="qswfa:asignaresponsablep">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('etapa','A');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="create" class="com.quasarbi.TaskListener.SubirArchivoAlfresco">
+          <activiti:field name="rutaArchivo">
+            <activiti:expression>${qswfa_rutaarchivo}</activiti:expression>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('bpm_assignee', task.getVariable('bpm_assignee'));</activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string>admin</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ActualizaPQRS"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="utResponderpqrs" name="Responder pqrs" activiti:assignee="${bpm_assignee.properties.userName}" activiti:formKey="qswfa:respondepqrs">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitudp', qswfa_redaccionsolicitud);
+execution.setVariable('etapa','R');</activiti:string>
+          </activiti:field>
+          <activiti:field name="runAs">
+            <activiti:string>admin</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_accionrealizadap', task.getVariable('qswfa_accionrealizadap'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ActualizaPQRS"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <userTask id="utRevisarRespuesta" name="Revisar respuesta" activiti:candidateGroups="GROUP_REVISION_PQRS" activiti:formKey="qswfa:revisarespuestap">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable("qswfa_accionrealizadaxrespuestap", qswfa_accionrealizadap);
+task.setVariable('qswfa_redaccionsolicitudp02', qswfa_redaccionsolicitud);
+execution.setVariable('etapa','C');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_brespuestap', task.getVariable('qswfa_brespuestap'));
+execution.setVariable('qswfa_observacionesrp', task.getVariable('qswfa_observacionesrp'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ActualizaPQRS"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow51" sourceRef="utRevisarRespuesta" targetRef="exclusivegateway8"></sequenceFlow>
+    <sequenceFlow id="flow52" sourceRef="utAsignarResponsableP" targetRef="mailtask1"></sequenceFlow>
+    <sequenceFlow id="flow53" sourceRef="utResponderpqrs" targetRef="utRevisarRespuesta"></sequenceFlow>
+    <serviceTask id="mtEnviarRespuestapqrs" name="Enviar respuesta" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:expression>${qswfa_email}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>registro@conte.org.co</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Encuesta de satisfacci&amp;oacute;n</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:string>Para el CONTE es muy importante contar con su opinión, 
+		  por favor califique el servicio prestado por nuestros funcionarios dando click en el siguiente enlace: http://10.10.10.54:8080/conte/encuesta</activiti:string>
+        </activiti:field>
+        <activiti:field name="text">
+          <activiti:string>Hola</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow56" sourceRef="mtEnviarRespuestapqrs" targetRef="endevent1"></sequenceFlow>
+    <userTask id="utNuevasAcciones" name="Nuevas acciones" activiti:assignee="${bpm_assignee.properties.userName}" activiti:formKey="qswfa:nuevasaccionesp">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable("qswfa_accionanteriorp", qswfa_accionrealizadap);
+task.setVariable("qswfa_observacionesrp02", qswfa_observacionesrp);
+task.setVariable('qswfa_redaccionsolicitudp03', qswfa_redaccionsolicitud);
+execution.setVariable('NA','NA');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>execution.setVariable('qswfa_accionrealizadap', task.getVariable('qswfa_nuevaaccionrealizadap'));</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.quasarbi.TaskListener.ActualizaPQRS"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow57" sourceRef="utNuevasAcciones" targetRef="utRevisarRespuesta"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway9" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow61" sourceRef="utEvaluacionComiteII" targetRef="exclusivegateway9"></sequenceFlow>
+    <sequenceFlow id="flow62" sourceRef="exclusivegateway9" targetRef="utEvaluacionConsejero">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lvalidez02=='Solicitar pruebas'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow63" sourceRef="utEvaluacionConsejero" targetRef="exclusivegateway4"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway10" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow65" sourceRef="exclusivegateway10" targetRef="utDigitalizarDocumentos">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lrecurso=='Si'}]]></conditionExpression>
+    </sequenceFlow>
+    <userTask id="usertask1" name="Generacion fallo" activiti:formKey="qswfa:generacionfallo01">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_comentarios02', '');
+task.setVariable('qswfa_comentarios03', '');
+task.setVariable('qswfa_comentarios04', '');
+task.setVariable('qswfa_comentarios06', '');
+task.setVariable('qswfa_comentariosc', '');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow66" sourceRef="exclusivegateway10" targetRef="usertask1">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lrecurso=='No'}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway11" name="Exclusive Gateway"></exclusiveGateway>
+    <userTask id="usertask2" name="Generacion fallo" activiti:formKey="qswfa:generacionfallo02">
+      <extensionElements>
+        <activiti:taskListener event="complete" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_comentarios02', '');
+task.setVariable('qswfa_comentarios04', '');
+task.setVariable('qswfa_comentarios06', '');
+task.setVariable('qswfa_comentariosc', '');</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow69" sourceRef="exclusivegateway11" targetRef="utEvaluacionConsejoConte">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lvalidez04=='Sancion'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow70" sourceRef="exclusivegateway11" targetRef="usertask2">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lvalidez04=='Archivo definitivo'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow72" sourceRef="utNotificacionDisciplinadoII" targetRef="utPublicacion"></sequenceFlow>
+    <sequenceFlow id="flow73" sourceRef="usertask2" targetRef="utPublicacion"></sequenceFlow>
+    <sequenceFlow id="flow74" sourceRef="usertask1" targetRef="utPublicacion"></sequenceFlow>
+    <serviceTask id="servicetask4" name="Auto preclusion y archivo" activiti:class="com.quasarbi.JavaDelegate.GeneracionPreclusion">
+      <extensionElements>
+        <activiti:field name="folderPath">
+          <activiti:expression>${nombrecarpeta}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="consejeroPonente">
+          <activiti:expression>${bpm_assignee.properties.userName}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="nombrePropietario">
+          <activiti:expression>${nombrespropietario}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="documentoPropietario">
+          <activiti:expression>${qswfa_numerodocumento}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="nombreAsociacion">
+          <activiti:string>Prueba</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow77" sourceRef="utValidacionDatosIII" targetRef="servicetask4"></sequenceFlow>
+    <userTask id="utNotificarPartes01" name="Notificar a las partes" activiti:candidateGroups="GROUP_COMITE_DISCIPLINARIO" activiti:formKey="qswfa:notificacionpartes">
+      <extensionElements>
+        <activiti:taskListener event="create" class="org.alfresco.repo.workflow.activiti.tasklistener.ScriptTaskListener">
+          <activiti:field name="script">
+            <activiti:string>task.setVariable('qswfa_redaccionsolicitud16', qswfa_redaccionsolicitud);
+task.setVariable('qswfa_comentariosconsejero03', qswfa_comentarios);
+task.setVariable('qswfa_comentariosc11', qswfa_comentariosc);
+var tmp;
+var tmp02;
+var tmp03;
+var folderNode = companyhome.childByNamePath(execution.getVariable('nombrecarpeta'));
+var arrNX = new Array();
+for (var x=0; x &lt; bpm_package.children.length; x++){
+	tmp03 = bpm_package.children[x];
+	arrNX.push(tmp03.properties.name);
+}
+for (var i=0; i &lt; folderNode.children.length; i++){
+	tmp = folderNode.children[i];
+	if ( tmp.isContainer ) {
+		for (var j=0; j &lt; tmp.children.length; j++){
+			tmp02 = tmp.children[j];
+			if( arrNX.indexOf(tmp02.properties.name) == -1 ){
+				bpm_package.addNode( tmp02 );
+			}
+		}
+	} else {
+		if( arrNX.indexOf(tmp.properties.name) == -1 ){
+			bpm_package.addNode( tmp );
+		}
+	}
+}</activiti:string>
+          </activiti:field>
+        </activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <serviceTask id="servicetask5" name="Auto apertura" activiti:class="com.quasarbi.JavaDelegate.GeneracionAutoApertura">
+      <extensionElements>
+        <activiti:field name="consejeroPonente">
+          <activiti:expression>${bpm_assignee.properties.userName}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="direccionPonente">
+          <activiti:expression>${qswfa_direccion}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="nombrePropietario">
+          <activiti:expression>${nombrespropietario}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="fechaPeticion">
+          <activiti:expression>${fechapeticion}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow81" sourceRef="utEvaluacionComite" targetRef="servicetask5"></sequenceFlow>
+    <serviceTask id="servicetask6" name="Auto preclusion" activiti:class="com.quasarbi.JavaDelegate.Prueba"></serviceTask>
+    <sequenceFlow id="flow82" sourceRef="stGenerarDocumentoCargos" targetRef="exclusivegateway11"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway12" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow83" sourceRef="servicetask4" targetRef="utNotificarPartes01"></sequenceFlow>
+    <sequenceFlow id="flow84" sourceRef="utNotificarPartes01" targetRef="exclusivegateway12"></sequenceFlow>
+    <sequenceFlow id="flow85" sourceRef="exclusivegateway12" targetRef="utNotificacionInculpado">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_lprocesosiguiente02=='Convocar inculpado'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow86" sourceRef="servicetask6" targetRef="utEvaluacionComiteIII"></sequenceFlow>
+    <serviceTask id="servicetask11" name="Creacion carpeta ticket" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate">
+      <extensionElements>
+        <activiti:field name="script">
+          <activiti:string>var node=companyhome.childByNamePath("CONTE");
+var nombrecarpeta = "";
+var nombrespropietario =  qswfa_nombres + " " + qswfa_apellidos;
+nombrecarpeta = execution.getVariable('peticionno') + " " + qswfa_numerodocumento + " " +nombrespropietario;
+if(node == null) {
+	node = companyhome.createFolder("CONTE");
+	node.setInheritsPermissions(true);
+	node.save();
+}
+if(node != null) {
+	if( companyhome.childByNamePath("CONTE/Peticiones") != null ){
+	} else {
+		node.setInheritsPermissions(true);
+		node.createFolder("Peticiones");
+	}
+}
+node = companyhome.childByNamePath("CONTE/Peticiones");
+if(node != null) {
+	if( companyhome.childByNamePath("CONTE/Peticiones/" + nombrecarpeta) == null ){
+		node.setInheritsPermissions(true);
+		node.createFolder(nombrecarpeta);
+	}		
+}
+node.save();
+nombrecarpeta = "CONTE/Peticiones/" + nombrecarpeta;
+execution.setVariable('nombrecarpeta', nombrecarpeta);
+execution.setVariable('nombrespropietario', nombrespropietario);</activiti:string>
+        </activiti:field>
+        <activiti:field name="runAs">
+          <activiti:string>admin</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="servicetask7" name="Creacion expediente" activiti:class="org.alfresco.repo.workflow.activiti.script.AlfrescoScriptDelegate">
+      <extensionElements>
+        <activiti:field name="script">
+          <activiti:string>var node=companyhome.childByNamePath("CONTE");
+var nombrecarpeta = "";
+nombrecarpeta = execution.getVariable('expediente');
+if(node == null) {
+	node = companyhome.createFolder("CONTE");
+	node.setInheritsPermissions(true);
+	node.save();
+}
+if(node != null) {
+	if( companyhome.childByNamePath("CONTE/Comite disciplinario") != null ){
+	} else {
+		node.setInheritsPermissions(true);
+		node.createFolder("Comite disciplinario");
+	}
+}
+node = companyhome.childByNamePath("CONTE/Comite disciplinario");
+if(node != null) {
+	if( companyhome.childByNamePath("CONTE/Comite disciplinario/" + nombrecarpeta) == null ){
+		node.setInheritsPermissions(true);
+		node.createFolder(nombrecarpeta);
+	}		
+}
+node.save();
+nombrecarpeta = "CONTE/Comite disciplinario/" + nombrecarpeta;
+execution.setVariable('nombrecarpeta', nombrecarpeta);
+var nombrespropietario =  qswfa_nombres + " " + qswfa_apellidos;
+execution.setVariable('nombrespropietario', nombrespropietario);</activiti:string>
+        </activiti:field>
+        <activiti:field name="runAs">
+          <activiti:string>admin</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow88" sourceRef="servicetask7" targetRef="utResultadosBusqueda"></sequenceFlow>
+    <sequenceFlow id="flow89" sourceRef="servicetask11" targetRef="utAsignarResponsableP"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway8" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow54" sourceRef="exclusivegateway8" targetRef="utNuevasAcciones">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_brespuestap=="Rechazado"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow55" sourceRef="exclusivegateway8" targetRef="mtEnviarRespuestapqrs">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${qswfa_brespuestap=="Aprobado"}]]></conditionExpression>
+    </sequenceFlow>
+    <serviceTask id="mailtask1" name="Notificar asignacion" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:expression>${bpm_assignee.properties.email}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>registro@conte.org.co</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Nuevo caso para evaluacion</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:string>Se le ha asignado un nuevo caso de peticion para que realice la correspondiente revision en los siguientes 5 dias.</activiti:string>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow90" sourceRef="mailtask1" targetRef="utResponderpqrs"></sequenceFlow>
+    <serviceTask id="mailtask2" name="Notificar peticion" activiti:type="mail">
+      <extensionElements>
+        <activiti:field name="to">
+          <activiti:expression>${qswfa_email}</activiti:expression>
+        </activiti:field>
+        <activiti:field name="from">
+          <activiti:string>registro@conte.org.co</activiti:string>
+        </activiti:field>
+        <activiti:field name="subject">
+          <activiti:string>Confirmacion nro de ticket</activiti:string>
+        </activiti:field>
+        <activiti:field name="html">
+          <activiti:expression>Se le ha asignado el ticket nro. ${peticionno}</activiti:expression>
+        </activiti:field>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="flow91" sourceRef="mailtask2" targetRef="servicetask11"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_pdpqrs">
+    <bpmndi:BPMNPlane bpmnElement="pdpqrs" id="BPMNPlane_pdpqrs">
+      <bpmndi:BPMNShape bpmnElement="startevent1" id="BPMNShape_startevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="-30.0" y="120.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utValidarDatos" id="BPMNShape_utValidarDatos">
+        <omgdc:Bounds height="55.0" width="105.0" x="30.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="284.0" y="117.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent1" id="BPMNShape_endevent1">
+        <omgdc:Bounds height="35.0" width="35.0" x="1039.0" y="692.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent2" id="BPMNShape_endevent2">
+        <omgdc:Bounds height="35.0" width="35.0" x="811.0" y="267.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utBuscarTecnico" id="BPMNShape_utBuscarTecnico">
+        <omgdc:Bounds height="55.0" width="105.0" x="347.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utResultadosBusqueda" id="BPMNShape_utResultadosBusqueda">
+        <omgdc:Bounds height="55.0" width="105.0" x="568.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="600.0" y="267.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utValidacionPresidente" id="BPMNShape_utValidacionPresidente">
+        <omgdc:Bounds height="55.0" width="105.0" x="672.0" y="470.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mtNotificarSolicitante" id="BPMNShape_mtNotificarSolicitante">
+        <omgdc:Bounds height="55.0" width="105.0" x="672.0" y="257.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEvaluacionComite" id="BPMNShape_utEvaluacionComite">
+        <omgdc:Bounds height="55.0" width="105.0" x="672.0" y="399.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEvaluacionConsejero" id="BPMNShape_utEvaluacionConsejero">
+        <omgdc:Bounds height="55.0" width="105.0" x="880.0" y="400.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="1009.0" y="407.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEvaluacionComiteII" id="BPMNShape_utEvaluacionComiteII">
+        <omgdc:Bounds height="55.0" width="105.0" x="977.0" y="330.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utValidacionDatosIII" id="BPMNShape_utValidacionDatosIII">
+        <omgdc:Bounds height="55.0" width="105.0" x="1081.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utNotificacionInculpado" id="BPMNShape_utNotificacionInculpado">
+        <omgdc:Bounds height="55.0" width="105.0" x="1410.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endevent3" id="BPMNShape_endevent3">
+        <omgdc:Bounds height="35.0" width="35.0" x="3041.0" y="193.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utDigitalizarDocumentos" id="BPMNShape_utDigitalizarDocumentos">
+        <omgdc:Bounds height="55.0" width="105.0" x="1540.0" y="259.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEvaluacionConsejeroII" id="BPMNShape_utEvaluacionConsejeroII">
+        <omgdc:Bounds height="55.0" width="105.0" x="1748.0" y="400.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mtNotificarAviso" id="BPMNShape_mtNotificarAviso">
+        <omgdc:Bounds height="55.0" width="105.0" x="1540.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utAsignacionConsejero" id="BPMNShape_utAsignacionConsejero">
+        <omgdc:Bounds height="55.0" width="105.0" x="1644.0" y="329.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="stGenerarAviso" id="BPMNShape_stGenerarAviso">
+        <omgdc:Bounds height="55.0" width="105.0" x="1670.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="btAviso" id="BPMNShape_btAviso">
+        <omgdc:Bounds height="30.0" width="30.0" x="1501.0" y="197.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utPublicarAviso" id="BPMNShape_utPublicarAviso">
+        <omgdc:Bounds height="55.0" width="105.0" x="1800.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utAsignacionDefensorPresidente" id="BPMNShape_utAsignacionDefensorPresidente">
+        <omgdc:Bounds height="55.0" width="105.0" x="1800.0" y="470.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEvaluacionComiteIII" id="BPMNShape_utEvaluacionComiteIII">
+        <omgdc:Bounds height="55.0" width="105.0" x="1900.0" y="329.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="stGenerarDocumentoCargos" id="BPMNShape_stGenerarDocumentoCargos">
+        <omgdc:Bounds height="55.0" width="105.0" x="2025.0" y="331.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEmitirSancion" id="BPMNShape_utEmitirSancion">
+        <omgdc:Bounds height="55.0" width="105.0" x="2446.0" y="331.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="stGenerarSancion" id="BPMNShape_stGenerarSancion">
+        <omgdc:Bounds height="55.0" width="105.0" x="2574.0" y="331.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utNotificacionDisciplinadoII" id="BPMNShape_utNotificacionDisciplinadoII">
+        <omgdc:Bounds height="55.0" width="105.0" x="2678.0" y="260.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utPublicacion" id="BPMNShape_utPublicacion">
+        <omgdc:Bounds height="55.0" width="105.0" x="2782.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utArchivo" id="BPMNShape_utArchivo">
+        <omgdc:Bounds height="55.0" width="105.0" x="2910.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utAsignarResponsableP" id="BPMNShape_utAsignarResponsableP">
+        <omgdc:Bounds height="55.0" width="105.0" x="376.0" y="538.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utResponderpqrs" id="BPMNShape_utResponderpqrs">
+        <omgdc:Bounds height="55.0" width="105.0" x="614.0" y="612.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway8" id="BPMNShape_exclusivegateway8">
+        <omgdc:Bounds height="40.0" width="40.0" x="843.0" y="689.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utRevisarRespuesta" id="BPMNShape_utRevisarRespuesta">
+        <omgdc:Bounds height="55.0" width="105.0" x="718.0" y="682.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mtEnviarRespuestapqrs" id="BPMNShape_mtEnviarRespuestapqrs">
+        <omgdc:Bounds height="55.0" width="105.0" x="905.0" y="682.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utNuevasAcciones" id="BPMNShape_utNuevasAcciones">
+        <omgdc:Bounds height="55.0" width="105.0" x="811.0" y="611.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway9" id="BPMNShape_exclusivegateway9">
+        <omgdc:Bounds height="40.0" width="40.0" x="1009.0" y="267.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway10" id="BPMNShape_exclusivegateway10">
+        <omgdc:Bounds height="40.0" width="40.0" x="1442.0" y="266.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask1" id="BPMNShape_usertask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="1410.0" y="331.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway11" id="BPMNShape_exclusivegateway11">
+        <omgdc:Bounds height="40.0" width="40.0" x="2270.0" y="407.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="usertask2" id="BPMNShape_usertask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="2134.0" y="401.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask4" id="BPMNShape_servicetask4">
+        <omgdc:Bounds height="55.0" width="105.0" x="1081.0" y="110.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utNotificarPartes01" id="BPMNShape_utNotificarPartes01">
+        <omgdc:Bounds height="55.0" width="105.0" x="1203.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask5" id="BPMNShape_servicetask5">
+        <omgdc:Bounds height="55.0" width="105.0" x="776.0" y="329.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask6" id="BPMNShape_servicetask6">
+        <omgdc:Bounds height="55.0" width="105.0" x="1900.0" y="400.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="utEvaluacionConsejoConte" id="BPMNShape_utEvaluacionConsejoConte">
+        <omgdc:Bounds height="55.0" width="105.0" x="2342.0" y="400.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway12" id="BPMNShape_exclusivegateway12">
+        <omgdc:Bounds height="40.0" width="40.0" x="1340.0" y="192.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask7" id="BPMNShape_servicetask7">
+        <omgdc:Bounds height="55.0" width="105.0" x="440.0" y="183.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="servicetask11" id="BPMNShape_servicetask11">
+        <omgdc:Bounds height="55.0" width="105.0" x="252.0" y="538.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailtask1" id="BPMNShape_mailtask1">
+        <omgdc:Bounds height="55.0" width="105.0" x="501.0" y="538.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="mailtask2" id="BPMNShape_mailtask2">
+        <omgdc:Bounds height="55.0" width="105.0" x="252.0" y="461.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="5.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="30.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="135.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="284.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3">
+        <omgdi:waypoint x="324.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="347.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4">
+        <omgdi:waypoint x="304.0" y="157.0"></omgdi:waypoint>
+        <omgdi:waypoint x="304.0" y="461.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow7" id="BPMNEdge_flow7">
+        <omgdi:waypoint x="777.0" y="284.0"></omgdi:waypoint>
+        <omgdi:waypoint x="811.0" y="284.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="399.0" y="165.0"></omgdi:waypoint>
+        <omgdi:waypoint x="399.0" y="209.0"></omgdi:waypoint>
+        <omgdi:waypoint x="440.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="620.0" y="238.0"></omgdi:waypoint>
+        <omgdi:waypoint x="620.0" y="267.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="640.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="672.0" y="284.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="620.0" y="307.0"></omgdi:waypoint>
+        <omgdi:waypoint x="619.0" y="496.0"></omgdi:waypoint>
+        <omgdi:waypoint x="672.0" y="497.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="724.0" y="470.0"></omgdi:waypoint>
+        <omgdi:waypoint x="724.0" y="454.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="828.0" y="384.0"></omgdi:waypoint>
+        <omgdi:waypoint x="828.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="880.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="1360.0" y="192.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1359.0" y="158.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2963.0" y="158.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2962.0" y="183.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="1029.0" y="407.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1029.0" y="385.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="1049.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1133.0" y="426.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1133.0" y="238.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="1029.0" y="267.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1029.0" y="209.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1081.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="1531.0" y="212.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1540.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="1645.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1670.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="1462.0" y="238.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1462.0" y="266.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="1592.0" y="314.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1591.0" y="356.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1644.0" y="356.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="1696.0" y="384.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1696.0" y="428.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1748.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
+        <omgdi:waypoint x="1775.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1800.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow30" id="BPMNEdge_flow30">
+        <omgdi:waypoint x="1852.0" y="238.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1852.0" y="281.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1852.0" y="384.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1852.0" y="470.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
+        <omgdi:waypoint x="1853.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1886.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1900.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow32" id="BPMNEdge_flow32">
+        <omgdi:waypoint x="1800.0" y="497.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1526.0" y="497.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1526.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1540.0" y="286.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow33" id="BPMNEdge_flow33">
+        <omgdi:waypoint x="2005.0" y="356.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2025.0" y="358.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow37" id="BPMNEdge_flow37">
+        <omgdi:waypoint x="2394.0" y="400.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2394.0" y="356.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2446.0" y="358.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
+        <omgdi:waypoint x="2551.0" y="358.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2574.0" y="358.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow39" id="BPMNEdge_flow39">
+        <omgdi:waypoint x="2626.0" y="331.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2626.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2678.0" y="287.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow42" id="BPMNEdge_flow42">
+        <omgdi:waypoint x="2887.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2910.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow43" id="BPMNEdge_flow43">
+        <omgdi:waypoint x="3015.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="3041.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow51" id="BPMNEdge_flow51">
+        <omgdi:waypoint x="823.0" y="709.0"></omgdi:waypoint>
+        <omgdi:waypoint x="843.0" y="709.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow52" id="BPMNEdge_flow52">
+        <omgdi:waypoint x="481.0" y="565.0"></omgdi:waypoint>
+        <omgdi:waypoint x="501.0" y="565.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow53" id="BPMNEdge_flow53">
+        <omgdi:waypoint x="666.0" y="667.0"></omgdi:waypoint>
+        <omgdi:waypoint x="666.0" y="713.0"></omgdi:waypoint>
+        <omgdi:waypoint x="718.0" y="709.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow54" id="BPMNEdge_flow54">
+        <omgdi:waypoint x="863.0" y="689.0"></omgdi:waypoint>
+        <omgdi:waypoint x="863.0" y="666.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow55" id="BPMNEdge_flow55">
+        <omgdi:waypoint x="883.0" y="709.0"></omgdi:waypoint>
+        <omgdi:waypoint x="905.0" y="709.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow56" id="BPMNEdge_flow56">
+        <omgdi:waypoint x="1010.0" y="709.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1039.0" y="709.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow57" id="BPMNEdge_flow57">
+        <omgdi:waypoint x="811.0" y="638.0"></omgdi:waypoint>
+        <omgdi:waypoint x="770.0" y="638.0"></omgdi:waypoint>
+        <omgdi:waypoint x="770.0" y="682.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow61" id="BPMNEdge_flow61">
+        <omgdi:waypoint x="1029.0" y="330.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1029.0" y="307.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow62" id="BPMNEdge_flow62">
+        <omgdi:waypoint x="1009.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="932.0" y="287.0"></omgdi:waypoint>
+        <omgdi:waypoint x="932.0" y="305.0"></omgdi:waypoint>
+        <omgdi:waypoint x="932.0" y="400.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow63" id="BPMNEdge_flow63">
+        <omgdi:waypoint x="985.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1009.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow65" id="BPMNEdge_flow65">
+        <omgdi:waypoint x="1482.0" y="286.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1540.0" y="286.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow66" id="BPMNEdge_flow66">
+        <omgdi:waypoint x="1462.0" y="306.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1462.0" y="331.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow69" id="BPMNEdge_flow69">
+        <omgdi:waypoint x="2310.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2342.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow70" id="BPMNEdge_flow70">
+        <omgdi:waypoint x="2270.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2239.0" y="428.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow72" id="BPMNEdge_flow72">
+        <omgdi:waypoint x="2730.0" y="260.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2730.0" y="211.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2782.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow73" id="BPMNEdge_flow73">
+        <omgdi:waypoint x="2186.0" y="456.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2186.0" y="497.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2834.0" y="497.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2834.0" y="238.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow74" id="BPMNEdge_flow74">
+        <omgdi:waypoint x="1462.0" y="386.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1462.0" y="538.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2834.0" y="538.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2834.0" y="238.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow77" id="BPMNEdge_flow77">
+        <omgdi:waypoint x="1133.0" y="183.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1133.0" y="165.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow81" id="BPMNEdge_flow81">
+        <omgdi:waypoint x="724.0" y="399.0"></omgdi:waypoint>
+        <omgdi:waypoint x="724.0" y="357.0"></omgdi:waypoint>
+        <omgdi:waypoint x="776.0" y="356.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow82" id="BPMNEdge_flow82">
+        <omgdi:waypoint x="2130.0" y="358.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2290.0" y="358.0"></omgdi:waypoint>
+        <omgdi:waypoint x="2290.0" y="407.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow83" id="BPMNEdge_flow83">
+        <omgdi:waypoint x="1186.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1258.0" y="137.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1255.0" y="183.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow84" id="BPMNEdge_flow84">
+        <omgdi:waypoint x="1308.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1340.0" y="212.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow85" id="BPMNEdge_flow85">
+        <omgdi:waypoint x="1380.0" y="212.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1410.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow86" id="BPMNEdge_flow86">
+        <omgdi:waypoint x="1952.0" y="400.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1952.0" y="384.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow88" id="BPMNEdge_flow88">
+        <omgdi:waypoint x="545.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="568.0" y="210.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow89" id="BPMNEdge_flow89">
+        <omgdi:waypoint x="357.0" y="565.0"></omgdi:waypoint>
+        <omgdi:waypoint x="376.0" y="565.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow90" id="BPMNEdge_flow90">
+        <omgdi:waypoint x="553.0" y="593.0"></omgdi:waypoint>
+        <omgdi:waypoint x="553.0" y="639.0"></omgdi:waypoint>
+        <omgdi:waypoint x="614.0" y="639.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow91" id="BPMNEdge_flow91">
+        <omgdi:waypoint x="304.0" y="516.0"></omgdi:waypoint>
+        <omgdi:waypoint x="304.0" y="538.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

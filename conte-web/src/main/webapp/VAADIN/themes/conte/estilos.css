@@ -1,0 +1,283 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	font-family:Arial, Helvetica, sans-serif;
+}
+ 
+body{
+	background: none repeat scroll 0 0 rgba(234, 234, 234, 0.09);
+	padding:0;
+	margin:0 auto;
+}
+
+#container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin: 64px 137px;
+    padding: 10px 5px;
+    width: 73%;
+}
+header {
+    height: 47px;
+    margin: 7px;
+    padding: 3px 23px;
+    width: 100%;
+}
+h2{
+	color:#E36406;
+	font-size:20px;
+	margin-bottom:10px;
+	margin-top:10px;
+	
+}
+
+legend{
+	color:#FF8000;
+    font-size:14px;
+	margin-bottom:3px;
+	margin-top:3px;
+}
+h4{
+	color:#999;
+	
+}
+
+#formulario{
+	background-color:#FFF;
+	margin-top:4px;
+	padding:4px;
+	
+}
+
+#formulario form {
+    font-size: 14px;
+    height: 69px;
+    margin: 7px -1px;
+    width: 706px;
+}
+
+textarea{
+	width:600px;
+	inherit:100px;
+}
+
+
+.campo {
+    background: none repeat scroll 0 0 #FFFFFF;
+    margin-bottom: 6px;
+    margin-top: -11px;
+    padding: 1px;
+    width: 2px;
+}
+	
+fieldset {
+    background-color: #FFFFFF;
+    /*box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;*/
+    /*height: 200px;*/
+    margin-top: 4px;
+    padding: 4px;
+    border-radius: 18px 18px 18px 18px;
+}
+
+
+#caja1 {
+    height: 298px;
+    width: 100%;
+}
+
+
+#formu1 {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;
+    /*height: 200px;*/
+    margin-top: 4px;
+    padding: 4px;
+}
+
+
+#formu1 form {
+    font-size: 14px;
+    height: 23px;
+    margin: 4px 6px;
+    text-align: left;
+    width: 553px;
+}
+article#campo01, article#campo02 {
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 90%;
+    margin: 5px;
+    
+    text-align: justify;
+   
+}
+article#campo01{
+	width:50%}
+article#campo02 {
+    margin: 3px 135px;
+    width: 20%;
+}
+#caja2 {
+    height: 260px;
+    width: 100%;
+}
+#formu2 {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;
+    height: 198px;
+    margin-top: 4px;
+    padding: 4px;
+	border-radius: 18px 18px 18px 18px;
+}
+
+#formu2 form {
+    font-size: 14px;
+    height: 23px;
+    margin: 4px 6px;
+    width: 416px;
+}	
+
+#caja3 {
+    height: 281px;
+    width: 100%;
+}
+#formu3 {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;
+    height: 214px;
+    margin-top: 4px;
+    padding: 4px;
+	border-radius: 18px 18px 18px 18px;
+}
+#formu3 form {
+    font-size: 14px;
+    height: 23px;
+    margin: 4px 6px;
+    width: 675px;
+}	
+
+article#campo1, article#campo2 {
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 90%;
+    margin: 5px;
+    max-width: 100%;
+    text-align: justify;
+    width: 48%;
+}
+
+#caja4 {
+    height: 523px;
+    width: 100%;
+}
+#formu4 {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;
+    height: 479px;
+    margin-top: 4px;
+    padding: 4px;
+	border-radius: 18px 18px 18px 18px;
+}
+#formu4 form {
+    font-size: 14px;
+    height: 23px;
+    margin: 4px 6px;
+    width: 675px;
+}	
+
+article#campo3, article#campo4 {
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 90%;
+    margin: 5px;
+    max-width: 100%;
+    text-align: justify;
+  
+}
+article#campo3{
+	width:50%}
+
+article#campo4{
+	width:30%;
+}
+
+#caja5 {
+    height: 388px;
+    width: 100%;
+}
+#formu5 {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;
+    height: 312px;
+    margin-top: 4px;
+    padding: 4px;
+	border-radius: 18px 18px 18px 18px;
+}
+#formu5 form {
+    font-size: 14px;
+    height: 23px;
+    margin: 4px 6px;
+    width: 443px;
+}
+
+article#campo5, article#campo6, article#campo7, article#campo8 {
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 19%;
+    margin: 5px;
+    max-width: 100%;
+    text-align: justify;
+    width: 48%;
+}article#campo6, article#campo7, article#campo8 {
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 25%;
+    margin: 5px;
+    max-width: 100%;
+    text-align: justify;
+    width: 10%;
+	vertical-align: top;
+}
+
+#caja6 {
+    height: 357px;
+    width: 100%;
+}
+#formu6 {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5) inset;
+    height: 292px;
+    margin-top: 4px;
+    padding: 4px;
+	border-radius: 18px 18px 18px 18px;
+}
+#formu6 form {
+    font-size: 14px;
+    height: 23px;
+    margin: 4px 6px;
+    width: 675px;
+}	
+
+article#campo9, article#campo10 {
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 90%;
+    margin: 5px;
+    max-width: 100%;
+    text-align: justify;
+    width: 48%;
+}
+article#campo11{
+    border-radius: 0 0 0 0;
+    display: inline-block;
+    height: 90%;
+    margin: 5px;
+    max-width: 100%;
+    text-align: justify;
+    width: 48%;
+}
+textarea:focus{
+	background:#999;
+	outline:none;
+	box-shadow: 0 0 10px #F60;
+}

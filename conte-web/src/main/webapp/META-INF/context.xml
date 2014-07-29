@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/SGM">
+  <!--
+<Resource name="mail/Session"
+              auth="Container"
+              type="javax.mail.Session"
+              username="registro@conte.org.co"
+              password="registro2012"
+              mail.debug="true"
+              mail.user="registro@conte.org.co"
+              mail.password="registro2012"
+              mail.transport.protocol="smtp"
+              mail.smtp.host="mail.conte.org.co"
+              mail.smtp.auth="true"
+              mail.smtp.port="587"
+              mail.smtp.starttls.enable="true"/>
+       
+<Resource name="jdbc/ConteDS" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="root" password="root" driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/sgm_conte_dev"/> 
+       
+-->
+  <_Resource auth="Container" driverClassName="com.mysql.jdbc.Driver" maxActive="100" maxIdle="30" maxWait="10000" name="jdbc/ConteDS" password="" type="javax.sql.DataSource" url="jdbc:mysql://localhost:3306/sgm_conte" username="root"/>
+</Context>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MODELO RESOLUCION AMPLIACION RECURSO APROBADO" pageWidth="612" pageHeight="1757" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="c14da913-9fe9-43ff-9d30-fabd4396f22a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="588"/>
+	<parameter name="numeroResolucion" class="java.lang.String"/>
+	<parameter name="fechaExpedicion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroRadicacion" class="java.lang.String"/>
+	<parameter name="nombreSolicitante" class="java.lang.String"/>
+	<parameter name="apellidoSolicitante" class="java.lang.String"/>
+	<parameter name="numeroCedula" class="java.lang.String"/>
+	<parameter name="fechaResolucion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaNotificacion" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="numeroActa" class="java.lang.String"/>
+	<parameter name="numeroFolios" class="java.lang.String"/>
+	<parameter name="clase-aux" class="java.util.List">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="clasesDobles" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombreConsejero" class="java.lang.String"/>
+	<parameter name="clasesSolicitadas" class="java.lang.String"/>
+	<parameter name="clasesIniciales" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="127" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="72" splitType="Stretch">
+			<textField>
+				<reportElement uuid="769ab8da-2895-494a-8ec0-295070d8a34d" x="261" y="52" width="196" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="57bed7b7-1be1-41f3-9553-e4eacadbed24" x="0" y="0" width="457" height="47"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resolución M-R0 "+$P{numeroResolucion}+"\n"+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
+"Por la cual se resuelve un recurso de ampliación"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="1366" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4b3a7ca3-732d-4436-9074-7d378ab88a3b" x="0" y="57" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["CONSIDERANDO:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3f3a8258-e210-493b-95cc-ef6b4d3765e0" x="0" y="275" width="457" height="1091"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PRIMERO: Reponer parcialmente la resolución recurrida, en el sentido de conferir matrícula profesional de técnico electricista, al señor "
++ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+ "en las siguientes clases: "
++ "\n\n" +
+$P{clasesDobles}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="32194980-167b-4aba-885b-da355eee1817" x="0" y="255" width="457" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["RESUELVE:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="03c71c54-8563-4a8b-a627-618a3d8f2533" x="0" y="77" width="457" height="178"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Que para resolver la solicitud de Matrícula Profesional de Técnico Electricista del señor "+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+"radicada bajo el número "+ $P{numeroRadicacion}+","+" "+"ésta entidad profirió la Resolución M-R0"+$P{numeroResolucion}+" "+"del"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+"notificada personalmente al peticionario el dia "+
+new SimpleDateFormat("dd-MM-yyyy").format($P{fechaNotificacion})+"."
++ "\n\nQue en el acto de notificación el peticionario interpuso recurso, con el fin de que se le conceda la clase: " + $P{clasesSolicitadas}
++ "\n\nQue según consta en acta de Comité Técnico "+$P{numeroActa}+ ", revisados nuevamente los "+$P{numeroFolios}+" folios, se obtuvo que el peticionario tiene derecho no sólo a las clases: "
++ $P{clasesIniciales}
++" como inicialmente le fueron otorgadas, sino adicionalmente tiene derecho a la clase: "
++"\n\nEn mérito de lo expuesto, el CONTE, fundado en las disposiciones antes citadas,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="127bb1e3-cc42-44d1-81e7-33491110e473" x="0" y="0" width="457" height="57"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["El CONSEJO NACIONAL DE TECNICOS ELECTRICISTAS"+"\n"+
+"en uso de sus facultades constitucionales y legales"+"\n"+
+"y en especial las conferidas por el numeral 1° y"+"\n"+
+"2° del articulo 35 de la ley 1264 del 2008"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="160" splitType="Stretch">
+			<textField>
+				<reportElement uuid="c66872c0-47c3-4bc4-9eee-38bf9bdb743e" x="0" y="90" width="457" height="66"/>
+				<textElement textAlignment="Center">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["NOTIFÍQUESE Y CÚMPLASE" +"\n\n"+
+"WILSON OCHOA"  +"\n"+
+"Presidente CONTE"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c3ba2f9d-0240-467b-9673-27a6c805392f" x="0" y="63" width="457" height="27"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dada en Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="cb1a95e7-f2cf-4081-9726-2e982d835331" x="0" y="0" width="457" height="63"/>
+				<textElement>
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SEGUNDO: Contra la presente resolución no procede recurso alguno y queda agotada la vía gubernativa.\n\nTERCERO: Incorporar al listado de matriculados y habilitados al Señor "+ $P{nombreSolicitante}+" "+$P{apellidoSolicitante}+ ","+" "+ "de conformidad al numeral 2º  del articulo 35 de la ley 1264 del 2008."
++ "\n\nCUARTO: La presente resolución deroga todas las anteriores que le sean contrarias."]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

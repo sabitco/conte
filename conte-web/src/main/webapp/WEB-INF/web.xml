@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+   
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    
+     <display-name>Conte</display-name>
+     
+     <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+      /WEB-INF/spring-context.xml
+    </param-value>
+    </context-param>
+     
+  <context-param>
+        <description>
+  	Vaadin production mode</description>
+        <param-name>productionMode</param-name>
+        <param-value>false</param-value>
+    </context-param>
+  
+  <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+  <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+  <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+  
+  <servlet>
+        <servlet-name>Conte Application</servlet-name>
+        <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class>
+        <init-param>
+            <description>
+  		Vaadin application class to start</description>
+            <param-name>application</param-name>
+            <param-value>co.org.conte.sgm.ui.App</param-value>
+        </init-param>
+        <init-param>
+            <param-name>disable-xsrf-protection</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>GuardarEvaluacion</servlet-name>
+        <servlet-class>co.org.conte.sgm.servlet.GuardarEvaluacion</servlet-class>
+    </servlet>
+     <servlet-mapping>
+        <servlet-name>GuardarEvaluacion</servlet-name>
+        <url-pattern>/guardarEvaluacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Conte Application</servlet-name>
+        <url-pattern>/*</url-pattern>
+    </servlet-mapping>
+  
+  <servlet>
+        <servlet-name>evaluacion</servlet-name>
+        <jsp-file>/evaluacion.jsp</jsp-file>
+    </servlet>
+  <servlet-mapping>
+        <servlet-name>evaluacion</servlet-name>
+        <url-pattern>/evaluacion</url-pattern>
+    </servlet-mapping>
+  
+    <servlet>
+        <servlet-name>ingresarPago</servlet-name>
+        <jsp-file>/ingresarPago.jsp</jsp-file>
+    </servlet>
+  <servlet-mapping>
+        <servlet-name>ingresarPago</servlet-name>
+        <url-pattern>/ingresarPago</url-pattern>
+    </servlet-mapping>
+        
+   <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/ConteDS</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    
+   </web-app>

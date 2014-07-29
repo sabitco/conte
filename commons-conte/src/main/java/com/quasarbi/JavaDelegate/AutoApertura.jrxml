@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AutoApertura" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="190c7fff-d6c3-4c71-9ca9-b6906fe0a577">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="28"/>
+	<parameter name="expediente" class="java.lang.String"/>
+	<parameter name="consejeroPonente" class="java.lang.String"/>
+	<parameter name="nombreDisciplinado" class="java.lang.String"/>
+	<parameter name="direccionPonente" class="java.lang.String"/>
+	<parameter name="nombrePropietario" class="java.lang.String"/>
+	<parameter name="fechaPeticion" class="java.lang.String"/>
+	<parameter name="fechaComite" class="java.lang.String"/>
+	<parameter name="fechaHoraCitacion" class="java.lang.String"/>
+	<pageHeader>
+		<band height="127" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7462dc91-f637-4e93-92e4-5d559f75a3f1" x="0" y="0" width="555" height="69"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[A-1. AUTO DE APERTURA  DE AVERIGUACION PRELIMINAR
+(ART. 74 REGIMEN DISCIPLINARIO)
+
+
+Comité disciplinario y de fomento educativo
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="849e5737-4f63-4165-a4fa-3fdde03daa6f" x="28" y="69" width="498" height="58"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["BOGOTÁ D.C " + new SimpleDateFormat("yyyy/MM/dd").format(new Date())
++ "\n"
++ "Ref. Expediente " + $P{expediente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="336" splitType="Stretch">
+			<textField>
+				<reportElement uuid="7ebff954-caf8-41ff-bbc1-5af0ba02e4ee" stretchType="RelativeToTallestObject" x="28" y="0" width="498" height="96"/>
+				<textElement textAlignment="Justified" verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Teniendo en cuenta la queja presentada el " + $P{fechaPeticion} + " por el señor " + $P{nombrePropietario} + ", ratificada el mismo día  en las oficinas del CONTE, y de igual forma el reparto efectuado en reunión ordinaria de comité disciplinario correspondiente al mes de " + $P{fechaComite} + ", donde se comisiona al Sr. " + $P{consejeroPonente} + " para llevar a cabo las diligencias preliminares por violación al código de ética de los técnicos electricistas por parte del profesional técnico electricista " + $P{nombreDisciplinado} + " identificado con la C.C. y matricula  del CONTE este despacho: "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="77cfd138-f27a-4279-b639-ad01d3e1153d" x="28" y="96" width="498" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Resuelve]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="f2591708-1e5c-46bf-a95f-c2c296290f3f" stretchType="RelativeToTallestObject" x="28" y="116" width="498" height="156"/>
+				<textElement/>
+				<textFieldExpression><![CDATA["PRIMERO: iniciar averiguación preliminar en contra de " + $P{nombreDisciplinado} + " por violación al código de ética en el ejercicio de la profesión frente a terceros, relacionados con el incumplimiento en la ejecución de obras eléctricas en el inmueble ubicado en la dirección " + $P{direccionPonente} + ", propietario " + $P{nombrePropietario} + ", respecto a la queja que reposa dentro del expediente " + $P{expediente} + "."
++ "\nSEGUNDO: por lo anterior se ordena la citación al profesional técnico electricista referido para el " + $P{fechaHoraCitacion} + " para ser escuchado en versión libre con el consejero ponente y el secretario del comité disciplinario."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="f1695168-27fa-4514-ae5f-69bd2d4e1198" x="28" y="272" width="498" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Notifíquese, comuníquese y cúmplase]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="ecb486dd-6db4-48be-951f-a23c7ff123ef" x="28" y="292" width="498" height="44"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{consejeroPonente} +
+"\nConsejero Investigador"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
