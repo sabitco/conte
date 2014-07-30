@@ -216,12 +216,19 @@ public class UsuarioCrud extends GenericCrud<Usuario>{
     public void process() {        
         if(validate()){
             Perfil p = (Perfil) perfil.getValue();
-            if(p.getCodigo()==2){
-                Tecnico t = new Tecnico();
+            if(p.getCodigo()==2){                
+                TecnicoDao daoTecnico = new TecnicoDao();
+                String d = super.getValue(documento);
+                Tecnico t = daoTecnico.findByDocumento(d);
+                boolean encontrado = true;
+                if (t == null) {
+                    t = new Tecnico();
+                    encontrado = false;
+                }
                 t.setCelular(getValue(celular));
                 t.setCiudad((Ciudad) ciudad.getValue());
                 t.setDireccion(getValue(direccion));
-                t.setDocumento(getValue(documento));
+                t.setDocumento(d);
                 t.setEmail(getValue(email).toLowerCase());
                 t.setNombres(getValue(nombres));
                 t.setNotificacion((notificacion.getValue().toString().equalsIgnoreCase(si)));
@@ -229,9 +236,12 @@ public class UsuarioCrud extends GenericCrud<Usuario>{
                 t.setSegundoApellido(getValue(segundoApellido));
                 t.setTelefono(getValue(telefono));
                 
-                TecnicoDao daoTecnico = new TecnicoDao();
                 try {
-                    daoTecnico.insert(t);
+                    if (encontrado) {
+                        daoTecnico.update(t);
+                    } else {
+                        daoTecnico.insert(t);
+                    }
                 } catch (DaoException ex) {
                     Logger.getLogger(UsuarioCrud.class.getName()).log(Level.SEVERE, null, ex);
                 }
