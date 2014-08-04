@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recursoNegado" pageWidth="612" pageHeight="1700" columnWidth="457" leftMargin="85" rightMargin="70" topMargin="170" bottomMargin="149" uuid="5d4fcfce-b62e-4b41-88bd-76a36a1c957d">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="594"/>
+	<property name="ireport.x" value="163"/>
+	<property name="ireport.y" value="482"/>
 	<parameter name="apellidoSolicitante" class="java.lang.String"/>
 	<parameter name="numeroResolucion" class="java.lang.String"/>
 	<parameter name="fechaExpedicion" class="java.util.Date">
@@ -37,20 +37,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="85" splitType="Stretch"/>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="72">
-			<textField>
-				<reportElement x="282" y="52" width="175" height="20" uuid="a3c82106-4b0f-4a0d-8475-aff0ed318835"/>
-				<textElement textAlignment="Right">
-					<font fontName="Californian FB" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
-			</textField>
+		<band height="85" splitType="Stretch">
 			<textField>
 				<reportElement x="0" y="0" width="457" height="52" uuid="44bd2542-3511-4eda-853f-7271e0dc04ed"/>
 				<textElement textAlignment="Center">
@@ -60,7 +47,20 @@
 new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
 "Por la cual se resuelve un recurso"]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="282" y="52" width="175" height="20" uuid="a3c82106-4b0f-4a0d-8475-aff0ed318835"/>
+				<textElement textAlignment="Right">
+					<font fontName="Californian FB" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Rad. "+$P{numeroRadicacion}]]></textFieldExpression>
+			</textField>
 		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="72"/>
 	</columnHeader>
 	<detail>
 		<band height="1309" splitType="Stretch">
@@ -69,14 +69,13 @@ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})+"\n"+
 				<textElement textAlignment="Justified">
 					<font fontName="Californian FB" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Que para resolver la solicitud de Ampliación de Matrícula Profesional de Técnico Electricista del señor "+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+"radicada bajo el número "+ $P{numeroRadicacion}+","+" "+"ésta entidad profirió la Resolución M-CO "+$P{numeroResolucion}+" "+"del"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+"notificada personalmente al peticionario el dia "+
+				<textFieldExpression><![CDATA["Que para resolver la solicitud de Ampliación de Matrícula Profesional de Técnico Electricista del señor "+$P{nombreSolicitante}+" "+$P{apellidoSolicitante}+","+" "+"identificado con cédula de ciudadanía número "+$P{numeroCedula}+","+" "+"radicada bajo el número "+ $P{numeroRadicacion}+","+" "+"ésta entidad profirió la Resolución M-C0 "+$P{numeroResolucion}+" "+"del"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+"notificada personalmente al peticionario el dia "+
 new SimpleDateFormat("dd-MM-yyyy").format($P{fechaPeticion})+"."
 + "\n\n" +
 "Que en el acto de notificación el peticionario interpuso recurso, con el fin de que se le conceda la clase: " + $P{clasesSolicitadas}
 + "\n\nQue estudiada nuevamente la solicitud según consta en el Acta de Comité Técnico 188, se encuentra que no hay lugar a reponer el acto impugnado, toda vez que carece de fundamentos y al analizar la motivación de la Resolución M-C0 "+ $P{numeroResolucion}+" "+"del"+" "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})+","+" "+ "se puede verificar que se ajusta a la documentación presentada, en el sentido de que el expediente no presenta títulos de estudio, ni certificaciones laborales, que de conformidad con el artículo 5º del Decreto Reglamentario 991 de 1991, demuestren que el peticionario tenga derecho a que se le expida la ampliación de matrícula profesional de Técnico Electricista, en las clases: "
 + "\n\nAdicionalmente, la documentación que reposa a folios "+ $P{numeroFolioInicial} + " del expediente, fue recibida extemporáneamente. " + "\n\nEn mérito de lo expuesto, el CONTE fundado en las disposiciones antes citadas, "
-+ "\n\n" +
-$P{clases}]]></textFieldExpression>
++ "\n\n" ]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="61" width="457" height="62" uuid="e9a10052-0f85-4488-87d0-a07637285c5a"/>
@@ -113,7 +112,7 @@ $P{clases}]]></textFieldExpression>
 				<textElement textAlignment="Justified">
 					<font fontName="Californian FB" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Dada en Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaExpedicion})]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Dada en Bogotá, D. C., "+ new SimpleDateFormat("dd-MM-yyyy").format($P{fechaResolucion})]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="145" width="457" height="20" uuid="e5e0615e-0ecb-4c4b-aa21-e927aa93842b"/>
