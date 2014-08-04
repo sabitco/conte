@@ -1,0 +1,1 @@
+UPDATE sgm_conte.inspector SET estado_inspector_id = 1;
