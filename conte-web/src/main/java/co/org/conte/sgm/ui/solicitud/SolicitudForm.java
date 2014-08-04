@@ -1,5 +1,6 @@
 package co.org.conte.sgm.ui.solicitud;
 
+import co.org.conte.enumerator.EstadoInspector;
 import co.org.conte.sgm.dao.AsociacionDao;
 import co.org.conte.sgm.dao.DepartamentoDao;
 import co.org.conte.sgm.dao.InspectorDao;
@@ -16,7 +17,6 @@ import co.org.conte.sgm.entity.Ciudad;
 import co.org.conte.sgm.entity.Departamento;
 import co.org.conte.sgm.entity.Estado;
 import co.org.conte.sgm.entity.Inspector;
-import co.org.conte.sgm.entity.Parametro;
 import co.org.conte.sgm.entity.Solicitud;
 import co.org.conte.sgm.entity.Tecnico;
 import co.org.conte.sgm.entity.TipoSolicitud;
@@ -56,7 +56,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JasperRunManager;
-import org.hibernate.Hibernate;
 
 /**
  *
@@ -221,8 +220,10 @@ import org.hibernate.Hibernate;
                 }
                 if(a!=null){
                     for(Inspector i : a.getInspectors()){
-                        inspector.addItem(i);
-                        inspector.setItemCaption(i, i.getNombres() + " " + i.getApellidos());
+                        if (EstadoInspector.ACTIVO == i.getEstadoInspector()) {
+                            inspector.addItem(i);
+                            inspector.setItemCaption(i, i.getNombres() + " " + i.getApellidos());
+                        }
                     }
                 }
              }
@@ -374,13 +375,6 @@ import org.hibernate.Hibernate;
     
     private void init(){
         createFields();
-        /*
-        celular = new TextField("Celular", 
-                (usuario.getCelular()==null || usuario.getTipoDocumento().equalsIgnoreCase("NIT")) ? "" : usuario.getCelular());
-                
-        direccionEmpresa = new TextField("Dirección Empresa:", "");              
-        nombres = new TextField("Nombres");
-        */
         direccionEmpresa.setWidth("300px");
         direccionResidencia = new TextField("Direccion Residencia",
                 (usuario.getDireccion()==null || usuario.getTipoDocumento().equalsIgnoreCase("NIT")) 
@@ -471,7 +465,6 @@ import org.hibernate.Hibernate;
 
             resource.getStream().setParameter("Content-Type", "application/x-unknown");
             
-           // resource.setMIMEType("application/octet-stream");
             resource.setCacheTime(0);
             Link l = new Link("Descargar", resource);
             l.setTargetName("_blank");
@@ -493,15 +486,6 @@ import org.hibernate.Hibernate;
         direccionFamiliar.setMaxLength(45);
         direccionResidencia.setMaxLength(60);
         telefonoFamiliar2.setMaxLength(20);
-//        empresa.setMaxLength(80);
-//        enteroPor.setMaxLength(60);
-//        nombres.setMaxLength(40);
-//        nombresFamiliar.setMaxLength(60);        
-//        primerApellido.setMaxLength(20);
-//        segundoApellido.setMaxLength(20);
-//        telefono.setMaxLength(20);
-//        telefonoEmpresa.setMaxLength(20);
-//        telefonoFamiliar.setMaxLength(20);
     }
     
     private void setDescriptions(){
@@ -514,7 +498,7 @@ import org.hibernate.Hibernate;
         u = parametroDao.getParameter("ip");
        
         System.out.println("valor de u " + u);
-        String ticket = AlfrescoUtil.getTicket();//
+        String ticket = AlfrescoUtil.getTicket();
         System.out.println("EL ESTADO DE LA SOLICITUD ES " + solicitud.getEstado().getCodigo());
         
         if(ticket==null || solicitud.getEstado().getCodigo()!=1){
@@ -522,7 +506,6 @@ import org.hibernate.Hibernate;
             return null;
         } else {              
             try {
-                //s = "http://10.10.10.51:8080/";
                 String aso = "";
                 String ins = "";
                 String flujo = "";
@@ -554,14 +537,9 @@ import org.hibernate.Hibernate;
                 }
                 if(((Asociacion)asociacion.getValue()) != null){
                     aso = ((Asociacion) asociacion.getValue()).getSigla() ;
-                    ins = String.valueOf(solicitud.getInspector().getCodigo());//;getDocumento();
-//                    System.out.println("\n El código del inspector es  ==> " + ins +" \n");
-                    
+                    ins = String.valueOf(solicitud.getInspector().getCodigo());
                 }                 
-                
-                //URL url = new URL(y+ "alfresco/service/workflow-instance-" + flujo
-                //URL url = new URL("http://localhost:8085/alfresco/service/workflow-instance-" + flujo        
-                //URL url = new URL("http://localhost:8080/alfresco/service/workflow-instance-" + flujo        
+                     
                 URL url = new URL(u+"alfresco/service/workflow-instance-" + flujo        
                                 +"&description=" + URLEncoder.encode(getValue(tipoSolicitud).toUpperCase() + " "+tecnico.getDocumento().toUpperCase() + " " + getValue(nombres).toUpperCase() + " " + getValue(primerApellido).toUpperCase() , "UTF-8")// "funciono%2044"
                                 +"&assign=admin&"
@@ -599,8 +577,6 @@ import org.hibernate.Hibernate;
                                 +"&numeroformulario=" + codigoSolicitud                                 
                                 +"&asociacion=" + URLEncoder.encode(aso,"UTF-8")
                                 +"&identificacionInspector=" + ins
-//                        URLEncoder.encode(((Inspector) inspector.getValue() != null) 
-//                                    ? ((Inspector) inspector.getValue()).getDocumento() : "" ,"UTF-8")
                                 +"&alf_ticket="+ ticket
                        );
                 

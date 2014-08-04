@@ -1,5 +1,6 @@
 package co.org.conte.sgm.ui.crud;
 
+import co.org.conte.enumerator.EstadoInspector;
 import co.org.conte.sgm.dao.AsociacionDao;
 import co.org.conte.sgm.dao.exception.DaoException;
 import co.org.conte.sgm.entity.Asociacion;
@@ -60,6 +61,7 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
     private TextField telefonoInspector;
     private TextField celularInspector;
     private TextField emailInspector;
+    private final NativeSelect estadoInspector;
     
     private List<Departamento> departamentos;
      
@@ -94,7 +96,7 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
         telefonoInspector = new TextField("Télefono");
         celularInspector = new TextField("Celular");
         emailInspector = new TextField("Correo");
-        
+        this.estadoInspector = new NativeSelect("Estado Inspector");
         departamentos = serviceUsuario.getAllDepartamentos();
         init();
         setDescriptions();
@@ -128,6 +130,7 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
         detailForm.addField("telefono", telefonoInspector);
         detailForm.addField("celular", celularInspector);
         detailForm.addField("email", emailInspector);
+        super.detailForm.addField("estadoInspector", this.estadoInspector);
     }
     
     @Override
@@ -186,11 +189,12 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
         detailTable.addContainerProperty("Documento", String.class,  null); 
         detailTable.addContainerProperty("Nombre", String.class,  null);     
         detailTable.addContainerProperty("Apellidos", String.class,  null);        
-//        detailTable.addContainerProperty("Ciudad", Ciudad.class,  null);        
+//        detailTable.addContainerProperty("Ciudad", String.class,  null);        
         detailTable.addContainerProperty("Dirección", String.class,  null);  
         detailTable.addContainerProperty("Telefono", String.class,  null);  
         detailTable.addContainerProperty("Celular", String.class,  null);  
         detailTable.addContainerProperty("Correo", String.class,  null);  
+        detailTable.addContainerProperty("Estado", String.class,  null);
         
         Set<Inspector> inspectores = entity.getInspectors();        
         if(inspectores != null && !inspectores.isEmpty()){
@@ -204,7 +208,8 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
                     i.getDireccion(),
                     i.getTelefono(),
                     i.getCelular(),
-                    i.getEmail()
+                    i.getEmail(),
+                    i.getEstadoInspector().getDescripcion()
                 }, i);
             }            
         }
@@ -348,6 +353,7 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
         entityDetail.setEmail(getValue(emailInspector).toLowerCase());
         entityDetail.setNombres(getValue(nombresInspector));
         entityDetail.setTelefono(getValue(telefonoInspector));
+        entityDetail.setEstadoInspector((EstadoInspector) estadoInspector.getValue());
     }
 
     @Override
@@ -374,6 +380,7 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
         direccionInspector.setRequired(required);
         celularInspector.setRequired(required);
         emailInspector.setRequired(required);
+        estadoInspector.setRequired(required);
     }
 
     @Override
@@ -404,7 +411,8 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
     @Override
     public boolean validateDetail(){
         return (
-                ciudadInspector.isValid() &&
+                estadoInspector.isValid()
+                && ciudadInspector.isValid() &&
                 codigoInspector.isValid() &&
                 documentoInspector.isValid() &&
                 nombresInspector.isValid() &&
@@ -433,12 +441,18 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
             departamentoInspector.addItem(departamento);
             departamentoInspector.setItemCaption(departamento, departamento.getNombre());
         }
+        for (EstadoInspector ei : EstadoInspector.values()) {
+            this.estadoInspector.addItem(ei);
+            this.estadoInspector.setItemCaption(ei, ei.getDescripcion());
+        }
         createForm();
         addValidators();
         setRequired(true);         
         addMyListeners();
         setMaxLengthMaster();
         setMaxLengthDetail();
+        super.deleteDetail.setEnabled(false);
+        super.detailForm.getFooter().removeComponent(super.deleteDetail);
     }
 
     @Override
@@ -463,6 +477,14 @@ public class AsociacionInspectorCrud extends GenericCrudMasterDetail<Asociacion,
             telefonoInspector.setValue(entityDetail.getTelefono());
             celularInspector.setValue(entityDetail.getCelular());
             emailInspector.setValue(entityDetail.getEmail());
+            for (EstadoInspector ei : EstadoInspector.values()) {
+                this.estadoInspector.addItem(ei);
+                this.estadoInspector.setItemCaption(ei, ei.getDescripcion());
+                System.out.println("Estado inspector = " + entityDetail.getEstadoInspector().getDescripcion() + "\n\n\n\n");
+                if (ei == entityDetail.getEstadoInspector()) {
+                    estadoInspector.setValue(ei);
+                }
+            }
         }
     }
     
