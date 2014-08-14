@@ -219,7 +219,7 @@ public class UsuarioCrud extends GenericCrud<Usuario>{
             if(p.getCodigo()==2){                
                 TecnicoDao daoTecnico = new TecnicoDao();
                 String d = super.getValue(documento);
-                Tecnico t = daoTecnico.findByDocumento(d);
+                Tecnico t = daoTecnico.findByDocumento(entity.getDocumento());
                 boolean encontrado = true;
                 if (t == null) {
                     t = new Tecnico();
