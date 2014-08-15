@@ -156,7 +156,7 @@ public class ActualizarDatos extends GenericForm{
                     tecnico.setDireccion(usuario.getDireccion());
                     tecnico.setNombres(usuario.getNombres());
                     tecnico.setPrimerApellido(usuario.getPrimerApellido());
-                    tecnico.setSegundoApellido(usuario.getPrimerApellido());
+                    tecnico.setSegundoApellido(usuario.getSegundoApellido());
                     tecnico.setTelefono(usuario.getTelefono());
                     tecnico.setCiudad(usuario.getCiudad());
                     tecnico.setEmail(usuario.getEmail());
