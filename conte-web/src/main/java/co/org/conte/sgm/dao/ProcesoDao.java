@@ -15,6 +15,8 @@ import org.hibernate.transform.Transformers;
  * @author J4M0
  */
 public class ProcesoDao extends BaseDao<Proceso> {
+    
+    private static final long serialVersionUID = 8948138947643176004L;
 
     public ProcesoDao() {
         super(Proceso.class);
@@ -29,14 +31,11 @@ public class ProcesoDao extends BaseDao<Proceso> {
         try{
             session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();            
-            String querySQL = "	SELECT art.PROC_INST_ID_ as codigo, ahd.text_ AS documento, arv.text_ AS carpeta, art.DESCRIPTION_ AS titulo, art.name_ AS tarea "
-                    + "FROM alfresco.`ACT_RU_TASK` art "
-                    + "INNER JOIN alfresco.`ACT_RU_VARIABLE` arv  "
-                    + "ON art.PROC_INST_ID_ = arv.PROC_INST_ID_ "
-                    + "INNER JOIN alfresco.`ACT_HI_DETAIL` ahd "
-                    + "ON art.PROC_INST_ID_ = ahd.PROC_INST_ID_ "
-                    + "WHERE arv.name_ = 'nombrecarpeta' "
-                    + "AND ahd.name_ = 'qswfr_numerodocumento' GROUP BY 2 ";
+            String querySQL = "SELECT art.PROC_INST_ID_ as codigo, arv.text_ AS "
+                    + "documento, art.DESCRIPTION_ AS titulo, art.name_ AS tarea "
+                    + "FROM alfresco.`ACT_RU_TASK` art INNER JOIN alfresco.`ACT_RU_VARIABLE` "
+                    + "arv ON art.PROC_INST_ID_ = arv.PROC_INST_ID_ "
+                    + "WHERE arv.name_ = 'qswfr_numerodocumento'";
 	
             Query query = session.createSQLQuery( querySQL ).setResultTransformer(Transformers.aliasToBean(Proceso.class));				
             retValue = query.list();
